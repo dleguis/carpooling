@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://java.sun.com/xml/ns/persistence"
+        version="2.0">
+
+    <!-- ============================= -->
+    <!-- JPA PERSISTENCE UNIT          -->
+    <!-- ============================= -->
+    <persistence-unit name="carpoolingPU" transaction-type="RESOURCE_LOCAL" >
+        <!-- Note : IntelliJ ajoute automatiquement les classes au persistence.xml, même si l'autodétection est activée -->
+        <properties>
+            <!-- Autodetection des classes annotées @Entity -->
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <!-- Interopérabilité des implémentations JPA -->
+            <property name="toplink.jdbc.url" value="${ds.connection.url}"/>
+            <property name="toplink.jdbc.driver" value="${ds.connection.driverClass}"/>
+            <property name="toplink.jdbc.user" value="${ds.connection.username}"/>
+            <property name="toplink.jdbc.password" value="${ds.connection.password}"/>
+            <property name="hibernate.connection.url" value="${ds.connection.url}"/>
+            <property name="hibernate.connection.driver_class" value="${ds.connection.driverClass}"/>
+            <property name="hibernate.connection.username" value="${ds.connection.username}"/>
+            <property name="hibernate.connection.password" value="${ds.connection.password}"/>
+            <property name="openjpa.ConnectionURL" value="${ds.connection.url}"/>
+            <property name="openjpa.ConnectionDriverName" value="${ds.connection.driverClass}"/>
+            <property name="openjpa.ConnectionUserName" value="${ds.connection.username}"/>
+            <property name="openjpa.ConnectionPassword" value="${ds.connection.password}"/>
+            <property name="eclipselink.jdbc.url" value="${ds.connection.url}"/>
+            <property name="eclipselink.jdbc.driver" value="${ds.connection.driverClass}"/>
+            <property name="eclipselink.jdbc.user" value="${ds.connection.username}"/>
+            <property name="eclipselink.jdbc.password" value="${ds.connection.password}"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>

@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:property-placeholder location="classpath*:carpooling.properties" />
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>WEB-INF/templates/</value>
+        </property>
+        <property name="suffix">
+            <value>.html</value>
+        </property>
+    </bean>
+
+    <!--
+24
+       Configures the location of static resources such as css files.
+25
+       Requires Spring Framework 3.0 or higher.
+26
+   -->
+    <mvc:resources location="/Assets/images/"
+                   mapping="/images/**" />
+    <mvc:resources location="Assets/css/" mapping="/css/**" />
+    <mvc:resources location="Assets/js/" mapping="/js/**" />
+    <!--
+30
+       Ensures that dispatcher servlet can be mapped to '/' and static resources
+31
+       are still served by the containers default servlet. Requires Spring Framework
+32
+       3.0 or higher.
+33
+   -->
+    <mvc:default-servlet-handler/>
+
+
+</beans>
