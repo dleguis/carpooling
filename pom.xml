@@ -21,9 +21,9 @@
         <slf4j.version>1.7.7</slf4j.version>
         <logback.version>1.1.2</logback.version>
         <spring.version>4.1.1.RELEASE</spring.version>
-        <project.basedir>bookstore-parent-config-externe/localhost</project.basedir>
-        <project.parent.basedir>../bookstore-parent-config-externe/localhost</project.parent.basedir>
-        <main.basedir>bookstore-parent-config-externe/localhost</main.basedir>
+        <project.basedir>carpooling-config-externe/localhost</project.basedir>
+        <project.parent.basedir>../carpooling-config-externe/localhost</project.parent.basedir>
+        <main.basedir>carpooling-config-externe/localhost</main.basedir>
         <ow2.version>1.0.13</ow2.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
     </properties>
@@ -207,6 +207,39 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    &lt;!&ndash; Associate the read-project-properties goal with the initialize phase, to read the properties file. &ndash;&gt;
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${main.basedir}/carpooling.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

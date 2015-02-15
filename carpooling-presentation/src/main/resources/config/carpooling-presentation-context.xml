@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jms="http://www.springframework.org/schema/jms" xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+                        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+                        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                        http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd
+                        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+    <!-- <context:property-placeholder order="1"
+                                  ignore-unresolvable="true" location="classpath*:hab.properties" /> -->
+
+    <!-- **************************************************************** -->
+    <!-- RESOURCE FOLDERS CONFIGURATION -->
+    <!-- Dispatcher configuration for serving static resources -->
+    <!-- **************************************************************** -->
+
+    <mvc:resources location="/Assets/img/"
+                   mapping="/img/**" />
+    <mvc:resources location="/Assets/css/" mapping="/css/**" />
+    <mvc:resources location="/Assets/js/" mapping="/js/**" />
+
+    <!-- **************************************************************** -->
+    <!-- SPRING ANNOTATION PROCESSING -->
+    <!-- **************************************************************** -->
+
+    <context:component-scan base-package="edu.flst.bookstore.presentation" />
+
+
+    <!-- <bean id="validator" class="org.hibernate.validator.util.LazyValidatorFactory"> -->
+    <!-- </bean> -->
+
+
+
+    <mvc:annotation-driven />
+    <mvc:interceptors>
+        <bean id="webContentInterceptor"
+              class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+            <property name="cacheSeconds" value="0" />
+            <property name="useExpiresHeader" value="true" />
+            <property name="useCacheControlHeader" value="true" />
+            <property name="useCacheControlNoStore" value="true" />
+        </bean>
+    </mvc:interceptors>
+
+
+
+    <!-- **************************************************************** -->
+    <!-- MESSAGE EXTERNALIZATION/INTERNATIONALIZATION -->
+    <!-- Standard Spring MessageSource implementation -->
+    <!-- **************************************************************** -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames" value="messages" />
+        <property name="useCodeAsDefaultMessage" value="true"></property>
+    </bean>
+
+    <!-- **************************************************************** -->
+    <!-- THYMELEAF-SPECIFIC ARTIFACTS -->
+    <!-- TemplateResolver <- TemplateEngine <- ViewResolver -->
+    <!-- **************************************************************** -->
+
+    <bean id="templateResolver"
+          class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <!-- Template cache is true by default. Set to false if you want -->
+        <!-- templates to be automatically updated when modified. -->
+        <property name="cacheable" value="false" />
+    </bean>
+
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+        <property name="additionalDialects">
+            <set>
+                <bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
+                <bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect"/>
+            </set>
+        </property>
+    </bean>
+
+    <!-- Configuration du multipart resolver (upload de fichier) -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- Taille maximale d'upload -->
+        <property name="maxUploadSize" value="150000" />
+    </bean>
+
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+        <property name="order" value="1" />
+    </bean>
+
+    <!-- **************************************************************** -->
+    <!-- DOZER -->
+    <!-- **************************************************************** -->
+    <bean id="mapperPresentation" class="org.dozer.DozerBeanMapper">
+        <property name="mappingFiles">
+            <list>
+                <value>mapping/bookstore-presentation-mappings.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="cart" class="edu.flst.bookstore.presentation.model.Cart" scope="session" >
+    </bean>
+
+</beans>
