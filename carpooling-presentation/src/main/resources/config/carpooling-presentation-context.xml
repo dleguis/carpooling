@@ -30,7 +30,7 @@
     <!-- SPRING ANNOTATION PROCESSING -->
     <!-- **************************************************************** -->
 
-    <context:component-scan base-package="edu.flst.bookstore.presentation" />
+    <context:component-scan base-package="edu.fst.m2.ipii.carpooling.presentation" />
 
 
     <!-- <bean id="validator" class="org.hibernate.validator.util.LazyValidatorFactory"> -->
@@ -107,9 +107,6 @@
                 <value>mapping/bookstore-presentation-mappings.xml</value>
             </list>
         </property>
-    </bean>
-
-    <bean id="cart" class="edu.flst.bookstore.presentation.model.Cart" scope="session" >
     </bean>
 
 </beans>

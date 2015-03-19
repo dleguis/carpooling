@@ -43,7 +43,7 @@
     </sec:authentication-manager>
 
     <bean id="authentificationService"
-          class="edu.flst.bookstore.service.auth.impl.AuthentificationServiceImpl">
+          class="edu.fst.m2.ipii.carpooling.service.auth.impl.AuthentificationServiceImpl">
     </bean>
 
     <bean id="authenticatedVoter"
