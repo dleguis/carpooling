@@ -1,66 +1,71 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
+
+/**
+ * Licensee: 
+ * License Type: Evaluation
+ */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
 import javax.persistence.*;
-
-/**
- * Created by Dimitri on 20/03/2015.
- */
+import java.io.Serializable;
 @Entity
-public class Paiement {
-    private int id;
-    private double somme;
-    private MoyenPaiement moyenPaiement;
-
-    @Id
-    @Column(name = "ID")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "Somme")
-    public double getSomme() {
-        return somme;
-    }
-
-    public void setSomme(double somme) {
-        this.somme = somme;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Paiement paiement = (Paiement) o;
-
-        if (id != paiement.id) return false;
-        if (Double.compare(paiement.somme, somme) != 0) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = id;
-        temp = Double.doubleToLongBits(somme);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "MoyenPaiementID", referencedColumnName = "ID", nullable = false)
-    public MoyenPaiement getMoyenPaiement() {
-        return moyenPaiement;
-    }
-
-    public void setMoyenPaiement(MoyenPaiement moyenPaiement) {
-        this.moyenPaiement = moyenPaiement;
-    }
+@org.hibernate.annotations.Proxy(lazy=false)
+@Table(name="Paiement")
+public class Paiement implements Serializable {
+	public Paiement() {
+	}
+	
+	@Column(name="ID", nullable=false, length=11)	
+	@Id	
+	@GeneratedValue(generator="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_PAIEMENT_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_PAIEMENT_ID_GENERATOR", strategy="native")	
+	private int ID;
+	
+	@ManyToOne(targetEntity=MoyenPaiement.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="MoyenPaiementID2", referencedColumnName="ID", nullable=false) })	
+	private MoyenPaiement moyenPaiement;
+	
+	@Column(name="Somme", nullable=false)	
+	private double somme;
+	
+	private void setID(int value) {
+		this.ID = value;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public int getORMID() {
+		return getID();
+	}
+	
+	public void setSomme(double value) {
+		this.somme = value;
+	}
+	
+	public double getSomme() {
+		return somme;
+	}
+	
+	public void setMoyenPaiement(MoyenPaiement value) {
+		this.moyenPaiement = value;
+	}
+	
+	public MoyenPaiement getMoyenPaiement() {
+		return moyenPaiement;
+	}
+	
+	public String toString() {
+		return String.valueOf(getID());
+	}
+	
 }

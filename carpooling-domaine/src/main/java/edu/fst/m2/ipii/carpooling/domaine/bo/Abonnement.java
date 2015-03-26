@@ -1,129 +1,101 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
+
+/**
+ * Licensee: 
+ * License Type: Evaluation
+ */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Created by Dimitri on 20/03/2015.
- */
 @Entity
-public class Abonnement {
-    private int id;
-    private int formuleId;
-    private int membreId;
-    private String libelle;
-    private Date dateDebutValide;
-    private Date dateFinValide;
-    private Formule formule;
-    private Membre membre;
+@org.hibernate.annotations.Proxy(lazy=false)
+@Table(name="Abonnement")
+public class Abonnement implements Serializable {
+	public Abonnement() {
+	}
+	
+	@Column(name="ID", nullable=false, length=11)	
+	@Id	
+	@GeneratedValue(generator="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_ABONNEMENT_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_ABONNEMENT_ID_GENERATOR", strategy="native")	
+	private int ID;
+	
+	@Column(name="Libelle", nullable=true, length=255)	
+	private String libelle;
+	
+	@Column(name="DateDebutValide", nullable=true)	
+	@Temporal(TemporalType.DATE)	
+	private Date dateDebutValide;
+	
+	@Column(name="DateFinValide", nullable=true)	
+	@Temporal(TemporalType.DATE)	
+	private Date dateFinValide;
+	
+	@ManyToMany(targetEntity=edu.fst.m2.ipii.carpooling.domaine.bo.Formule.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinTable(name="Abonnement_Formule", joinColumns={ @JoinColumn(name="AbonnementID") }, inverseJoinColumns={ @JoinColumn(name="FormuleID") })	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	private Set<Formule> formules;
+	
+	private void setID(int value) {
+		this.ID = value;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public int getORMID() {
+		return getID();
+	}
+	
+	public void setLibelle(String value) {
+		this.libelle = value;
+	}
+	
+	public String getLibelle() {
+		return libelle;
+	}
+	
+	public void setDateDebutValide(java.util.Date value) {
+		this.dateDebutValide = value;
+	}
+	
+	public java.util.Date getDateDebutValide() {
+		return dateDebutValide;
+	}
+	
+	public void setDateFinValide(java.util.Date value) {
+		this.dateFinValide = value;
+	}
+	
+	public java.util.Date getDateFinValide() {
+		return dateFinValide;
+	}
 
-    @Id
-    @Column(name = "ID")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "FormuleID")
-    public int getFormuleId() {
-        return formuleId;
-    }
-
-    public void setFormuleId(int formuleId) {
-        this.formuleId = formuleId;
-    }
-
-    @Basic
-    @Column(name = "MembreID")
-    public int getMembreId() {
-        return membreId;
-    }
-
-    public void setMembreId(int membreId) {
-        this.membreId = membreId;
-    }
-
-    @Basic
-    @Column(name = "Libelle")
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    @Basic
-    @Column(name = "DateDebutValide")
-    public Date getDateDebutValide() {
-        return dateDebutValide;
-    }
-
-    public void setDateDebutValide(Date dateDebutValide) {
-        this.dateDebutValide = dateDebutValide;
-    }
-
-    @Basic
-    @Column(name = "DateFinValide")
-    public Date getDateFinValide() {
-        return dateFinValide;
-    }
-
-    public void setDateFinValide(Date dateFinValide) {
-        this.dateFinValide = dateFinValide;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Abonnement that = (Abonnement) o;
-
-        if (formuleId != that.formuleId) return false;
-        if (id != that.id) return false;
-        if (membreId != that.membreId) return false;
-        if (dateDebutValide != null ? !dateDebutValide.equals(that.dateDebutValide) : that.dateDebutValide != null)
-            return false;
-        if (dateFinValide != null ? !dateFinValide.equals(that.dateFinValide) : that.dateFinValide != null)
-            return false;
-        if (libelle != null ? !libelle.equals(that.libelle) : that.libelle != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + formuleId;
-        result = 31 * result + membreId;
-        result = 31 * result + (libelle != null ? libelle.hashCode() : 0);
-        result = 31 * result + (dateDebutValide != null ? dateDebutValide.hashCode() : 0);
-        result = 31 * result + (dateFinValide != null ? dateFinValide.hashCode() : 0);
-        return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "FormuleID", referencedColumnName = "ID", nullable = false)
-    public Formule getFormule() {
-        return formule;
-    }
-
-    public void setFormule(Formule formule) {
-        this.formule = formule;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "MembreID", referencedColumnName = "ID", nullable = false)
-    public Membre getMembre() {
-        return membre;
-    }
-
-    public void setMembre(Membre membre) {
-        this.membre = membre;
-    }
+	
+	public Set<Formule> getFormules() {
+        if (null == formules) {
+            formules = new HashSet<>();
+        }
+		return formules;
+	}
+	
+	
+	public String toString() {
+		return String.valueOf(getID());
+	}
+	
 }

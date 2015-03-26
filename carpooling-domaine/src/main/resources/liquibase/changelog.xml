@@ -5,6 +5,10 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <changeSet context="sql" runOnChange="true" id="init-database" author="dleguis">
+        <sqlFile path="classpath*:liquibase/sql/init-database.sql" />
+    </changeSet>
+
     <include relativeToChangelogFile="true" file="changelogs/changelog-01-init.xml" />
     <include relativeToChangelogFile="true" file="changelogs/changelog-02-data.xml" />
     <!-- <include relativeToChangelogFile="true" file="changelogs/changelog-03-files.xml" /> -->

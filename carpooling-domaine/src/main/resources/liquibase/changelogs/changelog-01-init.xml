@@ -7,6 +7,333 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
-
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-1">
+        <createTable tableName="abonnement">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="MembreID" type="INT(10)"/>
+            <column name="Libelle" type="VARCHAR(255)"/>
+            <column name="DateDebutValide" type="date"/>
+            <column name="DateFinValide" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-2">
+        <createTable tableName="abonnement_formule">
+            <column name="AbonnementID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FormuleID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-3">
+        <createTable tableName="adresse">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="MembreID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Rue" type="VARCHAR(255)"/>
+            <column name="Ville" type="VARCHAR(255)"/>
+            <column name="CodePostal" type="VARCHAR(255)"/>
+            <column name="Latitude" type="FLOAT(12)"/>
+            <column name="Longitude" type="FLOAT(12)"/>
+            <column name="Pays" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-4">
+        <createTable tableName="commentaire">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="MembreID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TrajetID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Contenu" type="VARCHAR(255)"/>
+            <column name="Date" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-5">
+        <createTable tableName="facture">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PaiementID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Date" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-6">
+        <createTable tableName="fonction">
+            <column name="ID" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Libelle" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-7">
+        <createTable tableName="formule">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Titre" type="VARCHAR(255)"/>
+            <column name="Tarif" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-8">
+        <createTable tableName="formule_fonction">
+            <column name="FormuleID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FonctionID" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-9">
+        <createTable tableName="membre">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NomMembre" type="VARCHAR(255)"/>
+            <column name="PrenomMembre" type="VARCHAR(255)"/>
+            <column name="Note" type="FLOAT(12)"/>
+            <column name="Login" type="VARCHAR(255)"/>
+            <column name="Password" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-10">
+        <createTable tableName="membre_profil">
+            <column name="MembreID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ProfilID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-11">
+        <createTable tableName="moyenpaiement">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Libelle" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-12">
+        <createTable tableName="paiement">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="MoyenPaiementID2" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Somme" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-13">
+        <createTable tableName="pointembarquement">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="ReservationID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Latitude" type="FLOAT(12)"/>
+            <column name="Longitude" type="FLOAT(12)"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-14">
+        <createTable tableName="preferencemembre">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="MembreID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Cle" type="VARCHAR(255)"/>
+            <column name="Valeur" type="VARCHAR(255)"/>
+            <column name="Libelle" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-15">
+        <createTable tableName="profil">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Libelle" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-16">
+        <createTable tableName="profil_role">
+            <column name="ProfilID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RoleID" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-17">
+        <createTable tableName="reservation">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="MembreID2" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FactureID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TrajetID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DateReservation" type="date"/>
+            <column name="NombrePassagers" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Validee" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Tarif" type="FLOAT(12)"/>
+            <column name="Initiale" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-18">
+        <createTable tableName="role">
+            <column name="ID" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-19">
+        <createTable tableName="trajet">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PointEmbarquementID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VoitureID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Titre" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-20">
+        <createTable tableName="voiture">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="MembreID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Marque" type="VARCHAR(255)"/>
+            <column name="Modele" type="VARCHAR(255)"/>
+            <column name="NbPlaces" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Puissance" type="FLOAT(12)"/>
+            <column name="Carburant" type="VARCHAR(255)"/>
+            <column name="Categorie" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <!--<changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-21">
+        <addPrimaryKey columnNames="AbonnementID, FormuleID" constraintName="PRIMARY1" tableName="abonnement_formule"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-22">
+        <addPrimaryKey columnNames="ID" constraintName="PRIMARY2" tableName="fonction"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-23">
+        <addPrimaryKey columnNames="FormuleID, FonctionID" constraintName="PRIMARY3" tableName="formule_fonction"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-24">
+        <addPrimaryKey columnNames="MembreID, ProfilID" constraintName="PRIMARY4" tableName="membre_profil"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-25">
+        <addPrimaryKey columnNames="ProfilID, RoleID" constraintName="PRIMARY5" tableName="profil_role"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-26">
+        <addPrimaryKey columnNames="ID" constraintName="PRIMARY6" tableName="role"/>
+    </changeSet>-->
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-27">
+        <addForeignKeyConstraint baseColumnNames="MembreID" baseTableName="abonnement" constraintName="FKAbonnement270123" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-28">
+        <addForeignKeyConstraint baseColumnNames="AbonnementID" baseTableName="abonnement_formule" constraintName="FKAbonnement434499" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="abonnement"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-29">
+        <addForeignKeyConstraint baseColumnNames="FormuleID" baseTableName="abonnement_formule" constraintName="FKAbonnement798651" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="formule"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-30">
+        <addForeignKeyConstraint baseColumnNames="MembreID" baseTableName="adresse" constraintName="FKAdresse806075" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-31">
+        <addForeignKeyConstraint baseColumnNames="MembreID" baseTableName="commentaire" constraintName="FKCommentair473657" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-32">
+        <addForeignKeyConstraint baseColumnNames="TrajetID" baseTableName="commentaire" constraintName="FKCommentair586951" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="trajet"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-33">
+        <addForeignKeyConstraint baseColumnNames="PaiementID" baseTableName="facture" constraintName="FKFacture572149" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="paiement"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-34">
+        <addForeignKeyConstraint baseColumnNames="FormuleID" baseTableName="formule_fonction" constraintName="FKFormule_Fo778249" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="formule"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-35">
+        <addForeignKeyConstraint baseColumnNames="FonctionID" baseTableName="formule_fonction" constraintName="FKFormule_Fo787861" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="fonction"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-36">
+        <addForeignKeyConstraint baseColumnNames="ProfilID" baseTableName="membre_profil" constraintName="FKMembre_Pro337011" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="profil"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-37">
+        <addForeignKeyConstraint baseColumnNames="MembreID" baseTableName="membre_profil" constraintName="FKMembre_Pro580218" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-38">
+        <addForeignKeyConstraint baseColumnNames="MoyenPaiementID2" baseTableName="paiement" constraintName="FKPaiement510023" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="moyenpaiement"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-39">
+        <addForeignKeyConstraint baseColumnNames="ReservationID" baseTableName="pointembarquement" constraintName="FKPointEmbar399211" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="reservation"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-40">
+        <addForeignKeyConstraint baseColumnNames="MembreID" baseTableName="preferencemembre" constraintName="FKPreference776534" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-41">
+        <addForeignKeyConstraint baseColumnNames="ProfilID" baseTableName="profil_role" constraintName="FKProfil_Rol601370" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="profil"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-42">
+        <addForeignKeyConstraint baseColumnNames="RoleID" baseTableName="profil_role" constraintName="FKProfil_Rol969339" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="role"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-43">
+        <addForeignKeyConstraint baseColumnNames="TrajetID" baseTableName="reservation" constraintName="FKReservatio625345" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="trajet"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-44">
+        <addForeignKeyConstraint baseColumnNames="MembreID2" baseTableName="reservation" constraintName="FKReservatio673274" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-45">
+        <addForeignKeyConstraint baseColumnNames="FactureID" baseTableName="reservation" constraintName="FKReservatio764201" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="facture"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-46">
+        <addForeignKeyConstraint baseColumnNames="PointEmbarquementID" baseTableName="trajet" constraintName="FKTrajet377561" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="pointembarquement"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-47">
+        <addForeignKeyConstraint baseColumnNames="VoitureID" baseTableName="trajet" constraintName="FKTrajet737219" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="voiture"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-48">
+        <addForeignKeyConstraint baseColumnNames="MembreID" baseTableName="voiture" constraintName="FKVoiture38466" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
+    </changeSet>
 
 </databaseChangeLog>

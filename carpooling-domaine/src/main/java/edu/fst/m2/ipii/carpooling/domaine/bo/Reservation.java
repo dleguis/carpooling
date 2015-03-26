@@ -1,150 +1,160 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
+
+/**
+ * Licensee: 
+ * License Type: Evaluation
+ */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.Date;
 
-/**
- * Created by Dimitri on 20/03/2015.
- */
 @Entity
-public class Reservation {
-    private int id;
-    private Date dateReservation;
-    private int nombrePassagers;
-    private boolean validee;
-    private Float tarif;
-    private boolean initiale;
-    private Collection<PointEmbarquement> pointsEmbarquement;
-    private Membre membre;
-    private Trajet trajet;
-    private Facture facture;
-
-    @Id
-    @Column(name = "ID")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "DateReservation")
-    public Date getDateReservation() {
-        return dateReservation;
-    }
-
-    public void setDateReservation(Date dateReservation) {
-        this.dateReservation = dateReservation;
-    }
-
-    @Basic
-    @Column(name = "NombrePassagers")
-    public int getNombrePassagers() {
-        return nombrePassagers;
-    }
-
-    public void setNombrePassagers(int nombrePassagers) {
-        this.nombrePassagers = nombrePassagers;
-    }
-
-    @Basic
-    @Column(name = "Validee")
-    public boolean isValidee() {
-        return validee;
-    }
-
-    public void setValidee(boolean validee) {
-        this.validee = validee;
-    }
-
-    @Basic
-    @Column(name = "Tarif")
-    public Float getTarif() {
-        return tarif;
-    }
-
-    public void setTarif(Float tarif) {
-        this.tarif = tarif;
-    }
-
-    @Basic
-    @Column(name = "Initiale")
-    public boolean isInitiale() {
-        return initiale;
-    }
-
-    public void setInitiale(boolean initiale) {
-        this.initiale = initiale;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Reservation that = (Reservation) o;
-
-        if (id != that.id) return false;
-        if (initiale != that.initiale) return false;
-        if (nombrePassagers != that.nombrePassagers) return false;
-        if (validee != that.validee) return false;
-        if (dateReservation != null ? !dateReservation.equals(that.dateReservation) : that.dateReservation != null)
-            return false;
-        if (tarif != null ? !tarif.equals(that.tarif) : that.tarif != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (dateReservation != null ? dateReservation.hashCode() : 0);
-        result = 31 * result + nombrePassagers;
-        result = 31 * result + (validee ? 1 : 0);
-        result = 31 * result + (tarif != null ? tarif.hashCode() : 0);
-        result = 31 * result + (initiale ? 1 : 0);
-        return result;
-    }
-
-    @OneToMany(mappedBy = "reservation")
-    public Collection<PointEmbarquement> getPointsEmbarquement() {
-        return pointsEmbarquement;
-    }
-
-    public void setPointsEmbarquement(Collection<PointEmbarquement> pointsEmbarquement) {
-        this.pointsEmbarquement = pointsEmbarquement;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "MembreID2", referencedColumnName = "ID", nullable = false)
-    public Membre getMembre() {
-        return membre;
-    }
-
-    public void setMembre(Membre membre) {
-        this.membre = membre;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "TrajetID", referencedColumnName = "ID", nullable = false)
-    public Trajet getTrajet() {
-        return trajet;
-    }
-
-    public void setTrajet(Trajet trajet) {
-        this.trajet = trajet;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "FactureID", referencedColumnName = "ID", nullable = false)
-    public Facture getFacture() {
-        return facture;
-    }
-
-    public void setFacture(Facture facture) {
-        this.facture = facture;
-    }
+@org.hibernate.annotations.Proxy(lazy=false)
+@Table(name="Reservation")
+public class Reservation implements Serializable {
+	public Reservation() {
+	}
+	
+	@Column(name="ID", nullable=false, length=11)	
+	@Id	
+	@GeneratedValue(generator="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_RESERVATION_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_RESERVATION_ID_GENERATOR", strategy="native")	
+	private int ID;
+	
+	@ManyToOne(targetEntity=Membre.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="MembreID2", referencedColumnName="ID", nullable=false) })	
+	private Membre membre;
+	
+	@ManyToOne(targetEntity=Facture.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="FactureID", referencedColumnName="ID", nullable=false) })	
+	private Facture facture;
+	
+	@ManyToOne(targetEntity=Trajet.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="TrajetID", referencedColumnName="ID", nullable=false) })	
+	private Trajet trajet;
+	
+	@Column(name="DateReservation", nullable=true)	
+	@Temporal(TemporalType.DATE)	
+	private Date dateReservation;
+	
+	@Column(name="NombrePassagers", nullable=false, length=11)	
+	private int nombrePassagers;
+	
+	@Column(name="Validee", nullable=false, length=1)	
+	private boolean validee;
+	
+	@Column(name="Tarif", nullable=true)	
+	private Float tarif;
+	
+	@Column(name="Initiale", nullable=false, length=1)	
+	private boolean initiale;
+	
+	@OneToOne(mappedBy="reservation", targetEntity=PointEmbarquement.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	private PointEmbarquement pointEmbarquement;
+	
+	private void setID(int value) {
+		this.ID = value;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public int getORMID() {
+		return getID();
+	}
+	
+	public void setDateReservation(Date value) {
+		this.dateReservation = value;
+	}
+	
+	public Date getDateReservation() {
+		return dateReservation;
+	}
+	
+	public void setNombrePassagers(int value) {
+		this.nombrePassagers = value;
+	}
+	
+	public int getNombrePassagers() {
+		return nombrePassagers;
+	}
+	
+	public void setValidee(boolean value) {
+		this.validee = value;
+	}
+	
+	public boolean getValidee() {
+		return validee;
+	}
+	
+	public void setTarif(float value) {
+		setTarif(new Float(value));
+	}
+	
+	public void setTarif(Float value) {
+		this.tarif = value;
+	}
+	
+	public Float getTarif() {
+		return tarif;
+	}
+	
+	public void setInitiale(boolean value) {
+		this.initiale = value;
+	}
+	
+	public boolean getInitiale() {
+		return initiale;
+	}
+	
+	public void setTrajet(Trajet value) {
+		this.trajet = value;
+	}
+	
+	public Trajet getTrajet() {
+		return trajet;
+	}
+	
+	public void setMembre(Membre value) {
+		this.membre = value;
+	}
+	
+	public Membre getMembre() {
+		return membre;
+	}
+	
+	public void setFacture(Facture value) {
+		this.facture = value;
+	}
+	
+	public Facture getFacture() {
+		return facture;
+	}
+	
+	public void setPointEmbarquement(PointEmbarquement value) {
+		this.pointEmbarquement = value;
+	}
+	
+	public PointEmbarquement getPointEmbarquement() {
+		return pointEmbarquement;
+	}
+	
+	public String toString() {
+		return String.valueOf(getID());
+	}
+	
 }

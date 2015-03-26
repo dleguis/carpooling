@@ -8,7 +8,12 @@
 
     <property name="version" value="0.1"></property>
 
-
+    <changeSet author="Dimitri" runOnChange="true" id="init-membre">
+        <loadUpdateData encoding="UTF-8"
+                        file="classpath*:liquibase/data/membre.csv"
+                        primaryKey="ID"
+                        tableName="membre" />
+    </changeSet>
 
 
 </databaseChangeLog>

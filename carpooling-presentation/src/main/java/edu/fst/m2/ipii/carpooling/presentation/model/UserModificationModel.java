@@ -62,12 +62,8 @@ public class UserModificationModel {
 
     }
 
-    /**
-     * Instantiates a new user modification model.
-     *
-     * @param userDto the user dto
-     */
-    public UserModificationModel(UserDto userDto) {
+
+    /*public UserModificationModel(UserDto userDto) {
         this.login = userDto.getLogin();
         this.email = userDto.getEmail();
         this.password = userDto.getPassword();
@@ -77,7 +73,7 @@ public class UserModificationModel {
         this.line3 = userDto.getMailingAddress().getLine3();
         this.zip = userDto.getMailingAddress().getZip();
         this.city = userDto.getMailingAddress().getCity();
-    }
+    }*
 
     /**
      * Gets the login.

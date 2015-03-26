@@ -1,75 +1,75 @@
-package edu.fst.m2.ipii.carpooling.domaine.bo;
-
-import javax.persistence.*;
-import java.sql.Date;
-import java.util.Collection;
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
 
 /**
- * Created by Dimitri on 20/03/2015.
+ * Licensee: 
+ * License Type: Evaluation
  */
+package edu.fst.m2.ipii.carpooling.domaine.bo;
+
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+
 @Entity
-public class Facture {
-    private int id;
-    private Date date;
-    private Paiement paiement;
-    private Collection<Reservation> reservations;
-
-    @Id
-    @Column(name = "ID")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "Date")
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Facture facture = (Facture) o;
-
-        if (id != facture.id) return false;
-        if (date != null ? !date.equals(facture.date) : facture.date != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "PaiementID", referencedColumnName = "ID", nullable = false)
-    public Paiement getPaiement() {
-        return paiement;
-    }
-
-    public void setPaiement(Paiement paiement) {
-        this.paiement = paiement;
-    }
-
-    @OneToMany(mappedBy = "facture")
-    public Collection<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(Collection<Reservation> reservations) {
-        this.reservations = reservations;
-    }
+@org.hibernate.annotations.Proxy(lazy=false)
+@Table(name="Facture")
+public class Facture implements Serializable {
+	public Facture() {
+	}
+	
+	@Column(name="ID", nullable=false, length=11)
+	@Id	
+	@GeneratedValue(generator="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_FACTURE_ID_GENERATOR")
+	@org.hibernate.annotations.GenericGenerator(name="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_FACTURE_ID_GENERATOR", strategy="native")	
+	private int ID;
+	
+	@ManyToOne(targetEntity=Paiement.class, fetch= FetchType.LAZY)
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})
+	@JoinColumns({ @JoinColumn(name="PaiementID", referencedColumnName="ID", nullable=false) })
+	private Paiement paiement;
+	
+	@Column(name="`Date`", nullable=true)	
+	@Temporal(TemporalType.DATE)	
+	private Date date;
+	
+	private void setID(int value) {
+		this.ID = value;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public int getORMID() {
+		return getID();
+	}
+	
+	public void setDate(Date value) {
+		this.date = value;
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+	
+	public void setPaiement(Paiement value) {
+		this.paiement = value;
+	}
+	
+	public Paiement getPaiement() {
+		return paiement;
+	}
+	
+	public String toString() {
+		return String.valueOf(getID());
+	}
+	
 }

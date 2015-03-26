@@ -1,6 +1,7 @@
 package edu.fst.m2.ipii.carpooling.transverse.constraints;
 
-import edu.flst.bookstore.transverse.constraints.impl.FieldMatchValidator;
+
+import edu.fst.m2.ipii.carpooling.transverse.constraints.impl.FieldMatchValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

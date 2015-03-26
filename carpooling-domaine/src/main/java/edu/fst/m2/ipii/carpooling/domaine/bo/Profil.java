@@ -1,63 +1,75 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
+
+/**
+ * Licensee: 
+ * License Type: Evaluation
+ */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Created by Dimitri on 20/03/2015.
- */
 @Entity
-public class Profil {
-    private int id;
-    private String libelle;
-    private Collection<Role> roles;
-
-    @Id
-    @Column(name = "ID")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "Libelle")
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Profil profil = (Profil) o;
-
-        if (id != profil.id) return false;
-        if (libelle != null ? !libelle.equals(profil.libelle) : profil.libelle != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (libelle != null ? libelle.hashCode() : 0);
-        return result;
-    }
-
-    @OneToMany(mappedBy = "profilByProfilId")
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
+@org.hibernate.annotations.Proxy(lazy=false)
+@Table(name="Profil")
+public class Profil implements Serializable {
+	public Profil() {
+	}
+	
+	@Column(name="ID", nullable=false, length=11)	
+	@Id	
+	@GeneratedValue(generator="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_PROFIL_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_PROFIL_ID_GENERATOR", strategy="native")	
+	private int ID;
+	
+	@Column(name="Libelle", nullable=true, length=255)	
+	private String libelle;
+	
+	@ManyToMany(targetEntity=Role.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinTable(name="Profil_Role", joinColumns={ @JoinColumn(name="ProfilID") }, inverseJoinColumns={ @JoinColumn(name="RoleID") })	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	private Set<Role> roles;
+	
+	private void setID(int value) {
+		this.ID = value;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public int getORMID() {
+		return getID();
+	}
+	
+	public void setLibelle(String value) {
+		this.libelle = value;
+	}
+	
+	public String getLibelle() {
+		return libelle;
+	}
+	
+	public Set<Role> getRoles() {
+        if (null == roles) {
+            roles = new HashSet<>();
+        }
+		return roles;
+	}
+	
+	
+	public String toString() {
+		return String.valueOf(getID());
+	}
+	
 }
