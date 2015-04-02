@@ -15,5 +15,12 @@
                         tableName="membre" />
     </changeSet>
 
+    <changeSet author="Dimitri" runOnChange="true" id="init-profil">
+        <loadUpdateData encoding="UTF-8"
+                        file="classpath*:liquibase/data/profil.csv"
+                        primaryKey="ID"
+                        tableName="profil" />
+    </changeSet>
+
 
 </databaseChangeLog>

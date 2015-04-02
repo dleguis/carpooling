@@ -73,7 +73,7 @@
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-6">
         <createTable tableName="fonction">
             <column name="ID" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="Libelle" type="VARCHAR(255)"/>
         </createTable>
@@ -215,7 +215,7 @@
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-18">
         <createTable tableName="role">
             <column name="ID" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
         </createTable>
     </changeSet>
