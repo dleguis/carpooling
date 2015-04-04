@@ -34,10 +34,9 @@ public class Profil implements Serializable {
 	@Column(name="Libelle", nullable=true, length=255)	
 	private String libelle;
 	
-	@ManyToMany(targetEntity=Role.class)	
+	@ManyToMany(targetEntity=Role.class, fetch = FetchType.EAGER)
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinTable(name="Profil_Role", joinColumns={ @JoinColumn(name="ProfilID") }, inverseJoinColumns={ @JoinColumn(name="RoleID") })	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private Set<Role> roles;
 	
 	private void setID(int value) {

@@ -22,5 +22,25 @@
                         tableName="profil" />
     </changeSet>
 
+    <changeSet author="Dimitri" runOnChange="true" id="init-role">
+        <loadData encoding="UTF-8"
+                        file="classpath*:liquibase/data/role.csv"
+                        tableName="role" />
+    </changeSet>
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-profil-role">
+        <delete tableName="profil_role" />
+        <loadData encoding="UTF-8"
+                  file="classpath*:liquibase/data/profil-role.csv"
+                  tableName="profil_role" />
+    </changeSet>
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-membre-profil">
+        <delete tableName="membre_profil" />
+        <loadData encoding="UTF-8"
+                        file="classpath*:liquibase/data/membre-profil.csv"
+                        tableName="membre_profil" />
+    </changeSet>
+
 
 </databaseChangeLog>
