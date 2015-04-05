@@ -21,5 +21,7 @@ public abstract class AbstractServiceTest {
     @Autowired
     protected TrajetService trajetService;
 
+    @Autowired
+    protected MoyenPaiementService moyenPaiementService;
 
 }

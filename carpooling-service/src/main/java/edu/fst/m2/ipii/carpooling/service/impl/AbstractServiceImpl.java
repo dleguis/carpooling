@@ -1,7 +1,6 @@
 package edu.fst.m2.ipii.carpooling.service.impl;
 
-import edu.fst.m2.ipii.carpooling.domaine.repository.MembreRepository;
-import edu.fst.m2.ipii.carpooling.domaine.repository.TrajetRepository;
+import edu.fst.m2.ipii.carpooling.domaine.repository.*;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +23,18 @@ public abstract class AbstractServiceImpl {
 
     @Autowired
     protected TrajetRepository trajetRepository;
+
+    @Autowired
+    protected ReservationRepository reservationRepository;
+
+    @Autowired
+    protected PointEmbarquementRepository pointEmbarquementRepository;
+
+    @Autowired
+    protected MoyenPaiementRepository moyenPaiementRepository;
+
+    @Autowired
+    protected VoitureRepository voitureRepository;
 
     /** The mapper service. */
     @Autowired

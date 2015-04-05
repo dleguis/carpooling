@@ -20,7 +20,6 @@ public class TrajetDto {
     private PointEmbarquementDto arrivee;
 
     @Getter
-    @Setter
     private PointEmbarquementDto depart;
 
     @Getter
@@ -32,16 +31,23 @@ public class TrajetDto {
     private String titre;
 
     @Getter
-    @Setter
     private int nbPlacesDisponibles;
 
-    @Getter
-    @Setter
     private Set<ReservationDto> reservations;
 
-    @Getter
-    @Setter
     private Set<CommentaireDto> commentaires;
 
+    public Set<ReservationDto> getReservations() {
+        if (null == reservations) {
+            reservations = new HashSet<>();
+        }
+        return reservations;
+    }
 
+    public Set<CommentaireDto> getCommentaires() {
+        if (null == commentaires) {
+            commentaires = new HashSet<>();
+        }
+        return commentaires;
+    }
 }

@@ -2,6 +2,7 @@ package edu.fst.m2.ipii.carpooling.transverse.dto;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,7 +36,7 @@ public class MembreDto {
     
     @Getter
     @Setter
-    private Set<VoitureDto> voitures;
+    private List<VoitureDto> voitures;
     
     @Getter
     @Setter

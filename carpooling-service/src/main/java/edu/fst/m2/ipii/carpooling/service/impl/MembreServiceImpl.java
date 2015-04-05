@@ -26,4 +26,14 @@ public class MembreServiceImpl extends AbstractServiceImpl implements MembreServ
         }
         return MapperUtils.map(mapperService, membres, MembreDto.class);
     }
+
+    @Override
+    public MembreDto rechercher(int id) {
+        Membre membre = membreRepository.findOne(id);
+
+        LOGGER.debug("profils : {}", membre.getProfils());
+        LOGGER.debug("voitures : {}", membre.getVoitures());
+
+        return MapperUtils.map(mapperService, membre, MembreDto.class);
+    }
 }

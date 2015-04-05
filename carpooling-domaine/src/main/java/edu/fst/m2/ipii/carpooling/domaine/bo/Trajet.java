@@ -32,8 +32,8 @@ public class Trajet implements Serializable {
 	@org.hibernate.annotations.GenericGenerator(name="EDU_FST_M2_IPII_CARPOOLING_DOMAINE_BO_TRAJET_ID_GENERATOR", strategy="native")	
 	private int ID;
 	
-	@ManyToOne(targetEntity=PointEmbarquement.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@ManyToOne(targetEntity=PointEmbarquement.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	// @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})
 	@JoinColumns({ @JoinColumn(name="PointEmbarquementID", referencedColumnName="ID", nullable=false) })	
 	private PointEmbarquement arrivee;
 
@@ -41,8 +41,7 @@ public class Trajet implements Serializable {
 	private PointEmbarquement depart;
 	
 	@ManyToOne(targetEntity=Voiture.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="VoitureID", referencedColumnName="ID", nullable=false) })	
+	@JoinColumns({ @JoinColumn(name="VoitureID", referencedColumnName="ID", nullable=false) })
 	private Voiture voiture;
 	
 	@Column(name="Titre", nullable=true, length=255)	
@@ -61,8 +60,8 @@ public class Trajet implements Serializable {
 	private Set<Reservation> reservations;
 	
 	@OneToMany(targetEntity=Commentaire.class)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="TrajetID", nullable=false) })	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})
+	@JoinColumns({ @JoinColumn(name="TrajetID", nullable=false) })
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private Set<Commentaire> commentaires;
 	
@@ -142,10 +141,6 @@ public class Trajet implements Serializable {
 			}
 		}
 		return depart;
-	}
-
-	public void setDepart(PointEmbarquement depart) {
-		this.depart = depart;
 	}
 
 	public void setArrivee(PointEmbarquement value) {

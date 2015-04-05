@@ -11,4 +11,6 @@ import java.util.List;
 public interface MembreService {
 
     List<MembreDto> rechercher();
+
+    MembreDto rechercher(int id);
 }

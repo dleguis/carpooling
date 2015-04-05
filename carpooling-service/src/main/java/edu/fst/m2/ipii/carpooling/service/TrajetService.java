@@ -13,4 +13,6 @@ public interface TrajetService {
     List<TrajetDto> rechercher(TrajetCriteria trajetCriteria) throws Exception;
 
     TrajetDto getTrajet(int id);
+
+    int creer(TrajetDto trajetDto);
 }

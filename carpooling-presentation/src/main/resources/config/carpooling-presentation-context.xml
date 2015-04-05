@@ -25,6 +25,7 @@
                    mapping="/img/**" />
     <mvc:resources location="/Assets/css/" mapping="/css/**" />
     <mvc:resources location="/Assets/js/" mapping="/js/**" />
+    <mvc:resources location="/Assets/fonts/" mapping="/fonts/**" />
 
     <!-- **************************************************************** -->
     <!-- SPRING ANNOTATION PROCESSING -->

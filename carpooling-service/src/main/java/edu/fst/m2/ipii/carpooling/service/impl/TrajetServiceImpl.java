@@ -3,6 +3,7 @@ package edu.fst.m2.ipii.carpooling.service.impl;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
+import edu.fst.m2.ipii.carpooling.domaine.bo.Reservation;
 import edu.fst.m2.ipii.carpooling.domaine.bo.Trajet;
 import edu.fst.m2.ipii.carpooling.service.TrajetService;
 import edu.fst.m2.ipii.carpooling.transverse.criteria.TrajetCriteria;
@@ -11,13 +12,16 @@ import edu.fst.m2.ipii.carpooling.transverse.utils.mapper.MapperUtils;
 import org.dozer.Mapper;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Dimitri on 05/04/15.
  */
 @Service
+@Transactional
 public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetService {
 
     @Override
@@ -49,5 +53,24 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
     @Override
     public TrajetDto getTrajet(int id) {
         return MapperUtils.map(mapperService, trajetRepository.findOneFetch(id), TrajetDto.class);
+    }
+
+    @Override
+    public int creer(TrajetDto trajetDto) {
+
+        Trajet trajet = MapperUtils.map(mapperService, trajetDto, Trajet.class);
+
+        trajet.setArrivee(pointEmbarquementRepository.save(trajet.getArrivee()));
+
+        List<Reservation> reservations = reservationRepository.save(trajet.getReservations());
+
+        trajet.getReservations().clear();
+        trajet.getReservations().addAll(reservations);
+
+        trajet.setVoiture(voitureRepository.findOne(trajetDto.getVoiture().getID()));
+
+        trajet = trajetRepository.save(trajet);
+
+        return trajet.getID();
     }
 }
