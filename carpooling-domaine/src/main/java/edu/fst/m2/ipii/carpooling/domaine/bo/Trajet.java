@@ -15,6 +15,7 @@ package edu.fst.m2.ipii.carpooling.domaine.bo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,6 +36,9 @@ public class Trajet implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="PointEmbarquementID", referencedColumnName="ID", nullable=false) })	
 	private PointEmbarquement arrivee;
+
+	@Transient
+	private PointEmbarquement depart;
 	
 	@ManyToOne(targetEntity=Voiture.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -43,20 +47,43 @@ public class Trajet implements Serializable {
 	
 	@Column(name="Titre", nullable=true, length=255)	
 	private String titre;
+
+	@Column(name="DateDepart", nullable=true)
+	// @Temporal(TemporalType.DATE)
+	private Date dateDepart;
+
+	@Transient
+	private int nbPlacesDisponibles;
 	
 	@OneToMany(mappedBy="trajet", targetEntity=Reservation.class, fetch = FetchType.LAZY)
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private Set<Reservation> reservations = new HashSet<Reservation>();
+	private Set<Reservation> reservations;
 	
 	@OneToMany(targetEntity=Commentaire.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="TrajetID", nullable=false) })	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private Set<Commentaire> commentaires = new HashSet<Commentaire>();
+	private Set<Commentaire> commentaires;
 	
 	private void setID(int value) {
 		this.ID = value;
+	}
+
+	public int getNbPlacesDisponibles() {
+		if (voiture != null) {
+			int placesDisponibles = voiture.getNbPlaces();
+
+			for (Reservation reservation : getReservations()) {
+				if (reservation.isValidee()) {
+					placesDisponibles -= reservation.getNombrePassagers();
+				}
+			}
+
+			nbPlacesDisponibles = placesDisponibles;
+		}
+
+		return nbPlacesDisponibles;
 	}
 	
 	public int getID() {
@@ -73,6 +100,14 @@ public class Trajet implements Serializable {
 	
 	public String getTitre() {
 		return titre;
+	}
+
+	public Date getDateDepart() {
+		return dateDepart;
+	}
+
+	public void setDateDepart(Date dateDepart) {
+		this.dateDepart = dateDepart;
 	}
 
 	public Set<Reservation> getReservations() {
@@ -98,8 +133,21 @@ public class Trajet implements Serializable {
         }
 		return commentaires;
 	}
-	
-	
+
+	public PointEmbarquement getDepart() {
+		for (Reservation reservation : getReservations()) {
+			if (reservation.isInitiale()) {
+				depart = reservation.getPointEmbarquement();
+				break;
+			}
+		}
+		return depart;
+	}
+
+	public void setDepart(PointEmbarquement depart) {
+		this.depart = depart;
+	}
+
 	public void setArrivee(PointEmbarquement value) {
 		this.arrivee = value;
 	}
@@ -107,7 +155,7 @@ public class Trajet implements Serializable {
 	public PointEmbarquement getArrivee() {
 		return arrivee;
 	}
-	
+
 	public String toString() {
 		return String.valueOf(getID());
 	}

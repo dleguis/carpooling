@@ -2,12 +2,12 @@ package edu.fst.m2.ipii.carpooling.transverse.dto;
 
 import lombok.*;
 
-import java.util.Set;
+import java.util.Date;
 
 /**
- * Created by Dimitri on 02/04/15.
+ * Created by Dimitri on 05/04/15.
  */
-public class ProfilDto {
+public class FactureDto {
 
     @Getter
     @Setter
@@ -15,10 +15,9 @@ public class ProfilDto {
 
     @Getter
     @Setter
-    private String libelle;
+    private PaiementDto paiement;
 
     @Getter
     @Setter
-    private Set<RoleDto> roles;
-
+    private Date dateFacture;
 }

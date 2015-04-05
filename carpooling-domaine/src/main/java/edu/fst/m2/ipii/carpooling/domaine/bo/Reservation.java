@@ -46,19 +46,19 @@ public class Reservation implements Serializable {
 	private Trajet trajet;
 	
 	@Column(name="DateReservation", nullable=true)	
-	@Temporal(TemporalType.DATE)	
+	// @Temporal(TemporalType.DATE)
 	private Date dateReservation;
 	
 	@Column(name="NombrePassagers", nullable=false, length=11)	
 	private int nombrePassagers;
 	
-	@Column(name="Validee", nullable=false, length=1)	
+	@Column(name="Validee", nullable=false)
 	private boolean validee;
 	
 	@Column(name="Tarif", nullable=true)	
 	private Float tarif;
 	
-	@Column(name="Initiale", nullable=false, length=1)	
+	@Column(name="Initiale", nullable=false)
 	private boolean initiale;
 	
 	@OneToOne(mappedBy="reservation", targetEntity=PointEmbarquement.class, fetch=FetchType.LAZY)	
@@ -97,7 +97,7 @@ public class Reservation implements Serializable {
 		this.validee = value;
 	}
 	
-	public boolean getValidee() {
+	public boolean isValidee() {
 		return validee;
 	}
 	
@@ -117,7 +117,7 @@ public class Reservation implements Serializable {
 		this.initiale = value;
 	}
 	
-	public boolean getInitiale() {
+	public boolean isInitiale() {
 		return initiale;
 	}
 	

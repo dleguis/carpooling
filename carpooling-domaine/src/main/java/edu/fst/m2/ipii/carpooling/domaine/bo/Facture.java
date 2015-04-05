@@ -36,9 +36,9 @@ public class Facture implements Serializable {
 	@JoinColumns({ @JoinColumn(name="PaiementID", referencedColumnName="ID", nullable=false) })
 	private Paiement paiement;
 	
-	@Column(name="`Date`", nullable=true)	
-	@Temporal(TemporalType.DATE)	
-	private Date date;
+	@Column(name="DateFacture", nullable=true)
+	// @Temporal(TemporalType.DATE)
+	private Date dateFacture;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -52,12 +52,12 @@ public class Facture implements Serializable {
 		return getID();
 	}
 	
-	public void setDate(Date value) {
-		this.date = value;
+	public void setDateFacture(Date value) {
+		this.dateFacture = value;
 	}
 	
-	public Date getDate() {
-		return date;
+	public Date getDateFacture() {
+		return dateFacture;
 	}
 	
 	public void setPaiement(Paiement value) {

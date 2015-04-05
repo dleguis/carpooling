@@ -38,9 +38,9 @@ public class Commentaire implements Serializable {
 	@Column(name="Contenu", nullable=true, length=255)	
 	private String contenu;
 	
-	@Column(name="`Date`", nullable=true)	
-	@Temporal(TemporalType.DATE)	
-	private Date date;
+	@Column(name="DateCommentaire", nullable=true)
+	// @Temporal(TemporalType.DATE)
+	private Date dateCommentaire;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -62,12 +62,12 @@ public class Commentaire implements Serializable {
 		return contenu;
 	}
 	
-	public void setDate(java.util.Date value) {
-		this.date = value;
+	public void setDateCommentaire(java.util.Date value) {
+		this.dateCommentaire = value;
 	}
 	
-	public java.util.Date getDate() {
-		return date;
+	public java.util.Date getDateCommentaire() {
+		return dateCommentaire;
 	}
 	
 	public void setMembre(Membre value) {

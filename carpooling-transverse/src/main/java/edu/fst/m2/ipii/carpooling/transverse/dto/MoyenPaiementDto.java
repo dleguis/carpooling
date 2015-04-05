@@ -5,9 +5,9 @@ import lombok.*;
 import java.util.Set;
 
 /**
- * Created by Dimitri on 02/04/15.
+ * Created by Dimitri on 05/04/15.
  */
-public class ProfilDto {
+public class MoyenPaiementDto {
 
     @Getter
     @Setter
@@ -19,6 +19,5 @@ public class ProfilDto {
 
     @Getter
     @Setter
-    private Set<RoleDto> roles;
-
+    private Set<PaiementDto> paiements;
 }

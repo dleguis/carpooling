@@ -14,8 +14,8 @@
             </column>
             <column name="MembreID" type="INT(10)"/>
             <column name="Libelle" type="VARCHAR(255)"/>
-            <column name="DateDebutValide" type="date"/>
-            <column name="DateFinValide" type="date"/>
+            <column name="DateDebutValide" type="timestamp"/>
+            <column name="DateFinValide" type="timestamp"/>
         </createTable>
     </changeSet>
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-2">
@@ -39,8 +39,8 @@
             <column name="Rue" type="VARCHAR(255)"/>
             <column name="Ville" type="VARCHAR(255)"/>
             <column name="CodePostal" type="VARCHAR(255)"/>
-            <column name="Latitude" type="FLOAT(12)"/>
-            <column name="Longitude" type="FLOAT(12)"/>
+            <column name="Latitude" type="DOUBLE(12)"/>
+            <column name="Longitude" type="DOUBLE(12)"/>
             <column name="Pays" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
@@ -56,7 +56,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="Contenu" type="VARCHAR(255)"/>
-            <column name="Date" type="date"/>
+            <column name="DateCommentaire" type="timestamp"/>
         </createTable>
     </changeSet>
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-5">
@@ -67,7 +67,7 @@
             <column name="PaiementID" type="INT(10)">
                 <constraints nullable="false"/>
             </column>
-            <column name="Date" type="date"/>
+            <column name="DateFacture" type="timestamp"/>
         </createTable>
     </changeSet>
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-6">
@@ -148,10 +148,10 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="ReservationID" type="INT(10)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
-            <column name="Latitude" type="FLOAT(12)"/>
-            <column name="Longitude" type="FLOAT(12)"/>
+            <column name="Latitude" type="DOUBLE(12)"/>
+            <column name="Longitude" type="DOUBLE(12)"/>
         </createTable>
     </changeSet>
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-14">
@@ -199,15 +199,15 @@
             <column name="TrajetID" type="INT(10)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DateReservation" type="date"/>
+            <column name="DateReservation" type="timestamp"/>
             <column name="NombrePassagers" type="INT(10)">
                 <constraints nullable="false"/>
             </column>
-            <column name="Validee" type="BIT(1)">
+            <column name="Validee" type="TINYINT">
                 <constraints nullable="false"/>
             </column>
             <column name="Tarif" type="FLOAT(12)"/>
-            <column name="Initiale" type="BIT(1)">
+            <column name="Initiale" type="TINYINT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -231,6 +231,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="Titre" type="VARCHAR(255)"/>
+            <column name="DateDepart" type="timestamp"/>
         </createTable>
     </changeSet>
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-20">

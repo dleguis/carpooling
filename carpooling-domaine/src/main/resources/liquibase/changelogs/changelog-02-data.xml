@@ -42,5 +42,59 @@
                         tableName="membre_profil" />
     </changeSet>
 
+    <changeSet author="Dimitri" runOnChange="true" id="init-voiture">
+        <loadUpdateData primaryKey="ID" encoding="UTF-8"
+                  file="classpath*:liquibase/data/voiture.csv"
+                  tableName="voiture" />
+    </changeSet>
+
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-moyen-paiement">
+        <loadUpdateData primaryKey="ID"  encoding="UTF-8"
+                  file="classpath*:liquibase/data/moyenpaiement.csv"
+                  tableName="moyenpaiement" />
+    </changeSet>
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-paiement">
+        <loadUpdateData primaryKey="ID"  encoding="UTF-8"
+                  file="classpath*:liquibase/data/paiement.csv"
+                  tableName="paiement" />
+    </changeSet>
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-facture">
+        <loadUpdateData primaryKey="ID"  encoding="UTF-8"
+                        file="classpath*:liquibase/data/facture.csv"
+                        tableName="facture" />
+    </changeSet>
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-point-embarquement-trajet">
+        <loadUpdateData primaryKey="ID"  encoding="UTF-8"
+                        file="classpath*:liquibase/data/pointembarquement-trajet.csv"
+                        tableName="pointembarquement" />
+    </changeSet>
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-trajet">
+        <loadUpdateData primaryKey="ID"  encoding="UTF-8"
+                        file="classpath*:liquibase/data/trajet.csv"
+                        tableName="trajet" />
+    </changeSet>
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-reservation">
+        <loadUpdateData primaryKey="ID"  encoding="UTF-8"
+                        file="classpath*:liquibase/data/reservation.csv"
+                        tableName="reservation" />
+    </changeSet>
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-point-embarquement">
+        <loadUpdateData primaryKey="ID"  encoding="UTF-8"
+                        file="classpath*:liquibase/data/pointembarquement.csv"
+                        tableName="pointembarquement" />
+    </changeSet>
+
+    <changeSet author="Dimitri" runOnChange="true" id="init-commentaire">
+        <loadUpdateData primaryKey="ID"  encoding="UTF-8" quotchar="&quot;"
+                        file="classpath*:liquibase/data/commentaire.csv"
+                        tableName="commentaire" />
+    </changeSet>
 
 </databaseChangeLog>

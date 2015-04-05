@@ -5,9 +5,9 @@ import lombok.*;
 import java.util.Set;
 
 /**
- * Created by Dimitri on 02/04/15.
+ * Created by Dimitri on 05/04/15.
  */
-public class ProfilDto {
+public class FormuleDto {
 
     @Getter
     @Setter
@@ -15,10 +15,15 @@ public class ProfilDto {
 
     @Getter
     @Setter
-    private String libelle;
+    private String titre;
 
     @Getter
     @Setter
-    private Set<RoleDto> roles;
+    private int tarif;
+
+    @Getter
+    @Setter
+    private Set<FonctionDto> fonctions;
+
 
 }

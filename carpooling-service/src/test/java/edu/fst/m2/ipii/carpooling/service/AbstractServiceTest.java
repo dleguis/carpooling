@@ -18,5 +18,8 @@ public abstract class AbstractServiceTest {
     @Autowired
     protected MembreService membreService;
 
+    @Autowired
+    protected TrajetService trajetService;
+
 
 }

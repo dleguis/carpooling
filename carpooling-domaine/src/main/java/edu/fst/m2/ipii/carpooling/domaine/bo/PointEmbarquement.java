@@ -34,10 +34,10 @@ public class PointEmbarquement implements Serializable {
 	private Reservation reservation;
 	
 	@Column(name="Latitude", nullable=true)	
-	private Float latitude;
+	private Double latitude;
 	
 	@Column(name="Longitude", nullable=true)	
-	private Float longitude;
+	private Double longitude;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -51,27 +51,27 @@ public class PointEmbarquement implements Serializable {
 		return getID();
 	}
 	
-	public void setLatitude(float value) {
-		setLatitude(new Float(value));
+	public void setLatitude(double value) {
+		setLatitude(new Double(value));
 	}
 	
-	public void setLatitude(Float value) {
+	public void setLatitude(Double value) {
 		this.latitude = value;
 	}
 	
-	public Float getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 	
-	public void setLongitude(float value) {
-		setLongitude(new Float(value));
+	public void setLongitude(double value) {
+		setLongitude(new Double(value));
 	}
 	
-	public void setLongitude(Float value) {
+	public void setLongitude(Double value) {
 		this.longitude = value;
 	}
 	
-	public Float getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 	

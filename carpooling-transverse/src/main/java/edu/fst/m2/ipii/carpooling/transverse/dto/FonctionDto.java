@@ -5,12 +5,13 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Created by Dimitri on 02/04/15.
+ * Created by Dimitri on 05/04/15.
  */
 
 @Data
-public class RoleDto {
+public class FonctionDto {
 
     private String ID;
 
+    private String libelle;
 }
