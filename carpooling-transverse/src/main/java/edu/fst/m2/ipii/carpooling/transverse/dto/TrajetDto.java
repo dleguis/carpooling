@@ -31,10 +31,13 @@ public class TrajetDto {
     private String titre;
 
     @Getter
+    @Setter
     private int nbPlacesDisponibles;
 
+    @Setter
     private Set<ReservationDto> reservations;
 
+    @Setter
     private Set<CommentaireDto> commentaires;
 
     public Set<ReservationDto> getReservations() {

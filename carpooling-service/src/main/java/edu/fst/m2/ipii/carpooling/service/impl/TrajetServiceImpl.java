@@ -11,6 +11,8 @@ import edu.fst.m2.ipii.carpooling.transverse.dto.TrajetDto;
 import edu.fst.m2.ipii.carpooling.transverse.utils.mapper.MapperUtils;
 import org.dozer.Mapper;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,8 @@ import java.util.Set;
 @Transactional
 public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrajetServiceImpl.class);
+
     @Override
     public List<TrajetDto> rechercher() {
         return MapperUtils.map(mapperService, trajetRepository.findAll(), TrajetDto.class);
@@ -32,7 +36,6 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
     @Override
     public List<TrajetDto> rechercher(TrajetCriteria trajetCriteria) throws Exception {
 
-        // Replace the API key below with a valid API key.
         GeoApiContext context = new GeoApiContext().setApiKey("***REMOVED***");
         GeocodingResult[] results =  GeocodingApi.geocode(context, trajetCriteria.getVilleDepart()).await();
 
@@ -57,7 +60,14 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
 
     @Override
     public TrajetDto getTrajet(int id) {
-        return MapperUtils.map(mapperService, trajetRepository.findOneFetch(id), TrajetDto.class);
+
+        Trajet trajet = trajetRepository.findOneFetch(id);
+
+        LOGGER.debug("réservations : {}", trajet.getReservations());
+
+        LOGGER.debug("places disponibles : {}", trajet.getNbPlacesDisponibles());
+
+        return MapperUtils.map(mapperService, trajet, TrajetDto.class);
     }
 
     @Override
