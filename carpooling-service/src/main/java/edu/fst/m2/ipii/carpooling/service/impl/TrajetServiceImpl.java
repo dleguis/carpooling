@@ -8,6 +8,8 @@ import edu.fst.m2.ipii.carpooling.domaine.bo.Trajet;
 import edu.fst.m2.ipii.carpooling.service.TrajetService;
 import edu.fst.m2.ipii.carpooling.transverse.criteria.TrajetCriteria;
 import edu.fst.m2.ipii.carpooling.transverse.dto.TrajetDto;
+import edu.fst.m2.ipii.carpooling.transverse.exception.CarpoolingFonctionnelleException;
+import edu.fst.m2.ipii.carpooling.transverse.exception.code.CarpoolingFonctionnelleExceptionCode;
 import edu.fst.m2.ipii.carpooling.transverse.utils.mapper.MapperUtils;
 import org.dozer.Mapper;
 import org.joda.time.DateTime;
@@ -63,7 +65,11 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
 
         Trajet trajet = trajetRepository.findOneFetch(id);
 
-        LOGGER.debug("réservations : {}", trajet.getReservations());
+        if (null == trajet) {
+            throw new CarpoolingFonctionnelleException(CarpoolingFonctionnelleExceptionCode.ERR_TRAJET_002);
+        }
+
+        // LOGGER.debug("réservations : {}", trajet.getReservations());
 
         LOGGER.debug("places disponibles : {}", trajet.getNbPlacesDisponibles());
 

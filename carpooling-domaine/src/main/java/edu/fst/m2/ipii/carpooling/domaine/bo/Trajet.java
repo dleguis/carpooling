@@ -13,6 +13,8 @@
  */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,8 +25,6 @@ import java.util.Set;
 @org.hibernate.annotations.Proxy(lazy=false)
 @Table(name="Trajet")
 public class Trajet implements Serializable {
-	public Trajet() {
-	}
 	
 	@Column(name="ID", nullable=false, length=11)	
 	@Id	
@@ -50,9 +50,6 @@ public class Trajet implements Serializable {
 	@Column(name="DateDepart", nullable=true)
 	// @Temporal(TemporalType.DATE)
 	private Date dateDepart;
-
-	@Transient
-	private int nbPlacesDisponibles;
 	
 	@OneToMany(mappedBy="trajet", targetEntity=Reservation.class, fetch = FetchType.LAZY)
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -64,25 +61,52 @@ public class Trajet implements Serializable {
 	@JoinColumns({ @JoinColumn(name="TrajetID", nullable=false) })
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private Set<Commentaire> commentaires;
+
+	@Transient
+	private int nbPlacesDisponibles;
+
+	@Transient
+	private double tarif;
+
+	@Transient
+	private String membre;
+
+	@PostLoad
+	public void buildTransientValues() {
+
+		int placesDisponibles = null == voiture ? 0 : voiture.getNbPlaces();
+
+		for (Reservation reservation : getReservations()) {
+
+			if (reservation.isInitiale()) {
+				tarif = reservation.getTarif();
+				membre = reservation.getMembre().getLogin();
+			}
+			if (reservation.isValidee()) {
+				placesDisponibles -= reservation.getNombrePassagers();
+			}
+		}
+
+		nbPlacesDisponibles = placesDisponibles;
+
+	}
 	
 	private void setID(int value) {
 		this.ID = value;
 	}
 
+	public double getTarif() {
+
+		return tarif;
+	}
+
 	public int getNbPlacesDisponibles() {
-		if (voiture != null) {
-			int placesDisponibles = voiture.getNbPlaces();
-
-			for (Reservation reservation : getReservations()) {
-				if (reservation.isValidee()) {
-					placesDisponibles -= reservation.getNombrePassagers();
-				}
-			}
-
-			nbPlacesDisponibles = placesDisponibles;
-		}
 
 		return nbPlacesDisponibles;
+	}
+
+	public String getMembre() {
+		return membre;
 	}
 	
 	public int getID() {

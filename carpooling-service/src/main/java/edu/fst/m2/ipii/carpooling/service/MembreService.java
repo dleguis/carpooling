@@ -13,4 +13,6 @@ public interface MembreService {
     List<MembreDto> rechercher();
 
     MembreDto rechercher(int id);
+
+    MembreDto rechercher(String login);
 }

@@ -12,8 +12,6 @@
         <module>carpooling-transverse</module>
         <module>carpooling-service</module>
         <module>carpooling-presentation</module>
-        <!-- <module>carpooling-echange</module>
-        <module>carpooling-ear</module> -->
     </modules>
     <packaging>pom</packaging>
 
@@ -28,6 +26,7 @@
         <main.basedir>carpooling-config-externe/localhost</main.basedir>
         <ow2.version>1.0.13</ow2.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 
@@ -251,6 +250,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout/layout">
+<head>
+    <title>Détail trajet</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div id="preloader">
+        <div class="preloader-container">
+            <img src="images/preloader.gif" th:src="@{'/images/preloader.gif'}" class="preload-gif" alt="preload-image" />
+        </div>
+    </div>
+
+    <div class="google-image">
+        <div id="directions-panel"></div>
+        <div id="map-canvas"></div>
+    </div>
+
+
+    <!-- label white html start -->
+    <div class="container">
+        <div class="page30-wrap" style="margin-top: 70px;">
+            <div class="row">
+                <a href="#" th:href="@{'/#'}" style="float: left; margin:20px;"><h5 class="btn form-btn">Retour</h5></a>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="item-details-wrap">
+                            <div class="item-details-wrap-header"></div>
+                            <div class="item-details-wrap-container">
+                                <div class="item-details-content">
+                                    <div class="item-details-content2"><a href="#" th:href="@{'/#'}"><img src="images/minicar.png" th:src="@{'/images/minicar.png'}" alt=""/></a></div>
+                                    <h2>vihicel</h2>
+                                </div>
+                            </div>
+                            <div class="item-details-wrap-container2">
+                                <div class="item-details-man-wrap">
+                                    <div class="item-details-man3"><a href="#" th:href="@{'/#'}" class="img-circle"><img src="images/profile.png" th:src="@{'/images/profile.png'}" alt="" /></a></div>
+                                    <div class="item-details-bag3"><a href="#" th:href="@{'/#'}" class="img-circle"><img src="images/bag2.png" th:src="@{'/images/bag2.png'}" alt="" /></a></div>
+                                </div>
+                                <div class="clipart-wrap2">
+                                    <div class="clipart3">
+                                        <a href="#" th:href="@{'/#'}" class="">6</a>
+                                    </div>
+                                    <div class="clipart33">
+                                        <a href="#" th:href="@{'/#'}" class="">4</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-wrap">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="service-wrap1"><span>Car Type:</span></div>
+                                        <div class="service-wrap2"><span>Private Car</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="service-wrap1"><span>Service:</span></div>
+                                        <div class="service-wrap2"><span>Outstation</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="service-wrap1"><span>From:</span></div>
+                                        <div class="service-wrap2"><span>Paris</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="service-wrap1"><span>Destination:</span></div>
+                                        <div class="service-wrap2"><span>London</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="service-wrap1"><span>Pickup Date:</span></div>
+                                        <div class="service-wrap2"><span>Sunday, 09th Dec 2014</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="service-wrap1"><span>Drop Date:</span></div>
+                                        <div class="service-wrap2"><span>Thursday, 20th Dec 2014</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Roundtrip-Fare">
+                                <h4>Roundtrip Fare:</h4>
+                                <h3>$128.99</h3>
+                                <p>(Inclusive of All Taxes)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 page30-form-wrapper">
+                    <div class="row Transfer">
+                        <h3>Détails du trajet</h3>
+                        <h5>Information de départ</h5>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">Adresse de départ</label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">45 rue tamere</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">Ville</label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">Lille</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">Code postal</label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">59000</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">Heure de départ </label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">08h00</label>
+                            </div>
+                            <hr />
+                            <h5>Information d'arrivée</h5>
+                            <div class="form-group">
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">Ville d'arrivée </label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">tarace</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">adresse d'arrivée </label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">45 rue des putes</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">prix</label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">10 balles</label>
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <div class="col-sm-offset-7 col-sm-5">
+                                    <div class="completing-form-btnwrap"><button type="submit" class="btn form-btn  btn-block">Réserver</button></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-4 page30-form-wrapper">
+                    <div class="row">
+                        <div class="add-wrap">
+                            <div class="add-img"><a href="#" th:href="@{'/#'}"><img class="img-responsive" src="images/add1.jpg" th:src="@{'/images/add1.jpg'}" alt=""/></a></div>
+                            <div class="add-text"><a href="#" th:href="@{'/#'}"><h2>Partez <br />où vous <br />voulez avec Dogecar</h2></a></div>
+                        </div>
+                        <div class="add-wrap">
+                            <div class="add-img add-img2"><a href="#" th:href="@{'/#'}"><img class="img-responsive" src="images/add2.jpg" th:src="@{'/images/add2.jpg'}" alt=""/></a></div>
+                            <div class="add-text"><a href="#" th:href="@{'/#'}"><h2>Smoke<br />WEED<br />Everyday</h2></a></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- label white html exit -->
+
+</section>
+</body>
+</html>

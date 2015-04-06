@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@org.hibernate.annotations.Proxy(lazy=false)
 @Table(name="Profil")
 public class Profil implements Serializable {
 	public Profil() {
@@ -35,8 +34,7 @@ public class Profil implements Serializable {
 	private String libelle;
 	
 	@ManyToMany(targetEntity=Role.class, fetch = FetchType.EAGER)
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinTable(name="Profil_Role", joinColumns={ @JoinColumn(name="ProfilID") }, inverseJoinColumns={ @JoinColumn(name="RoleID") })	
+	@JoinTable(name="Profil_Role", joinColumns={ @JoinColumn(name="ProfilID") }, inverseJoinColumns={ @JoinColumn(name="RoleID") })
 	private Set<Role> roles;
 	
 	private void setID(int value) {

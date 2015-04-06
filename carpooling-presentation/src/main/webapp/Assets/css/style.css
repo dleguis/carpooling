@@ -117,7 +117,7 @@ margin-left: 75%;
 	opacity: .9;
 	}
 .adp, .adp table{
-background: url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg.jpg) repeat-x  #fff;
+background: url(../../../../../../../../../images/form-headr-bg.jpg) repeat-x  #fff;
 padding: 5px 15px;
 border-top: 8px;
 }
@@ -232,7 +232,7 @@ width: 100%;
 height: 67px;
 border-top: 6px solid #2dbdce;
 position: absolute;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/blader-bg.png) ;
+background:url(../../../../../../../../../images/blader-bg.png) ;
 z-index: 9999;
 }
 .anytime-anywhere{
@@ -297,7 +297,7 @@ margin-top: 8px;
 }
 .resister-social .select-control{
 float:left;
-background: url('../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/select-bg-arro.png') no-repeat transparent 62% 52%;
+background: url('../../../../../../../../../images/select-bg-arro.png') no-repeat transparent 62% 52%;
 outline:0px;
 padding:10px;
 border:none;
@@ -308,7 +308,7 @@ appearence: none;
 -mox-appearance: none;
 }
 .resister-social .white-array{
-background: url('../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/select-bg-arro2.png') no-repeat transparent 62% 52% !important;
+background: url('../../../../../../../../../images/select-bg-arro2.png') no-repeat transparent 62% 52% !important;
 }
 .resister-social .language-opt{
 float:left;
@@ -370,7 +370,7 @@ width:100%;
 .custom-dropdown-nav{
 width: 330px !important;
 margin-left: -270px;
-background: url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg.jpg) bottom center repeat-x #ffffff;
+background: url(../../../../../../../../../images/form-headr-bg.jpg) bottom center repeat-x #ffffff;
 padding-bottom:20px;
 }
 
@@ -393,7 +393,7 @@ font-size:26px;
 height:10px;
 width:100%;
 float:left;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg.jpg) repeat-x;
+background:url(../../../../../../../../../images/form-headr-bg.jpg) repeat-x;
 }
 .form-select{
 width:88%;
@@ -406,7 +406,7 @@ width:100%;
 border:1px solid #CCCCCC;
 margin-top:8px;
 font-family:Trebuchet MS;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/down-array.png) no-repeat 96% #ffffff;
+background:url(../../../../../../../../../images/down-array.png) no-repeat 96% #ffffff;
 outline: 0px; 
 font-size: 16px;
 appearence: none;
@@ -425,7 +425,7 @@ width:100%;
 border:1px solid #CCCCCC;
 margin-top:8px;
 font-family:Trebuchet MS;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/picup.png) no-repeat 96% #ffffff;
+background:url(../../../../../../../../../images/picup.png) no-repeat 96% #ffffff;
 outline: 0px; 
 font-size: 16px;
 appearence: none;
@@ -441,7 +441,7 @@ border:1px solid #CCCCCC;
 margin-top:8px;
 float:left;
 font-family:Trebuchet MS;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/date.png) no-repeat 96% #ffffff;
+background:url(../../../../../../../../../images/date.png) no-repeat 96% #ffffff;
 outline: 0px; 
 font-size: 16px; 
 appearence: none;
@@ -455,7 +455,7 @@ border:1px solid #CCCCCC;
 margin-top:8px;
 float:right;
 font-family:Trebuchet MS;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/down-array.png) no-repeat 96% #ffffff;
+background:url(../../../../../../../../../images/down-array.png) no-repeat 96% #ffffff;
 outline: 0px; 
 font-size: 16px;
 appearence: none;
@@ -566,7 +566,7 @@ float:left;
 width:100%;
 }
 .label-yellow{
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/map-bg.png) no-repeat 65%;
+background:url(../../../../../../../../../images/map-bg.png) no-repeat 65%;
 width:100%;
 float:left;
 padding-bottom:84px;
@@ -749,7 +749,7 @@ transition: all 150ms ease-in;
 .right-cursor1{
 position:absolute;
 height:30px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/slider-btn-right.png)no-repeat;
+background:url(../../../../../../../../../images/slider-btn-right.png)no-repeat;
 width:18px;
 margin-left:-82px;
 }
@@ -757,7 +757,7 @@ margin-left:-82px;
 float:right;
 height:30px;
 margin-right:-82px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/slider-btn-left.png)no-repeat;
+background:url(../../../../../../../../../images/slider-btn-left.png)no-repeat;
 width:18px;
 }
 .slider-btn{
@@ -908,13 +908,13 @@ background-color:#ffffff; background-image:none; border:none; box-shadow:none; h
 .custom_btn_top{height:40px;}
 .custom-select-box .bootstrap-select.btn-group .btn .caret{height:35px; top:2px;  width:35px; margin-right: -12px; border-radius:3px; border:0px; float:right; margin-top:-6px;  -moz-margin-start: -35%;}
 /* .custom-select-box2 .bootstrap-select.btn-group .btn .caret{height:6px; top:2px;  width:6px; margin-right: -12px; border-radius:3px; border:0px; float:right; margin-top:-6px;  -moz-margin-start: -35%;} */
-.tec-domain-cat1 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/dropdown-icon.png) no-repeat;}
-.tec-domain-cat2 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/dropdown-icon.png) no-repeat;}
-.tec-domain-cat3 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/dropdown-icon2.png) no-repeat;}
-.tec-domain-cat4 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/dropdown-icon2.png) no-repeat;}
-.tec-domain-cat5 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/dropdown-icon3.png) no-repeat !important;}
+.tec-domain-cat1 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../images/dropdown-icon.png) no-repeat;}
+.tec-domain-cat2 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../images/dropdown-icon.png) no-repeat;}
+.tec-domain-cat3 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../images/dropdown-icon2.png) no-repeat;}
+.tec-domain-cat4 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../images/dropdown-icon2.png) no-repeat;}
+.tec-domain-cat5 .bootstrap-select.btn-group .btn .caret{background:#ffffff url(../../../../../../../../../images/dropdown-icon3.png) no-repeat !important;}
 
-.tec-domain-cat5  {background:#ffffff url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/dropdown-icon3.png) no-repeat 100% !important;border-radius: 4px;color: #2C3E50;}
+.tec-domain-cat5  {background:#ffffff url(../../../../../../../../../images/dropdown-icon3.png) no-repeat 100% !important;border-radius: 4px;color: #2C3E50;}
 .tec-domain-cat5::-webkit-calendar-picker-indicator{display: block;float: left;width: 0.66em;height: 0.66em;padding: 0.17em 0.34em;opacity: 0;-webkit-user-modify: read-only;}
 .tec-domain-cat5::-webkit-inner-spin-button{display:none;}
 .tec-domain-cat5::-webkit-clear-button {display:none;}
@@ -925,17 +925,17 @@ background-color:#ffffff; background-image:none; border:none; box-shadow:none; h
 	color: #2C3E50 !important;
     }
 
-.tec-domain-cat6 .bootstrap-select.btn-group .btn .caret{background: url('../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/dropdown-icon.png') no-repeat scroll 58% 0% #FFF;
+.tec-domain-cat6 .bootstrap-select.btn-group .btn .caret{background: url('../../../../../../../../../images/dropdown-icon.png') no-repeat scroll 58% 0% #FFF;
 width: 20px !important;
 z-index: 1000;
 position: absolute !important;
 height: 35px !important;
 top: 6px !important;
 right: 19px !important;}
-.tec-domain-cat7 .bootstrap-select.btn-group .btn .caret{background: url('../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/dropdown-icon4.png') no-repeat scroll 85% 15% transparent;
+.tec-domain-cat7 .bootstrap-select.btn-group .btn .caret{background: url('../../../../../../../../../images/dropdown-icon4.png') no-repeat scroll 85% 15% transparent;
 margin-top: -2px;
 width: 24px !important;}
-.tec-domain-cat8 .bootstrap-select.btn-group .btn .caret{background: url('../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/dropdown-icon5.png') no-repeat scroll 85% 15% transparent;
+.tec-domain-cat8 .bootstrap-select.btn-group .btn .caret{background: url('../../../../../../../../../images/dropdown-icon5.png') no-repeat scroll 85% 15% transparent;
 margin-top: -1px;
 width: 24px !important;}
 .custom-select-box2 .bootstrap-select button.dropdown-toggle{background-color: transparent;width:80px;}
@@ -1022,7 +1022,7 @@ width: 100%;
 padding-top:59px; 
 width:100%;
 float:left; 
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/cow.jpg) repeat-y;
+background:url(../../../../../../../../../images/cow.jpg) repeat-y;
 background-repeat:repeat;
 background-attachment: fixed;
 background-size: cover;
@@ -1075,7 +1075,7 @@ width:100%;
 width:100%;
 float:left;
 padding-top:55px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/page13bg.jpg);
+background:url(../../../../../../../../../images/page13bg.jpg);
 
 background-repeat:repeat;
 background-attachment: fixed;
@@ -1166,7 +1166,7 @@ width:100%;
 width:100%;
 float:left;
 padding-top:46px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/page19.jpg);
+background:url(../../../../../../../../../images/page19.jpg);
 
 background-repeat:repeat;
 background-attachment: fixed;
@@ -1272,7 +1272,7 @@ background:#000000;
 opacity: .6;
 cursor: pointer; 
 z-index:9999;
-cursor: url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/more.png)80 40, crosshair;
+cursor: url(../../../../../../../../../images/more.png)80 40, crosshair;
 }
 .featured-hover
 {
@@ -1332,7 +1332,7 @@ transition: all 100ms ease-in;
 height:8px;
 width:100%;
 float:left;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg2.jpg)repeat-x;
+background:url(../../../../../../../../../images/form-headr-bg2.jpg)repeat-x;
 }
 .p25-minicar-wrap{
 width:150px;
@@ -1420,7 +1420,7 @@ font-size:14px;
  background:#2dbdce; 
 }
 .page25-content:hover .page25-clipart{
- background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/clipart-hover.png) no-repeat;
+ background:url(../../../../../../../../../images/clipart-hover.png) no-repeat;
 }
 .p25-minicar-clipartwrap{
 height: 29px;
@@ -1441,7 +1441,7 @@ line-height:34px;
 float:left; 
 width:36px;
 height:29px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/clipart2.png) no-repeat;
+background:url(../../../../../../../../../images/clipart2.png) no-repeat;
 text-align:center;
 }
 .page25-container{
@@ -1457,7 +1457,7 @@ margin-bottom:51px;
 width:98%; 
 float:left;
 display:block;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg2.jpg) repeat-y right;
+background:url(../../../../../../../../../images/form-headr-bg2.jpg) repeat-y right;
 border:1px solid #2C3E50;
 margin-bottom: 20px; 
 transition: all 100ms ease-in;
@@ -1554,7 +1554,7 @@ height:32px !important;
 width: 29px;
 margin-top:13px;
 height: 36px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/clipart.png) no-repeat;
+background:url(../../../../../../../../../images/clipart.png) no-repeat;
 float:left; 
 text-align:center;
 }
@@ -1566,7 +1566,7 @@ font-family: 'SourceSansPro Light';
 .clipart22{
 width: 29px;
 height: 36px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/clipart.png) no-repeat;
+background:url(../../../../../../../../../images/clipart.png) no-repeat;
 float:left; 
 text-align:center;
 margin-top:38px;
@@ -1624,7 +1624,7 @@ width:96%;
 float:left;
 margin-top:20px;
 display:block;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg2.jpg) repeat-x;
+background:url(../../../../../../../../../images/form-headr-bg2.jpg) repeat-x;
 border:1px solid #2C3E50; 
 transition: all 100ms ease-in;
 -webkit-transition: all 100ms ease-in;
@@ -1690,7 +1690,7 @@ text-align: center;
 .clipart{
 width:36px;
 height:29px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/clipart2.png) no-repeat;
+background:url(../../../../../../../../../images/clipart2.png) no-repeat;
 float:left;
 margin-left: 67px;
 text-align:center;
@@ -1774,7 +1774,7 @@ margin-bottom:60px;
 width:94%; 
 float:left;
 overflow:hidden;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg2.jpg) repeat-x;
+background:url(../../../../../../../../../images/form-headr-bg2.jpg) repeat-x;
 border:1px solid #2C3E50;
 margin-top:25px;
 transition: all 100ms ease-in;
@@ -1786,7 +1786,7 @@ transition: all 100ms ease-in;
 width:97%; 
 float:left;
 overflow:hidden;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg2.jpg) repeat-x;
+background:url(../../../../../../../../../images/form-headr-bg2.jpg) repeat-x;
 border:6px solid #2C3E50;
 margin-top:19px;
 margin-left:-4px;
@@ -1847,7 +1847,7 @@ margin-top:10px !important;
 float:left; 
 width:36px;
 height:29px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/clipart2.png) no-repeat;
+background:url(../../../../../../../../../images/clipart2.png) no-repeat;
 text-align:center;
 }
 .page28-clipart a{ 
@@ -1936,7 +1936,7 @@ float:left;
 border:1px solid #2C3E50;
 width:98%;
 margin-left:7px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg2.jpg) repeat-x top;
+background:url(../../../../../../../../../images/form-headr-bg2.jpg) repeat-x top;
 }
 .contact-details-wrap-top{
 float:left;
@@ -2040,7 +2040,7 @@ float:left;
 .item-details-wrap-header{
 width:100%;
 height:8px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/form-headr-bg2.jpg) repeat-x;
+background:url(../../../../../../../../../images/form-headr-bg2.jpg) repeat-x;
 }
 .item-details-wrap-container{
 float:left;
@@ -2102,7 +2102,7 @@ text-align: center;
 width: 34px;
  
 height: 36px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/clipart.png) no-repeat;
+background:url(../../../../../../../../../images/clipart.png) no-repeat;
 float:left; 
 text-align:center;
 margin-top: 39px;
@@ -2115,7 +2115,7 @@ font-family: 'SourceSansPro Light';
 .clipart33{
 width: 34px;
 height: 36px;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/clipart.png) no-repeat;
+background:url(../../../../../../../../../images/clipart.png) no-repeat;
 float:left; 
 text-align:center;
 margin-top:56px;
@@ -2225,7 +2225,7 @@ padding: 0px 29px;
 /*=================== page no 30 css exit ======================== */
 /* *************** footer css content start ******************* */
 .custom-footer{
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/map-bg2.png) no-repeat 65% 0% #2C3E50;
+background:url(../../../../../../../../../images/map-bg2.png) no-repeat 65% 0% #2C3E50;
 width:100%;
 float:left;
 border-bottom: 2px solid #2dbdce;
@@ -2284,7 +2284,7 @@ margin-top:20px;
 .footer-map-bg{
 width:100%;
 float:right;
-background:url(../../../../../../../../../Skydrive/Documents/FST/Projet%20Technique/projet%20tech/images/map-bg3.png)no-repeat;
+background:url(../../../../../../../../../images/map-bg3.png)no-repeat;
 height:250px;
 }
 

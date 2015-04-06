@@ -22,10 +22,10 @@ public enum CarpoolingFonctionnelleExceptionCode {
     ERR_USER_004("Mot de passe incorrect"),
 
     /** The ER r_ boo k_001. */
-    ERR_BOOK_001("Le livre n'existe pas"),
+    ERR_TRAJET_001("Le trajet existe déjà"),
 
     /** The ER r_ autho r_001. */
-    ERR_AUTHOR_001("L'auteur n'existe pas"),
+    ERR_TRAJET_002("Le trajet n'existe pas"),
 
     /** The ER r_ orde r_001. */
     ERR_ORDER_001("La commande n'existe pas"),

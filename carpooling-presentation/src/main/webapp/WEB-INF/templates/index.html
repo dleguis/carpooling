@@ -1,15 +1,291 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       layout:decorator="layout/layout">
 <head>
     <title>Accueil</title>
 </head>
 <body>
 <section layout:fragment="content">
+    <div id="preloader">
+        <div class="preloader-container">
+            <img src="images/preloader.gif" th:src="@{'/images/preloader.gif'}" class="preload-gif" alt="preload-image" />
+        </div>
+    </div>
 
-    Bla.
+    <div class="google-image">
+        <div id="directions-panel"></div>
+        <div id="map-canvas"></div>
+    </div>
+
+
+    <!-- Booking now form wrapper html start -->
+    <div class="booking-form-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div sec:authorize="hasRole('ROLE_ECRAN_001_RECHERCHE_TRAJET')" class="form-wrap ">
+                            <div class="form-headr"></div>
+                            <h2>Chercher un trajet.</h2>
+                            <div class="form-select">
+                                <form th:object="${trajetRechercheModel}" th:action="@{'/recherche-trajet.html'}" method="GET" >
+                                    <div class="col-sm-12 custom-select-box tec-domain-cat3">
+                                        <div class="row">
+                                            <input th:field="*{villeDepart}" class="control-form4 selectpicker custom-select-box tec-domain-cat btn" type="text" placeholder="ville de départ" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 custom-select-box tec-domain-cat3">
+                                        <div class="row">
+                                            <input th:field="*{villeArrivee}" class="control-form4 selectpicker custom-select-box tec-domain-cat btn" type="text" placeholder="ville d'arrivée" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="col-sm-8 custom-select-box  day">
+                                                <div class="row" >
+                                                    <input th:field="*{dateDepart}" class="form-control custom-select-box tec-domain-cat5" type="date" pattern="dd/MM/YYYY" name="date"  />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 custom-select-box tec-domain-cat6 time">
+                                                <div class="row">
+                                                    <select class="selectpicker" data-live-search="false" >
+                                                        <option class="time1"> 01:00</option>
+                                                        <option class="time1"> 02:00</option>
+                                                        <option class="time1"> 03:00</option>
+                                                        <option class="time1"> 04:00</option>
+                                                        <option class="time1"> 05:00</option>
+                                                        <option class="time1"> 06:00</option>
+                                                        <option class="time1"> 07:00</option>
+                                                        <option class="time1"> 08:00</option>
+                                                        <option class="time1"> 09:00</option>
+                                                        <option class="time1"> 10:00</option>
+                                                        <option class="time1"> 11:00</option>
+                                                        <option class="time1"> 12:00</option>
+                                                        <option class="time1"> 13:00</option>
+                                                        <option class="time1"> 14:00</option>
+                                                        <option class="time1"> 15:00</option>
+                                                        <option class="time1"> 16:00</option>
+                                                        <option class="time1"> 17:00</option>
+                                                        <option class="time1"> 18:00</option>
+                                                        <option class="time1"> 19:00</option>
+                                                        <option class="time1"> 20:00</option>
+                                                        <option class="time1"> 21:00</option>
+                                                        <option class="time1"> 22:00</option>
+                                                        <option class="time1"> 23:00</option>
+                                                        <option class="time1"> 24:00</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-button">
+                                        <button type="submit" class="btn form-btn btn-lg btn-block">Chercher un convoiturage</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Booking now form wrapper html Exit -->
+
+    <!-- anytime-anywhere html start -->
+    <div class="anytime-anywhere">
+        <div class="row">
+            <div class="anytime-wrap">
+                <h1>DES TRAJETS <br/>À PETIT BUDGET !</h1>
+                <div class="anytime-text">
+                    <p><i class="fa fa-custom fa-circle-o"></i>Dogecar est la solution de convoiturage N°1 en France, pas cool pour les taxis</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- anytime-anywhere html Exit -->
+
+    <div th:if="${null != trajets}" class="container">
+        <div class="row page25-container">
+            <div class="col-sm-12">
+                <div class="row">
+
+                    <div th:each="trajet : ${trajets}" class="page25-content">
+                        <div class="page25-content-header"></div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <div class="p25-minicar-wrap">
+                                    <div class="p25-minicar"><a href="#" th:href="@{'/#'}"><img src="images/minicar.png" th:src="@{'/images/minicar.png'}" alt=""/></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="Proin-text-wrap">
+                                    <a href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}"><h6 th:text="${trajet.voiture.marque} + ' ' + ${trajet.voiture.modele}">Mini Car</h6></a>
+                                    <p th:text="${trajet.titre}">Proin gravida nibh vel velit actor <br/>aliquet. Aenean sollicitudin,</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="pa25-frofile-wrap">
+                                    <div class="p25-minicar-promo-text2">
+                                        <div class="containt-text-profile">
+                                            <a title="Places disponibles" href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" class="img-circle"><img src="images/profile2.png" th:src="@{'/images/profile2.png'}" alt="Places disponibles" /></a>
+                                        </div>
+                                        <div class="containt-text-profile p25-text-bag2">
+                                            <a title="Réservations en cours" href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" class="img-circle"><img src="images/bag.png" th:src="@{'/images/bag.png'}" alt="Réservations en cours" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="p25-minicar-clipartwrap">
+                                        <div class="page25-clipart">
+                                            <a href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" th:text="${trajet.nbPlacesDisponibles}">6</a>
+                                        </div>
+                                        <div class="page25-clipart page25-clipart2">
+                                            <a href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" th:text="${#lists.size(trajet.reservations)}">6</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="row">
+                                <div class="pa28-text-wrap">
+                                    <h2 th:text="${trajet.tarif} + ' €'">99 €</h2>
+                                    <p th:text="${trajet.membre}">Fare Details</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="pa25-btn-wrapper">
+                                    <div class="pa25-btn-wrap">
+                                        <a href="Results_6.html" th:href="@{'/detail-trajet/' + ${trajet.ID}}" class="btn pa25-btn btn-lg">VOIR</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- label white2 html start LOGIN -->
+    <div sec:authorize="!hasRole('ROLE_ECRAN_001_RECHERCHE_TRAJET')" class="label-white white-lable-m">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+                    <div class="row">
+                        <div class="label-item">
+                            <div class="containt-font">
+                                <a href="#" th:href="@{'/#'}" class="img-circle"><img src="images/lock.png" th:src="@{'/images/lock.png'}" alt=""/></a>
+                            </div>
+                            <div class="containt-text">
+                                <h3>Pas encore inscrit ?</h3>
+                                <span>L'inscription est simple est rapide!</span>
+                                <p>
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="inputname1" class="col-sm-4 control-label2 control-label">First Name<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input type="text" class="form-control" id="inputname1" placeholder="First Name" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputlastname1" class="col-sm-4 control-label2 control-label ">Last Name</label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input type="text" class="form-control" id="inputlastname1" placeholder="Last Name"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputemail1" class="col-sm-4 control-label2 control-label ">Email Address<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input type="email" class="form-control" id="inputemail1" placeholder="Email Address*" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputnumber1" class="col-sm-4 control-label2 control-label ">Mobile Number<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input type="text" class="form-control" id="inputnumber1" placeholder="Mobile Number" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputage1" class="col-sm-4 control-label2 control-label ">Age</label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input type="text" class="form-control" id="inputage1" placeholder="Age" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputcountry1" class="col-sm-4 control-label2 control-label" >Country<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input type="text" class="form-control" id="inputcountry1" placeholder="Country" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label2 control-label"> Special note to the driver </label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <textarea class="form-control" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-7 col-sm-5">
+                                            <div class="completing-form-btnwrap"><button type="submit" class="btn form-btn  btn-block">Inscription</button></div>
+                                        </div>
+                                    </div>
+                                </form>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 " data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+                    <div class="row float-right">
+                        <div class="label-item ">
+                            <div class="containt-font" >
+                                <a href="#" th:href="@{'/#'}" class="img-circle"><img src="images/hidden.png" th:src="@{'/images/hidden.png'}" alt=""/></a>
+                            </div>
+                            <div class="containt-text">
+                                <h3>Connection</h3>
+                                <span>veuillez rentrer vos identifiant de connection</span>
+                                <p>
+                                <form class="form-horizontal" th:action="@{/j_spring_security_check}" method="post">
+                                    <p th:if="${(param.error != null) and (param.error[0] == '1')}" th:text="#{login.error}" class="error">
+                                        Wrong user or password</p>
+                                    <div class="form-group">
+                                        <label for="j_username" class="col-sm-4 control-label2 control-label">Login<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input type="text" id="j_username" name="j_username" autofocus="autofocus" class="form-control" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="j_password" class="col-sm-4 control-label2 control-label ">Mot de passe<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input type="password" id="j_password" name="j_password" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-7 col-sm-5">
+                                            <div class="completing-form-btnwrap"><button type="submit" class="btn form-btn  btn-block">login</button></div>
+                                        </div>
+                                    </div>
+                                </form>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 </body>
 </html>

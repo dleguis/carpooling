@@ -22,7 +22,7 @@ public class ReservationDto {
     private FactureDto facture;
 
     @Getter
-    @Setter
+    // @Setter
     private TrajetDto trajet;
 
     @Getter

@@ -20,6 +20,7 @@
     <sec:http pattern="/css/**" security="none" />
     <sec:http pattern="/js/**" security="none" />
     <sec:http pattern="/media/**" security="none" />
+    <sec:http pattern="/fonts/**" security="none" />
 
     <sec:http pattern="/login/**" security="none"
               access-decision-manager-ref="accessDecisionManager" />
@@ -29,12 +30,11 @@
             secured-annotations="enabled" />
 
     <sec:http auto-config="true" use-expressions="true">
-        <sec:form-login login-page='/login.html' default-target-url="/"
-                        authentication-failure-url="/login.html?error=1" />
-        <sec:intercept-url pattern="/login.html" access="permitAll"/>
-        <sec:intercept-url pattern="/register.html" access="permitAll"/>
+        <sec:form-login login-page='/login-register.html' default-target-url="/index.html"
+                        authentication-failure-url="/login-register.html?error=1" />
+        <sec:intercept-url pattern="/login-register.html" access="permitAll"/>
         <sec:intercept-url pattern="/**" access="isAuthenticated()" />
-        <sec:logout invalidate-session="true" logout-success-url="/login.html"/>
+        <sec:logout invalidate-session="true" logout-success-url="/login-register.html"/>
     </sec:http>
 
     <sec:authentication-manager>

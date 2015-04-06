@@ -2,6 +2,8 @@ package edu.fst.m2.ipii.carpooling.presentation.controller;
 
 
 import edu.fst.m2.ipii.carpooling.presentation.AbstractController;
+import edu.fst.m2.ipii.carpooling.presentation.model.TrajetRechercheModel;
+import edu.fst.m2.ipii.carpooling.presentation.model.UserInscriptionModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,9 @@ public class HomeController extends AbstractController {
      */
     @RequestMapping(value = { "/", "index.html" }, method = RequestMethod.GET)
     public String index(Model model) {
-        // model.addAttribute("users", userService.rechercher());
+
+        model.addAttribute("trajetRechercheModel", new TrajetRechercheModel());
+
         return "index";
     }
 

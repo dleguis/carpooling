@@ -12,7 +12,7 @@ public class PointEmbarquementDto {
     private int ID;
 
     @Getter
-    @Setter
+    // @Setter
     private ReservationDto reservation;
 
     @Getter

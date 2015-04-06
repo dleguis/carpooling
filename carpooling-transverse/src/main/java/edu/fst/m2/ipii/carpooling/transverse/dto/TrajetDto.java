@@ -34,6 +34,14 @@ public class TrajetDto {
     @Setter
     private int nbPlacesDisponibles;
 
+    @Getter
+    @Setter
+    private double tarif;
+
+    @Getter
+    @Setter
+    private String membre;
+
     @Setter
     private Set<ReservationDto> reservations;
 

@@ -24,7 +24,7 @@
        Requires Spring Framework 3.0 or higher.
 26
    -->
-    <mvc:resources location="/Assets/images/"
+    <mvc:resources location="/Assets/img/"
                    mapping="/images/**" />
     <mvc:resources location="Assets/css/" mapping="/css/**" />
     <mvc:resources location="Assets/js/" mapping="/js/**" />

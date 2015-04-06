@@ -1,6 +1,7 @@
 package edu.fst.m2.ipii.carpooling.presentation.controller;
 
 
+import edu.fst.m2.ipii.carpooling.presentation.AbstractController;
 import edu.fst.m2.ipii.carpooling.presentation.model.UserInscriptionModel;
 import edu.fst.m2.ipii.carpooling.transverse.utils.binding.BindingResultUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Created by Dimitri on 19/10/14.
  */
 @Controller
-public class LoginController {
+public class LoginController extends AbstractController {
 
     /**
      * The Constant LOGGER.
@@ -37,24 +40,21 @@ public class LoginController {
      *
      * @return the login
      */
-    @RequestMapping(value = "/login.html", method = RequestMethod.GET)
-    public String getLogin() {
-		return "login";
-    }
+    @RequestMapping(value = "/login-register.html", method = RequestMethod.GET)
+    public String getLogin(Model model, HttpServletResponse response) {
 
-    /**
-     * Gets the inscription.
-     *
-     * @param model
-     *            the model
-     * @return the inscription
-     */
-    @RequestMapping(value = "/register.html", method = RequestMethod.GET)
-    public String getInscription(Model model) {
+		if (null != getUserProfil()) {
+			return "redirect:index.html";
+		}
+
+		response.setCharacterEncoding("utf-8");
+
 		model.addAttribute("userModel", new UserInscriptionModel());
 		model.addAttribute("errors", "");
-		return "register";
+
+		return "index";
     }
+
 
     /**
      * Post inscription.
