@@ -7,17 +7,13 @@ import lombok.Setter;
 /**
  * Created by Dimitri on 05/04/15.
  */
+@Getter
+@Setter
 public class PaiementDto {
 
-    @Getter
-    @Setter
     private int ID;
 
-    @Getter
-    @Setter
     private MoyenPaiementDto moyenPaiement;
 
-    @Getter
-    @Setter
     private double somme;
 }

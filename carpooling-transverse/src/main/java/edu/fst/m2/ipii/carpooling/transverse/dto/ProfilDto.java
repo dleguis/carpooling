@@ -2,23 +2,20 @@ package edu.fst.m2.ipii.carpooling.transverse.dto;
 
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by Dimitri on 02/04/15.
  */
+@Getter
+@Setter
 public class ProfilDto {
 
-    @Getter
-    @Setter
     private int ID;
 
-    @Getter
-    @Setter
     private String libelle;
 
-    @Getter
-    @Setter
-    private Set<RoleDto> roles;
+    private Set<RoleDto> roles = new HashSet<>();
 
 }

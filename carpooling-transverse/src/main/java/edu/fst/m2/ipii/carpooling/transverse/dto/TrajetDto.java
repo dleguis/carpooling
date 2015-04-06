@@ -3,62 +3,40 @@ package edu.fst.m2.ipii.carpooling.transverse.dto;
 import lombok.*;
 import lombok.NonNull;
 
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by Dimitri on 05/04/15.
  */
+@Getter
+@Setter
 public class TrajetDto {
 
-    @Getter
-    @Setter
     private int ID;
 
-    @Getter
-    @Setter
     private PointEmbarquementDto arrivee;
 
-    @Getter
     private PointEmbarquementDto depart;
 
-    @Getter
-    @Setter
     private VoitureDto voiture;
 
-    @Getter
-    @Setter
     private String titre;
 
-    @Getter
-    @Setter
+    private Date dateDepart;
+
     private int nbPlacesDisponibles;
 
-    @Getter
-    @Setter
     private double tarif;
 
-    @Getter
-    @Setter
-    private String membre;
+    private String conducteur;
 
-    @Setter
-    private Set<ReservationDto> reservations;
+    private List<String> passagers;
 
-    @Setter
-    private Set<CommentaireDto> commentaires;
+    private Set<ReservationDto> reservations = new HashSet<>();
 
-    public Set<ReservationDto> getReservations() {
-        if (null == reservations) {
-            reservations = new HashSet<>();
-        }
-        return reservations;
-    }
+    private Set<CommentaireDto> commentaires = new HashSet<>();
 
-    public Set<CommentaireDto> getCommentaires() {
-        if (null == commentaires) {
-            commentaires = new HashSet<>();
-        }
-        return commentaires;
-    }
 }

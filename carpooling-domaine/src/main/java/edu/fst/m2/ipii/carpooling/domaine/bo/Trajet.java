@@ -13,13 +13,9 @@
  */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
-import org.apache.commons.collections.CollectionUtils;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @org.hibernate.annotations.Proxy(lazy=false)
@@ -69,7 +65,10 @@ public class Trajet implements Serializable {
 	private double tarif;
 
 	@Transient
-	private String membre;
+	private String conducteur;
+
+	@Transient
+	private List<String> passagers = new ArrayList<>();
 
 	@PostLoad
 	public void buildTransientValues() {
@@ -80,9 +79,10 @@ public class Trajet implements Serializable {
 
 			if (reservation.isInitiale()) {
 				tarif = reservation.getTarif();
-				membre = reservation.getMembre().getLogin();
+				conducteur = reservation.getMembre().getLogin();
 			}
 			if (reservation.isValidee()) {
+				passagers.add(reservation.getMembre().getLogin());
 				placesDisponibles -= reservation.getNombrePassagers();
 			}
 		}
@@ -105,8 +105,12 @@ public class Trajet implements Serializable {
 		return nbPlacesDisponibles;
 	}
 
-	public String getMembre() {
-		return membre;
+	public String getConducteur() {
+		return conducteur;
+	}
+
+	public List<String> getPassagers() {
+		return passagers;
 	}
 	
 	public int getID() {

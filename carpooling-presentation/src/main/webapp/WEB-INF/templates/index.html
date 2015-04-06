@@ -147,7 +147,7 @@
                                             <a href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" th:text="${trajet.nbPlacesDisponibles}">6</a>
                                         </div>
                                         <div class="page25-clipart page25-clipart2">
-                                            <a href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" th:text="${#lists.size(trajet.reservations)}">6</a>
+                                            <a href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" th:text="${#lists.size(trajet.reservations) - 1}">6</a>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@
                             <div class="row">
                                 <div class="pa28-text-wrap">
                                     <h2 th:text="${trajet.tarif} + ' €'">99 €</h2>
-                                    <p th:text="${trajet.membre}">Fare Details</p>
+                                    <p th:text="${trajet.conducteur}">Fare Details</p>
                                 </div>
                             </div>
                         </div>

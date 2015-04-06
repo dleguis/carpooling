@@ -28,7 +28,7 @@ public abstract class AbstractController {
      *
      * @return the user profil
      */
-    @ModelAttribute
+    @ModelAttribute("userProfil")
     public Utilisateur getUserProfil() {
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
         if (!(a.getPrincipal() instanceof Utilisateur)) {

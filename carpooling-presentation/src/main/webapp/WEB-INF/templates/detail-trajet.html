@@ -34,7 +34,7 @@
                             <div class="item-details-wrap-container">
                                 <div class="item-details-content">
                                     <div class="item-details-content2"><a href="#" th:href="@{'/#'}"><img src="images/minicar.png" th:src="@{'/images/minicar.png'}" alt=""/></a></div>
-                                    <h2>vihicel</h2>
+                                    <h2 th:text="${trajet.voiture.marque} + ' ' + ${trajet.voiture.modele}">vihicel</h2>
                                 </div>
                             </div>
                             <div class="item-details-wrap-container2">
@@ -44,25 +44,25 @@
                                 </div>
                                 <div class="clipart-wrap2">
                                     <div class="clipart3">
-                                        <a href="#" th:href="@{'/#'}" class="">6</a>
+                                        <a href="#" th:href="@{'/#'}" class="" th:text="${trajet.nbPlacesDisponibles}">6</a>
                                     </div>
                                     <div class="clipart33">
-                                        <a href="#" th:href="@{'/#'}" class="">4</a>
+                                        <a href="#" th:href="@{'/#'}" class="" th:text="${#lists.size(trajet.reservations) - 1}">4</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="service-wrap">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="service-wrap1"><span>Car Type:</span></div>
-                                        <div class="service-wrap2"><span>Private Car</span></div>
+                                        <div class="service-wrap1"><span>Car Type :</span></div>
+                                        <div class="service-wrap2"><span th:text="${trajet.voiture.categorie}">Private Car</span></div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="service-wrap1"><span>Service:</span></div>
-                                        <div class="service-wrap2"><span>Outstation</span></div>
+                                        <div class="service-wrap1"><span>Puissance :</span></div>
+                                        <div class="service-wrap2"><span th:text="${trajet.voiture.puissance} + 'ch'">Outstation</span></div>
                                     </div>
                                 </div>
 
@@ -96,7 +96,7 @@
                             </div>
                             <div class="Roundtrip-Fare">
                                 <h4>Roundtrip Fare:</h4>
-                                <h3>$128.99</h3>
+                                <h3 th:text="${trajet.tarif} + ' €'">$128.99</h3>
                                 <p>(Inclusive of All Taxes)</p>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputname1" class="col-sm-4 control-label2 control-label">Heure de départ </label>
-                                <label for="inputname1" class="col-sm-4 control-label2 control-label">08h00</label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label" th:text="${#calendars.format(trajet.dateDepart,'H:mm')}">08h00</label>
                             </div>
                             <hr />
                             <h5>Information d'arrivée</h5>
@@ -140,7 +140,7 @@
                                 <label for="inputname1" class="col-sm-4 control-label2 control-label">10 balles</label>
                             </div>
                             <hr />
-                            <div class="form-group">
+                            <div class="form-group" th:if="${(userProfil.username != trajet.conducteur) || !(#lists.contains(trajet.passagers, userProfil.username))}">
                                 <div class="col-sm-offset-7 col-sm-5">
                                     <div class="completing-form-btnwrap"><button type="submit" class="btn form-btn  btn-block">Réserver</button></div>
                                 </div>

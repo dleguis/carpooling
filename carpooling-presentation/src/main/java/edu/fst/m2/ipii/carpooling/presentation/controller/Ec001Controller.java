@@ -31,8 +31,10 @@ public class Ec001Controller extends AbstractController {
                                    @ModelAttribute("trajetRechercheModel") @Validated TrajetRechercheModel trajetRechercheModel,
                                    BindingResult bindingResult) throws Exception {
 
+        // Validation sur le POJO TrajetRechercheModel
         if (!bindingResult.hasErrors()) {
 
+            // Parsing de la date
             Date dateTrajet = DateTime.parse(trajetRechercheModel.getDateDepart(), DateTimeFormat.forPattern("YYYY-MM-dd")).toDate();
 
             TrajetCriteria trajetCriteria = TrajetCriteria.builder().villeDepart(trajetRechercheModel.getVilleDepart())
@@ -40,12 +42,14 @@ public class Ec001Controller extends AbstractController {
                                                                     .dateDepart(dateTrajet)
                                                                     .build();
 
+            // Recherche de trajets selon les critères remplus
             List<TrajetDto> trajets = trajetService.rechercher(trajetCriteria);
 
             model.addAttribute("trajets", trajets);
 
         }
         else {
+            // Création du rapport d'erreur
             String errors = BindingResultUtils.getBindingMessages(bindingResult);
 
             if (StringUtils.isNotEmpty(errors)) {
