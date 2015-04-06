@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface TrajetService {
 
+    List<TrajetDto> rechercher();
+
     List<TrajetDto> rechercher(TrajetCriteria trajetCriteria) throws Exception;
 
     TrajetDto getTrajet(int id);

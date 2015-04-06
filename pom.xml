@@ -12,6 +12,8 @@
         <module>carpooling-transverse</module>
         <module>carpooling-service</module>
         <module>carpooling-presentation</module>
+        <!-- <module>carpooling-echange</module>
+        <module>carpooling-ear</module> -->
     </modules>
     <packaging>pom</packaging>
 

@@ -25,6 +25,11 @@ import java.util.Set;
 public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetService {
 
     @Override
+    public List<TrajetDto> rechercher() {
+        return MapperUtils.map(mapperService, trajetRepository.findAll(), TrajetDto.class);
+    }
+
+    @Override
     public List<TrajetDto> rechercher(TrajetCriteria trajetCriteria) throws Exception {
 
         // Replace the API key below with a valid API key.
