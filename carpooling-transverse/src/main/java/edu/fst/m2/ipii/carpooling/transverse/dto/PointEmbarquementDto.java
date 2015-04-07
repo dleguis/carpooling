@@ -1,12 +1,8 @@
 package edu.fst.m2.ipii.carpooling.transverse.dto;
 
-import lombok.*;
-
 /**
  * Created by Dimitri on 05/04/15.
  */
-@Getter
-@Setter
 public class PointEmbarquementDto {
 
     private int ID;
@@ -18,4 +14,27 @@ public class PointEmbarquementDto {
     private Double longitude;
 
 
+    public int getID() {
+        return this.ID;
+    }
+
+    public Double getLatitude() {
+        return this.latitude;
+    }
+
+    public Double getLongitude() {
+        return this.longitude;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
 }
