@@ -41,13 +41,12 @@ public class LoginController extends AbstractController {
      * @return the login
      */
     @RequestMapping(value = "/login-register.html", method = RequestMethod.GET)
-    public String getLogin(Model model, HttpServletResponse response) {
+    public String getLogin(Model model) {
 
+		// Si l'utilisateur est déjà connecté, pas besoin de lui remontrer la page de login
 		if (null != getUserProfil()) {
 			return "redirect:index.html";
 		}
-
-		response.setCharacterEncoding("utf-8");
 
 		model.addAttribute("userModel", new UserInscriptionModel());
 		model.addAttribute("errors", "");

@@ -28,12 +28,6 @@ public class TrajetRestController {
     @RequestMapping("/trajet/{id}")
     public TrajetDto getTrajet(@PathVariable("id") int id, HttpServletResponse response) {
 
-        TrajetDto trajet = trajetService.getTrajet(id);
-
-        if (null == trajet) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
-
-        return trajet;
+        return trajetService.getTrajet(id);
     }
 }
