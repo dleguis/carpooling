@@ -7,19 +7,18 @@ import edu.fst.m2.ipii.carpooling.domaine.bo.Reservation;
 import edu.fst.m2.ipii.carpooling.domaine.bo.Trajet;
 import edu.fst.m2.ipii.carpooling.service.TrajetService;
 import edu.fst.m2.ipii.carpooling.transverse.criteria.TrajetCriteria;
+import edu.fst.m2.ipii.carpooling.transverse.dto.CoordonneesVilleDto;
 import edu.fst.m2.ipii.carpooling.transverse.dto.TrajetDto;
 import edu.fst.m2.ipii.carpooling.transverse.exception.CarpoolingFonctionnelleException;
 import edu.fst.m2.ipii.carpooling.transverse.exception.code.CarpoolingFonctionnelleExceptionCode;
 import edu.fst.m2.ipii.carpooling.transverse.utils.mapper.MapperUtils;
-import org.dozer.Mapper;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Dimitri on 05/04/15.
@@ -30,6 +29,8 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TrajetServiceImpl.class);
 
+    private Map<String, CoordonneesVilleDto> cacheCoordonnees = new HashMap<>();
+
     @Override
     public List<TrajetDto> rechercher() {
         return MapperUtils.map(mapperService, trajetRepository.findAll(), TrajetDto.class);
@@ -38,24 +39,27 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
     @Override
     public List<TrajetDto> rechercher(TrajetCriteria trajetCriteria) throws Exception {
 
-        GeoApiContext context = new GeoApiContext().setApiKey("***REMOVED***");
-        GeocodingResult[] results =  GeocodingApi.geocode(context, trajetCriteria.getVilleDepart()).await();
+        CoordonneesVilleDto coordonneesDepart;
+        CoordonneesVilleDto coordonneesArrivee;
 
-        double latDepart = results[0].geometry.location.lat;
-        double lngDepart = results[0].geometry.location.lng;
+        try {
+            // Récupération des coordonnées de la ville de départ
+            coordonneesDepart = getCoordonneesByRequest(trajetCriteria.getVilleDepart());
+            // Récupération des coordonnées de la ville d'arrivée
+            coordonneesArrivee = getCoordonneesByRequest(trajetCriteria.getVilleArrivee());
+        }
+        catch (Exception exception) {
+            return new ArrayList<TrajetDto>();
+        }
 
-        results =  GeocodingApi.geocode(context, trajetCriteria.getVilleArrivee()).await();
-
-        double latArrivee = results[0].geometry.location.lat;
-        double lngArrivee = results[0].geometry.location.lng;
-
-
-        List<Trajet> trajets = trajetRepository.findTrajetByCriteria(latDepart,
-                lngDepart,
-                latArrivee,
-                lngArrivee,
+        List<Trajet> trajets = trajetRepository.findTrajetByCriteria(
+                coordonneesDepart.getLatitude(),
+                coordonneesDepart.getLongitude(),
+                coordonneesArrivee.getLatitude(),
+                coordonneesArrivee.getLongitude(),
                 new DateTime(trajetCriteria.getDateDepart()).withTimeAtStartOfDay().toDate(),
-                new DateTime(trajetCriteria.getDateDepart()).withTime(23, 59, 59, 0).toDate());
+                new DateTime(trajetCriteria.getDateDepart()).withTime(23, 59, 59, 0).toDate()
+        );
 
         return MapperUtils.map(mapperService, trajets, TrajetDto.class);
     }
@@ -81,17 +85,56 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
 
         Trajet trajet = MapperUtils.map(mapperService, trajetDto, Trajet.class);
 
+        // Sauvegarde préalable du point d'embarquement d'arrivée du trajet
         trajet.setArrivee(pointEmbarquementRepository.save(trajet.getArrivee()));
 
+        // Création de la réservation initiale
         List<Reservation> reservations = reservationRepository.save(trajet.getReservations());
 
         trajet.getReservations().clear();
         trajet.getReservations().addAll(reservations);
 
+        // récupération de la voiture associée
         trajet.setVoiture(voitureRepository.findOne(trajetDto.getVoiture().getID()));
 
+        // Sauvegarde du trajet
         trajet = trajetRepository.save(trajet);
 
+        // Récupération de l'id du trajet nouvellement créé
         return trajet.getID();
+    }
+
+    // @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+    // @Cacheable(cacheName = "getCoordonneesCache")
+    private CoordonneesVilleDto getCoordonneesByRequest(String request) throws Exception{
+
+        if (cacheCoordonnees.containsKey(request)) {
+            CoordonneesVilleDto coordonnees = cacheCoordonnees.get(request);
+
+            // Max 10 000 éléments dans le cache
+            if (cacheCoordonnees.size() > 10000) {
+                cacheCoordonnees.clear();
+            }
+
+            return coordonnees;
+        }
+
+        CoordonneesVilleDto coordonnees = new CoordonneesVilleDto();
+
+        GeoApiContext context = new GeoApiContext().setApiKey("***REMOVED***");
+        GeocodingResult[] results =  GeocodingApi.geocode(context, request).await();
+
+        coordonnees.setRequest(request);
+        coordonnees.setLatitude(results[0].geometry.location.lat);
+        coordonnees.setLongitude(results[0].geometry.location.lng);
+
+        coordonnees.setRue((results[0].addressComponents.length > 0 ? results[0].addressComponents[0].longName : null) + " " + (results[0].addressComponents[1] != null ? results[0].addressComponents[1].longName : null));
+        coordonnees.setVille(results[0].addressComponents.length > 2 ? results[0].addressComponents[2].longName : null);
+        coordonnees.setCodePostal(results[0].addressComponents.length > 6 ? results[0].addressComponents[6].longName : null);
+        coordonnees.setPays(results[0].addressComponents.length > 5 ? results[0].addressComponents[5].longName : null);
+
+        cacheCoordonnees.put(request, coordonnees);
+
+        return coordonnees;
     }
 }

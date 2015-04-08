@@ -22,6 +22,8 @@
     <sec:http pattern="/media/**" security="none" />
     <sec:http pattern="/fonts/**" security="none" />
 
+    <sec:http pattern="/rest/**" security="none" />
+
     <sec:http pattern="/login/**" security="none"
               access-decision-manager-ref="accessDecisionManager" />
 
