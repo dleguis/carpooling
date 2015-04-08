@@ -1,14 +1,18 @@
 package edu.fst.m2.ipii.carpooling.service.impl;
 
-import edu.fst.m2.ipii.carpooling.domaine.bo.Membre;
-import edu.fst.m2.ipii.carpooling.service.MembreService;
-import edu.fst.m2.ipii.carpooling.transverse.dto.MembreDto;
-import edu.fst.m2.ipii.carpooling.transverse.utils.mapper.MapperUtils;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import edu.fst.m2.ipii.carpooling.domaine.bo.Membre;
+import edu.fst.m2.ipii.carpooling.domaine.bo.Voiture;
+import edu.fst.m2.ipii.carpooling.service.MembreService;
+import edu.fst.m2.ipii.carpooling.transverse.dto.MembreDto;
+import edu.fst.m2.ipii.carpooling.transverse.utils.mapper.MapperUtils;
 
 /**
  * Created by Dimitri on 02/04/15.
@@ -54,6 +58,16 @@ public class MembreServiceImpl extends AbstractServiceImpl implements
 		Membre m = new Membre();
 		m = MapperUtils.map(mapperService, membre, Membre.class);
 		membreRepository.save(m);
+
+	}
+
+	@Override
+	public void update(MembreDto membreDto) {
+		Membre m = membreRepository.findOne(membreDto.getID());
+		m.setNomMembre(membreDto.getNomMembre());
+		m.setPrenomMembre(membreDto.getPrenomMembre());
+	   // m.getVoitures().addAll((Collection<? extends Voiture>) MapperUtils.map(mapperService, membreDto.getVoitures(), ArrayList.class));
+		 membreRepository.save(m);
 
 	}
 }

@@ -17,5 +17,7 @@ public interface MembreService {
     
     void save(MembreDto membre);
     
+    void update(MembreDto membreDto);
+    
     
 }
