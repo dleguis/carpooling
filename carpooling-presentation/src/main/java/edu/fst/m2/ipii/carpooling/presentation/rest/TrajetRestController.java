@@ -20,12 +20,12 @@ public class TrajetRestController {
     @Autowired
     private TrajetService trajetService;
 
-    @RequestMapping("/trajets")
+    @RequestMapping("/getAllTrajets")
     public List<TrajetDto> getTrajets() {
         return trajetService.rechercher();
     }
 
-    @RequestMapping("/trajet/{id}")
+    @RequestMapping("/getTrajetById/{id}")
     public TrajetDto getTrajet(@PathVariable("id") int id, HttpServletResponse response) {
 
         return trajetService.getTrajet(id);
