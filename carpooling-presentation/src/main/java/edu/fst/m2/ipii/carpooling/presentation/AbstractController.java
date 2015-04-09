@@ -1,6 +1,7 @@
 package edu.fst.m2.ipii.carpooling.presentation;
 
 
+import edu.fst.m2.ipii.carpooling.service.MembreService;
 import edu.fst.m2.ipii.carpooling.service.TrajetService;
 import edu.fst.m2.ipii.carpooling.transverse.dto.Utilisateur;
 import org.slf4j.Logger;
@@ -22,6 +23,9 @@ public abstract class AbstractController {
 
     @Autowired
     protected TrajetService trajetService;
+
+    @Autowired
+    protected MembreService membreService;
 
     /**
      * Gets the user profil.
