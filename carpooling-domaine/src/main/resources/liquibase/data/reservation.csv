@@ -1,2 +1,3 @@
-ID,MembreID2,FactureID,TrajetID,DateReservation,NombrePassagers,Validee,Tarif,Initiale
-1,1,1,1,2015-04-10T09:21:01,2,1,0,1
+ID,MembreID2,FactureID,TrajetID,DateReservation,NombrePassagers,Tarif,Initiale,Etat
+1,1,1,1,2015-04-10T09:21:01,2,0,1,INITIALE
+2,2,2,2,2015-04-09T10:00:00,1,19,1,INITIALE

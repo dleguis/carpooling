@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Dimitri on 06/04/2015.
@@ -43,7 +44,7 @@ public class Ec001Controller extends AbstractController {
                                                                     .build();
 
             // Recherche de trajets selon les critères remplus
-            List<TrajetDto> trajets = trajetService.rechercher(trajetCriteria);
+            Set<TrajetDto> trajets = trajetService.rechercher(trajetCriteria);
 
             model.addAttribute("trajets", trajets);
 

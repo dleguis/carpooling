@@ -97,4 +97,10 @@
                         tableName="commentaire" />
     </changeSet>
 
+    <changeSet author="Dimitri" runOnChange="true" id="init-note">
+        <loadUpdateData primaryKey="ID"  encoding="UTF-8" quotchar="&quot;"
+                        file="classpath*:liquibase/data/note.csv"
+                        tableName="note" />
+    </changeSet>
+
 </databaseChangeLog>

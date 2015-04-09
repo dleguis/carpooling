@@ -3,11 +3,12 @@ package edu.fst.m2.ipii.carpooling.service.impl;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
-import edu.fst.m2.ipii.carpooling.domaine.bo.Reservation;
-import edu.fst.m2.ipii.carpooling.domaine.bo.Trajet;
+import edu.fst.m2.ipii.carpooling.domaine.bo.*;
 import edu.fst.m2.ipii.carpooling.service.TrajetService;
+import edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation;
 import edu.fst.m2.ipii.carpooling.transverse.criteria.TrajetCriteria;
 import edu.fst.m2.ipii.carpooling.transverse.dto.CoordonneesVilleDto;
+import edu.fst.m2.ipii.carpooling.transverse.dto.NouvelleReservationDto;
 import edu.fst.m2.ipii.carpooling.transverse.dto.TrajetDto;
 import edu.fst.m2.ipii.carpooling.transverse.exception.CarpoolingFonctionnelleException;
 import edu.fst.m2.ipii.carpooling.transverse.exception.code.CarpoolingFonctionnelleExceptionCode;
@@ -37,7 +38,7 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
     }
 
     @Override
-    public List<TrajetDto> rechercher(TrajetCriteria trajetCriteria) throws Exception {
+    public Set<TrajetDto> rechercher(TrajetCriteria trajetCriteria) throws Exception {
 
         CoordonneesVilleDto coordonneesDepart;
         CoordonneesVilleDto coordonneesArrivee;
@@ -49,10 +50,10 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
             coordonneesArrivee = getCoordonneesByRequest(trajetCriteria.getVilleArrivee());
         }
         catch (Exception exception) {
-            return new ArrayList<TrajetDto>();
+            return new HashSet<>();
         }
 
-        List<Trajet> trajets = trajetRepository.findTrajetByCriteria(
+        Set<Trajet> trajets = trajetRepository.findTrajetByCriteria(
                 coordonneesDepart.getLatitude(),
                 coordonneesDepart.getLongitude(),
                 coordonneesArrivee.getLatitude(),
@@ -102,6 +103,35 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
 
         // Récupération de l'id du trajet nouvellement créé
         return trajet.getID();
+    }
+
+    @Override
+    public void reserver(NouvelleReservationDto nouvelleReservation) throws Exception {
+        Trajet trajet = trajetRepository.findOne(nouvelleReservation.getTrajetId());
+
+        CoordonneesVilleDto coordonnees = getCoordonneesByRequest(nouvelleReservation.getPointEmbarquement());
+
+        Paiement paiement = new Paiement();
+        paiement.setMoyenPaiement(moyenPaiementRepository.findOne(nouvelleReservation.getMoyenPaiementId()));
+        paiement.setSomme(trajet.getTarif());
+
+        Facture facture = new Facture();
+        facture.setDateFacture(DateTime.now().toDate());
+        facture.setPaiement(paiement);
+
+        PointEmbarquement pointDepart = new PointEmbarquement();
+        pointDepart.setLibelle(coordonnees.getRequest());
+        pointDepart.setLatitude(coordonnees.getLatitude());
+        pointDepart.setLongitude(coordonnees.getLongitude());
+
+        Reservation reservation = new Reservation();
+        reservation.setPointEmbarquement(pointDepart);
+        reservation.setNombrePassagers(nouvelleReservation.getNbPlaces());
+        reservation.setDateReservation(DateTime.now().toDate());
+        reservation.setFacture(facture);
+        reservation.setInitiale(false);
+        reservation.setMembre(membreRepository.findOne(nouvelleReservation.getMembreId()));
+        reservation.setEtat(EtatReservation.EN_ATTENTE);
     }
 
     // @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)

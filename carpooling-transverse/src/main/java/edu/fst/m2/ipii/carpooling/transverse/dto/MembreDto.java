@@ -22,6 +22,8 @@ public class MembreDto {
 
     private String password;
 
+    private String email;
+
     private List<VoitureDto> voitures = new ArrayList<>();
 
     private Set<AbonnementDto> abonnements = new HashSet<>();
@@ -56,6 +58,14 @@ public class MembreDto {
 
     public String getPassword() {
         return this.password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<VoitureDto> getVoitures() {

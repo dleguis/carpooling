@@ -13,6 +13,8 @@
  */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
+import edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -52,8 +54,9 @@ public class Reservation implements Serializable {
 	@Column(name="NombrePassagers", nullable=false, length=11)	
 	private int nombrePassagers;
 	
-	@Column(name="Validee", nullable=false)
-	private boolean validee;
+	@Column(name="Etat", nullable=false)
+	@Enumerated(EnumType.STRING)
+	private EtatReservation etat;
 	
 	@Column(name="Tarif", nullable=true)	
 	private Float tarif;
@@ -92,15 +95,15 @@ public class Reservation implements Serializable {
 	public int getNombrePassagers() {
 		return nombrePassagers;
 	}
-	
-	public void setValidee(boolean value) {
-		this.validee = value;
+
+	public EtatReservation getEtat() {
+		return etat;
 	}
-	
-	public boolean isValidee() {
-		return validee;
+
+	public void setEtat(EtatReservation etat) {
+		this.etat = etat;
 	}
-	
+
 	public void setTarif(float value) {
 		setTarif(new Float(value));
 	}

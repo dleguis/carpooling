@@ -1,5 +1,6 @@
 package edu.fst.m2.ipii.carpooling.service;
 
+import edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation;
 import edu.fst.m2.ipii.carpooling.transverse.criteria.TrajetCriteria;
 import edu.fst.m2.ipii.carpooling.transverse.dto.*;
 import org.joda.time.DateTime;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -18,7 +20,7 @@ public class TrajetServiceTest extends AbstractServiceTest {
 
     @Test
     public void testRechercher() throws Exception {
-        List<TrajetDto> trajets = trajetService.rechercher(TrajetCriteria.builder()
+        Set<TrajetDto> trajets = trajetService.rechercher(TrajetCriteria.builder()
                 .villeDepart("Lille")
                 .villeArrivee("Paris")
                 .dateDepart(DateTime.parse("31/12/2015", DateTimeFormat.forPattern("dd/MM/YYYY")).toDate())
@@ -73,7 +75,7 @@ public class TrajetServiceTest extends AbstractServiceTest {
         reservation.setNombrePassagers(1);
         reservation.setTarif(12F);
         reservation.setPointEmbarquement(depart);
-        reservation.setValidee(true);
+        reservation.setEtat(EtatReservation.INITIALE);
 
         // Trajet
         TrajetDto trajet = new TrajetDto();

@@ -15,7 +15,9 @@ package edu.fst.m2.ipii.carpooling.domaine.bo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -45,6 +47,9 @@ public class Membre implements Serializable {
 	
 	@Column(name="Password", nullable=true, length=255)	
 	private String password;
+
+	@Column(name="Email", nullable=true, length=255)
+	private String email;
 	
 	@OneToMany(targetEntity=Voiture.class)
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -79,7 +84,13 @@ public class Membre implements Serializable {
 	@JoinTable(name="Membre_Profil", joinColumns={ @JoinColumn(name="MembreID") }, inverseJoinColumns={ @JoinColumn(name="ProfilID") })	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
 	private Set<Profil> profils;
-	
+
+	@OneToMany(targetEntity=Note.class)
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})
+	@JoinColumns({ @JoinColumn(name="MembreID", nullable=false) })
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)
+	private List<Note> notes;
+
 	private void setID(int value) {
 		this.ID = value;
 	}
@@ -135,7 +146,15 @@ public class Membre implements Serializable {
 	public Float getNote() {
 		return note;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Set<Voiture> getVoitures() {
         if (null == voitures) {
             voitures = new HashSet<>();
@@ -178,8 +197,14 @@ public class Membre implements Serializable {
         }
 		return profils;
 	}
-	
-	
+
+	public List<Note> getNotes() {
+		if (null == notes) {
+			notes = new ArrayList<>();
+		}
+		return notes;
+	}
+
 	public String toString() {
 		return String.valueOf(getID());
 	}

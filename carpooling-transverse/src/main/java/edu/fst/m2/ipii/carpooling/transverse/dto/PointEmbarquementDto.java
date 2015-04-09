@@ -13,6 +13,8 @@ public class PointEmbarquementDto {
 
     private Double longitude;
 
+    private String libelle;
+
 
     public int getID() {
         return this.ID;
@@ -36,5 +38,13 @@ public class PointEmbarquementDto {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
 }

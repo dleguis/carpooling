@@ -38,6 +38,9 @@ public class PointEmbarquement implements Serializable {
 	
 	@Column(name="Longitude", nullable=true)	
 	private Double longitude;
+
+	@Column(name="Libelle", nullable=true)
+	private String libelle;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -74,7 +77,15 @@ public class PointEmbarquement implements Serializable {
 	public Double getLongitude() {
 		return longitude;
 	}
-	
+
+	public String getLibelle() {
+		return libelle;
+	}
+
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
+
 	public void setReservation(Reservation value) {
 		this.reservation = value;
 	}

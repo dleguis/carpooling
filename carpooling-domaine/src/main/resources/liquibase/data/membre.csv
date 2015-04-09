@@ -1,2 +1,3 @@
-ID,NomMembre,PrenomMembre,Note,Login,Password
-1,Admin,Admin,5,admin,admin
+ID,NomMembre,PrenomMembre,Note,Login,Password,Email
+1,Admin,Admin,5,admin,admin,admin@dogecar.com
+2,Leguis,Dimitri,4,dleguis,dleguis,dleguis@dogecar.com

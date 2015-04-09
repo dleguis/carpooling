@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public interface TrajetRepository extends JpaRepository<Trajet, Integer>, TrajetRepositoryCustom {
 
@@ -21,20 +22,20 @@ public interface TrajetRepository extends JpaRepository<Trajet, Integer>, Trajet
             "AND r.pointEmbarquement.latitude = :latDepart " +
             "AND r.pointEmbarquement.longitude = :lngDepart")*/
     @Query(value = "SELECT t.*,\n" +
-            "  ( 6371 * acos( cos( radians(:latArrivee) )\n" +
+            "  COALESCE(( 6371 * acos( cos( radians(:latArrivee) )\n" +
             "                 * cos( radians( tp.Latitude ) )\n" +
             "                 * cos( radians( tp.Longitude ) - radians(:lngArrivee) )\n" +
-            "                 + sin( radians(:latArrivee) ) * sin( radians( tp.Latitude ) ) ) ) AS distance1,\n" +
-            "  ( 6371 * acos( cos( radians(:latDepart) )\n" +
+            "                 + sin( radians(:latArrivee) ) * sin( radians( tp.Latitude ) ) ) ), 0) AS distance1,\n" +
+            "  COALESCE(( 6371 * acos( cos( radians(:latDepart) )\n" +
             "                 * cos( radians( rp.Latitude ) )\n" +
             "                 * cos( radians( rp.Longitude ) - radians(:lngDepart) )\n" +
-            "                 + sin( radians(:latDepart) ) * sin( radians( rp.Latitude ) ) ) ) AS distance2\n" +
+            "                 + sin( radians(:latDepart) ) * sin( radians( rp.Latitude ) ) ) ), 0) AS distance2\n" +
             "FROM trajet t, pointembarquement tp, pointembarquement rp, reservation r\n" +
             "WHERE t.PointEmbarquementID = tp.ID\n" +
             "      AND rp.ReservationID = r.ID\n" +
             "      AND t.DateDepart BETWEEN :dateDepartDebut AND :dateDepartFin \n" +
             "HAVING distance1 < 25 AND distance2 < 25 ORDER BY distance1, distance2 LIMIT 0 , 20", nativeQuery = true)
-    List<Trajet> findTrajetByCriteria(
+    Set<Trajet> findTrajetByCriteria(
                                       @Param("latDepart") double latDepart,
                                       @Param("lngDepart") double lngDepart,
                                       @Param("latArrivee") double latArrivee,

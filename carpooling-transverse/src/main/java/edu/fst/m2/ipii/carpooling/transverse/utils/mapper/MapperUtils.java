@@ -2,9 +2,7 @@ package edu.fst.m2.ipii.carpooling.transverse.utils.mapper;
 
 import org.dozer.Mapper;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Dimitri on 02/11/14.
@@ -56,6 +54,25 @@ public class MapperUtils {
 
 		return dest;
     }
+
+	public static <T, U> Set<U> map(final Mapper mapper, final Set<T> source, final Class<U> destType) {
+
+		final HashSet<U> dest = new HashSet<>();
+
+		for (T element : source) {
+			if (element == null) {
+				continue;
+			}
+			dest.add(mapper.map(element, destType));
+		}
+
+		// finally remove all null values if any
+		Set s1 = new HashSet<>();
+		s1.add(null);
+		dest.removeAll(s1);
+
+		return dest;
+	}
 
     /**
      * Map.

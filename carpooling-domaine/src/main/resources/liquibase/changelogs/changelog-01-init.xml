@@ -109,6 +109,7 @@
             <column name="Note" type="FLOAT(12)"/>
             <column name="Login" type="VARCHAR(255)"/>
             <column name="Password" type="VARCHAR(255)"/>
+            <column name="Email" type="VARCHAR(255)" />
         </createTable>
     </changeSet>
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-10">
@@ -152,6 +153,7 @@
             </column>
             <column name="Latitude" type="DOUBLE(12)"/>
             <column name="Longitude" type="DOUBLE(12)"/>
+            <column name="Libelle" type="VARCHAR(255)" />
         </createTable>
     </changeSet>
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-14">
@@ -203,7 +205,7 @@
             <column name="NombrePassagers" type="INT(10)">
                 <constraints nullable="false"/>
             </column>
-            <column name="Validee" type="TINYINT">
+            <column name="Etat" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="Tarif" type="FLOAT(12)"/>
@@ -250,6 +252,20 @@
             <column name="Puissance" type="FLOAT(12)"/>
             <column name="Carburant" type="VARCHAR(255)"/>
             <column name="Categorie" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-note">
+        <createTable tableName="note">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="MembreID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NoteurID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Note" type="INT(10)"/>
         </createTable>
     </changeSet>
     <!--<changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-21">
@@ -335,6 +351,10 @@
     </changeSet>
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-48">
         <addForeignKeyConstraint baseColumnNames="MembreID" baseTableName="voiture" constraintName="FKVoiture38466" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
+    </changeSet>
+    <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-49">
+        <addForeignKeyConstraint baseColumnNames="MembreID" baseTableName="note" constraintName="FKNote38467" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
+        <addForeignKeyConstraint baseColumnNames="NoteurID" baseTableName="note" constraintName="FKNote38468" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="membre"/>
     </changeSet>
 
 </databaseChangeLog>

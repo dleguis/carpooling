@@ -1,5 +1,7 @@
 package edu.fst.m2.ipii.carpooling.transverse.dto;
 
+import edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation;
+
 import java.util.Date;
 
 /**
@@ -19,7 +21,7 @@ public class ReservationDto {
 
     private int nombrePassagers;
 
-    private boolean validee;
+    private EtatReservation etat;
 
     private Float tarif;
 
@@ -47,8 +49,12 @@ public class ReservationDto {
         return this.nombrePassagers;
     }
 
-    public boolean isValidee() {
-        return this.validee;
+    public EtatReservation getEtat() {
+        return etat;
+    }
+
+    public void setEtat(EtatReservation etat) {
+        this.etat = etat;
     }
 
     public Float getTarif() {
@@ -81,10 +87,6 @@ public class ReservationDto {
 
     public void setNombrePassagers(int nombrePassagers) {
         this.nombrePassagers = nombrePassagers;
-    }
-
-    public void setValidee(boolean validee) {
-        this.validee = validee;
     }
 
     public void setTarif(Float tarif) {

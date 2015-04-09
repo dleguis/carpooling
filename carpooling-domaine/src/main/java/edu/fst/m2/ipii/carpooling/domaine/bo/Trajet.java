@@ -13,6 +13,8 @@
  */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
+import edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -77,11 +79,11 @@ public class Trajet implements Serializable {
 
 		for (Reservation reservation : getReservations()) {
 
-			if (reservation.isInitiale()) {
+			if (reservation.getEtat() == EtatReservation.INITIALE) {
 				tarif = reservation.getTarif();
 				conducteur = reservation.getMembre().getLogin();
 			}
-			if (reservation.isValidee()) {
+			if (reservation.getEtat() == EtatReservation.INITIALE || reservation.getEtat() == EtatReservation.VALIDEE) {
 				passagers.add(reservation.getMembre().getLogin());
 				placesDisponibles -= reservation.getNombrePassagers();
 			}
@@ -182,5 +184,21 @@ public class Trajet implements Serializable {
 	public String toString() {
 		return String.valueOf(getID());
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Trajet)) return false;
+
+		Trajet trajet = (Trajet) o;
+
+		if (ID != trajet.ID) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return ID;
+	}
 }
