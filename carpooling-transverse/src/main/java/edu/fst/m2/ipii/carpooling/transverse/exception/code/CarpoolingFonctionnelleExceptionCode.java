@@ -27,6 +27,8 @@ public enum CarpoolingFonctionnelleExceptionCode {
     /** The ER r_ autho r_001. */
     ERR_TRAJET_002("Le trajet n'existe pas"),
 
+    ERR_TRAJET_003("Le trajet est plein"),
+
     /** The ER r_ orde r_001. */
     ERR_ORDER_001("La commande n'existe pas"),
 

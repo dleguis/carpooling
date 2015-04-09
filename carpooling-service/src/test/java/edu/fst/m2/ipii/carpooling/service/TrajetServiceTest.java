@@ -89,4 +89,17 @@ public class TrajetServiceTest extends AbstractServiceTest {
         assertNotNull(trajetCree);
 
     }
+
+    @Test
+    public void testReserver() throws Exception {
+        NouvelleReservationDto nouvelleReservation = new NouvelleReservationDto();
+        nouvelleReservation.setMembreId(1);
+        nouvelleReservation.setMoyenPaiementId(2);
+        nouvelleReservation.setNbPlaces(1);
+        nouvelleReservation.setPointEmbarquement("Clichy-sous-Bois");
+        nouvelleReservation.setTrajetId(1);
+
+        trajetService.reserver(nouvelleReservation);
+
+    }
 }

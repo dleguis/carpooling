@@ -3,6 +3,7 @@ package edu.fst.m2.ipii.carpooling.presentation.controller;
 
 import edu.fst.m2.ipii.carpooling.presentation.AbstractController;
 import edu.fst.m2.ipii.carpooling.presentation.model.UserInscriptionModel;
+import edu.fst.m2.ipii.carpooling.service.MembreService;
 import edu.fst.m2.ipii.carpooling.transverse.dto.AdresseDto;
 import edu.fst.m2.ipii.carpooling.transverse.dto.MembreDto;
 import edu.fst.m2.ipii.carpooling.transverse.utils.binding.BindingResultUtils;
@@ -24,12 +25,15 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Dimitri on 19/10/14.
  */
 @Controller
-public class LoginController extends AbstractController {
+public class LoginController {
 
     /**
      * The Constant LOGGER.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
+
+	@Autowired
+	protected MembreService membreService;
 
     /**
      * The user service.
@@ -45,10 +49,6 @@ public class LoginController extends AbstractController {
     @RequestMapping(value = "/login-register.html", method = RequestMethod.GET)
     public String getLogin(Model model) {
 
-		// Si l'utilisateur est déjà connecté, pas besoin de lui remontrer la page de login
-		if (null != getUserProfil()) {
-			return "redirect:index.html";
-		}
 
 		model.addAttribute("userModel", new UserInscriptionModel());
 		model.addAttribute("errors", "");

@@ -108,7 +108,7 @@
                     <div class="row Transfer">
                         <h3>Détails du trajet</h3>
                         <h5>Information de départ</h5>
-                        <form class="form-horizontal">
+                        <form th:object="${reservationForm}" th:action="@{/reserver}" method="POST" class="form-horizontal">
                             <div class="form-group">
                                 <label for="inputname1" class="col-sm-4 control-label2 control-label">Adresse de départ</label>
                                 <label for="inputname1" class="col-sm-4 control-label2 control-label">45 rue tamere</label>
@@ -141,6 +141,12 @@
                             </div>
                             <hr />
                             <div class="form-group" th:if="${(userProfil.username != trajet.conducteur) || !(#lists.contains(trajet.passagers, userProfil.username))}">
+                                private int trajetId;
+                                private String pointEmbarquement;
+                                private int membreId;
+                                int nbPlaces;
+                                int moyenPaiementId;
+                                <input type="hidden" th:field="*{trajetId}" th:value="${trajet.ID}" />
                                 <div class="col-sm-offset-7 col-sm-5">
                                     <div class="completing-form-btnwrap"><button type="submit" class="btn form-btn  btn-block">Réserver</button></div>
                                 </div>

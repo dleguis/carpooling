@@ -109,20 +109,33 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
     public void reserver(NouvelleReservationDto nouvelleReservation) throws Exception {
         Trajet trajet = trajetRepository.findOne(nouvelleReservation.getTrajetId());
 
+        if (trajet == null) {
+            throw new CarpoolingFonctionnelleException(CarpoolingFonctionnelleExceptionCode.ERR_TRAJET_002);
+        }
+        else if (trajet.getNbPlacesDisponibles() - nouvelleReservation.getNbPlaces() < 0) {
+            throw new CarpoolingFonctionnelleException(CarpoolingFonctionnelleExceptionCode.ERR_TRAJET_003);
+        }
+
         CoordonneesVilleDto coordonnees = getCoordonneesByRequest(nouvelleReservation.getPointEmbarquement());
 
         Paiement paiement = new Paiement();
         paiement.setMoyenPaiement(moyenPaiementRepository.findOne(nouvelleReservation.getMoyenPaiementId()));
         paiement.setSomme(trajet.getTarif());
 
+        paiement = paiementRepository.save(paiement);
+
         Facture facture = new Facture();
         facture.setDateFacture(DateTime.now().toDate());
         facture.setPaiement(paiement);
+
+        facture = factureRepository.save(facture);
 
         PointEmbarquement pointDepart = new PointEmbarquement();
         pointDepart.setLibelle(coordonnees.getRequest());
         pointDepart.setLatitude(coordonnees.getLatitude());
         pointDepart.setLongitude(coordonnees.getLongitude());
+
+        pointDepart = pointEmbarquementRepository.save(pointDepart);
 
         Reservation reservation = new Reservation();
         reservation.setPointEmbarquement(pointDepart);
@@ -132,6 +145,11 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
         reservation.setInitiale(false);
         reservation.setMembre(membreRepository.findOne(nouvelleReservation.getMembreId()));
         reservation.setEtat(EtatReservation.EN_ATTENTE);
+        reservation.setTrajet(trajet);
+        reservation.setTarif(new Float(trajet.getTarif()));
+        reservation.setPointEmbarquement(pointDepart);
+
+        reservationRepository.save(reservation);
     }
 
     // @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
