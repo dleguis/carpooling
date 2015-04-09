@@ -3,6 +3,8 @@ package edu.fst.m2.ipii.carpooling.presentation.controller;
 
 import edu.fst.m2.ipii.carpooling.presentation.AbstractController;
 import edu.fst.m2.ipii.carpooling.presentation.model.UserInscriptionModel;
+import edu.fst.m2.ipii.carpooling.transverse.dto.AdresseDto;
+import edu.fst.m2.ipii.carpooling.transverse.dto.MembreDto;
 import edu.fst.m2.ipii.carpooling.transverse.utils.binding.BindingResultUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -71,13 +73,13 @@ public class LoginController extends AbstractController {
 	    BindingResult bindingResult) {
 
 		if (!bindingResult.hasErrors()) {
-			// Création du UserDto à envoyer
-			/* UserDto user = new UserDto();
+			// Création du UserDto à envoyer hghg
+			MembreDto user = new MembreDto();
 			user.setLogin(userInscriptionModel.getLogin());
 			user.setPassword(userInscriptionModel.getPassword());
 			user.setEmail(userInscriptionModel.getEmail());
 
-			MailingAddressDto address = new MailingAddressDto();
+			/*AdresseDto address = new AdresseDto();
 			address.setLine1(userInscriptionModel.getLine1());
 			address.setLine2(userInscriptionModel.getLine2());
 			address.setLine3(userInscriptionModel.getLine3());
@@ -86,10 +88,10 @@ public class LoginController extends AbstractController {
 
 			user.setMailingAddress(address);
 
-			// Enregistrement de l'utilisateur
+			// Enregistrement de l'utilisateur */
 
-			userService.creer(user);
-			return "redirect:login.html";*/
+			membreService.save(user);
+			return "redirect:login.html";
 		}
 
 		String errors = BindingResultUtils.getBindingMessages(bindingResult);
