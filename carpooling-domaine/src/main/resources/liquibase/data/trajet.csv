@@ -1,3 +1,3 @@
-ID,PointEmbarquementID,VoitureID,Titre,DateDepart
-1,1,1,Opération espadon,2015-12-31T12:00:00
-2,2,2,"Traversée de la France",2015-04-10T19:00:00
+ID,PointEmbarquementID,VoitureID,Titre,DateDepart,actif
+1,1,1,Opération espadon,2015-12-31T12:00:00,1
+2,2,2,"Traversée de la France",2015-04-10T19:00:00,1

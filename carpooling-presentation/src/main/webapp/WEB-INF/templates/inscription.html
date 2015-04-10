@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layout/layout">
+<head>
+    <title>Erreur</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <br/>
+    <br/>
+    <div class="container">
+        <div class="page30-wrap" style="margin-top: 70px;">
+            <div class="form form-group">
+                <form method="POST" th:object="${userModel}" class="form-horizontal">
+
+                    <div class="form-group">
+                        <label for="inputname1" class="col-sm-4 control-label2 control-label">First Name<span>*</span></label>
+                        <div class=" col-sm-8 completing-form">
+                            <input id="login" name="login" th:value="${membre.login}" readonly="readonly" type="text" class="form-control" placeholder="Login" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputname1" class="col-sm-4 control-label2 control-label">First Name<span>*</span></label>
+                        <div class=" col-sm-8 completing-form">
+                            <input id="firstName" name="firstName" th:value="${membre.prenomMembre}" type="text" class="form-control" placeholder="First Name" required="required"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputlastname1" class="col-sm-4 control-label2 control-label ">Last Name</label>
+                        <div class=" col-sm-8 completing-form">
+                            <input id="lastName" name="lastName" th:value="${membre.nomMembre}" type="text" class="form-control"  placeholder="Last Name"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputemail1" class="col-sm-4 control-label2 control-label ">Email Address<span>*</span></label>
+                        <div class=" col-sm-8 completing-form">
+                            <input  id="email" name="email" th:value="${membre.email}" type="email" class="form-control"  placeholder="Email Address*" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputemail1" class="col-sm-4 control-label2 control-label ">Email Address confirmation<span>*</span></label>
+                        <div class=" col-sm-8 completing-form">
+                            <input id="emailConfirmation" name="emailConfirmation" type="email" class="form-control" placeholder="Email Address*" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputnumber1" class="col-sm-4 control-label2 control-label ">Password<span>*</span></label>
+                        <div class=" col-sm-8 completing-form">
+                            <input id="password" name="password" th:value="${membre.password}" type="password" class="form-control"  placeholder="password" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputnumber1" class="col-sm-4 control-label2 control-label ">Password confirmation<span>*</span></label>
+                        <div class=" col-sm-8 completing-form">
+                            <input id="passwordConfirmation" name="passwordConfirmation" type="password" class="form-control"  placeholder="password confirmation" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-7 col-sm-5">
+                            <div class="completing-form-btnwrap"><button type="submit" class="btn form-btn  btn-block">Modification</button></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

@@ -192,49 +192,55 @@
                                 <h3>Pas encore inscrit ?</h3>
                                 <span>L'inscription est simple est rapide!</span>
                                 <p>
-                                <form class="form-horizontal">
+                                <form method="POST" th:action="@{/register.html}" th:object="${userModel}" class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <label for="inputname1" class="col-sm-4 control-label2 control-label">Login</label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input id="login" name="login" th:field="*{login}"  type="text" class="form-control" placeholder="Login" required="required"/>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="inputname1" class="col-sm-4 control-label2 control-label">First Name<span>*</span></label>
                                         <div class=" col-sm-8 completing-form">
-                                            <input type="text" class="form-control" id="inputname1" placeholder="First Name" required="required"/>
+                                            <input id="firstName" name="firstName" th:field="*{firstName}" type="text" class="form-control" placeholder="First Name" required="required"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputlastname1" class="col-sm-4 control-label2 control-label ">Last Name</label>
+                                        <label for="inputlastname1" class="col-sm-4 control-label2 control-label ">Last Name<span>*</span></label>
                                         <div class=" col-sm-8 completing-form">
-                                            <input type="text" class="form-control" id="inputlastname1" placeholder="Last Name"/>
+                                            <input id="lastName" name="lastName" th:field="*{lastName}" type="text" class="form-control"  placeholder="Last Name"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputemail1" class="col-sm-4 control-label2 control-label ">Email Address<span>*</span></label>
                                         <div class=" col-sm-8 completing-form">
-                                            <input type="email" class="form-control" id="inputemail1" placeholder="Email Address*" required="required"/>
+                                            <input  id="email" name="email" th:field="*{email}" type="email" class="form-control"  placeholder="Email Address*" required="required"/>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="inputnumber1" class="col-sm-4 control-label2 control-label ">Mobile Number<span>*</span></label>
+                                        <label for="inputemail1" class="col-sm-4 control-label2 control-label ">Email Address confirmation<span>*</span></label>
                                         <div class=" col-sm-8 completing-form">
-                                            <input type="text" class="form-control" id="inputnumber1" placeholder="Mobile Number" required="required"/>
+                                            <input id="emailConfirmation" name="emailConfirmation" th:field="*{emailConfirmation}" type="email" class="form-control" placeholder="Email Address*" required="required"/>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="inputage1" class="col-sm-4 control-label2 control-label ">Age</label>
+                                        <label for="inputnumber1" class="col-sm-4 control-label2 control-label ">Password<span>*</span></label>
                                         <div class=" col-sm-8 completing-form">
-                                            <input type="text" class="form-control" id="inputage1" placeholder="Age" />
+                                            <input id="password" name="password" th:field="*{password}" type="password" class="form-control"  placeholder="password" required="required"/>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="inputcountry1" class="col-sm-4 control-label2 control-label" >Country<span>*</span></label>
+                                        <label for="inputnumber1" class="col-sm-4 control-label2 control-label ">Password confirmation<span>*</span></label>
                                         <div class=" col-sm-8 completing-form">
-                                            <input type="text" class="form-control" id="inputcountry1" placeholder="Country" required="required"/>
+                                            <input id="passwordConfirmation" th:field="*{passwordConfirmation}" name="passwordConfirmation" type="password" class="form-control"  placeholder="password confirmation" required="required"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label2 control-label"> Special note to the driver </label>
-                                        <div class=" col-sm-8 completing-form">
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </div>
-                                    </div>
+
                                     <div class="form-group">
                                         <div class="col-sm-offset-7 col-sm-5">
                                             <div class="completing-form-btnwrap"><button type="submit" class="btn form-btn  btn-block">Inscription</button></div>
@@ -253,8 +259,8 @@
                                 <a href="#" th:href="@{'/#'}" class="img-circle"><img src="images/hidden.png" th:src="@{'/images/hidden.png'}" alt=""/></a>
                             </div>
                             <div class="containt-text">
-                                <h3>Connection</h3>
-                                <span>veuillez rentrer vos identifiant de connection</span>
+                                <h3>Connexion</h3>
+                                <span>veuillez rentrer vos identifiant de connexion</span>
                                 <p>
                                 <form class="form-horizontal" th:action="@{/j_spring_security_check}" method="post">
                                     <p th:if="${(param.error != null) and (param.error[0] == '1')}" th:text="#{login.error}" class="error">

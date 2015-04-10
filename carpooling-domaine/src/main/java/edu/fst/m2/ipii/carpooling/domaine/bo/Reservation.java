@@ -64,7 +64,7 @@ public class Reservation implements Serializable {
 	@Column(name="Initiale", nullable=false)
 	private boolean initiale;
 	
-	@OneToOne(mappedBy="reservation", targetEntity=PointEmbarquement.class, fetch=FetchType.LAZY)	
+	@OneToOne(mappedBy="reservation", targetEntity=PointEmbarquement.class, fetch=FetchType.EAGER)
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	private PointEmbarquement pointEmbarquement;
 	

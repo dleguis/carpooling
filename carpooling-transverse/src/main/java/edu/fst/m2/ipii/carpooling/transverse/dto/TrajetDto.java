@@ -1,9 +1,8 @@
 package edu.fst.m2.ipii.carpooling.transverse.dto;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation;
+
+import java.util.*;
 
 /**
  * Created by Dimitri on 05/04/15.
@@ -20,6 +19,8 @@ public class TrajetDto {
 
     private String titre;
 
+    private boolean actif;
+
     private Date dateDepart;
 
     private int nbPlacesDisponibles;
@@ -30,9 +31,30 @@ public class TrajetDto {
 
     private List<String> passagers;
 
-    private Set<ReservationDto> reservations = new HashSet<>();
+    private List<ReservationDto> reservations = new ArrayList<>();
 
     private Set<CommentaireDto> commentaires = new HashSet<>();
+
+    public PointEmbarquementDto getPointDepart() {
+        for (ReservationDto reservationDto : getReservations()) {
+            if (EtatReservation.INITIALE.equals(reservationDto.getEtat()) || reservationDto.isInitiale()) {
+                return reservationDto.getPointEmbarquement();
+            }
+        }
+
+        return null;
+    }
+
+    public List<PointEmbarquementDto> getEtapes() {
+        List<PointEmbarquementDto> pts = new ArrayList<>();
+        for (ReservationDto reservationDto : getReservations()) {
+            if (EtatReservation.VALIDEE.equals(reservationDto.getEtat())) {
+                pts.add(reservationDto.getPointEmbarquement());
+            }
+        }
+
+        return pts;
+    }
 
     public int getID() {
         return this.ID;
@@ -52,6 +74,14 @@ public class TrajetDto {
 
     public String getTitre() {
         return this.titre;
+    }
+
+    public boolean isActif() {
+        return actif;
+    }
+
+    public void setActif(boolean actif) {
+        this.actif = actif;
     }
 
     public Date getDateDepart() {
@@ -74,7 +104,7 @@ public class TrajetDto {
         return this.passagers;
     }
 
-    public Set<ReservationDto> getReservations() {
+    public List<ReservationDto> getReservations() {
         return this.reservations;
     }
 
@@ -122,7 +152,7 @@ public class TrajetDto {
         this.passagers = passagers;
     }
 
-    public void setReservations(Set<ReservationDto> reservations) {
+    public void setReservations(List<ReservationDto> reservations) {
         this.reservations = reservations;
     }
 

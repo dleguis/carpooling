@@ -36,6 +36,16 @@ public class MembreDto {
 
     private Set<ProfilDto> profils = new HashSet<>();
 
+    public VoitureDto getVoitureWithId(int voitureId) {
+        for (VoitureDto voiture : getVoitures()) {
+            if (voiture.getID() == voitureId) {
+                return voiture;
+            }
+        }
+
+        return null;
+    }
+
     public int getID() {
         return this.ID;
     }

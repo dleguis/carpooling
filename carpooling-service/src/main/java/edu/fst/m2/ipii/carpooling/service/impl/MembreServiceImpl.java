@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import edu.fst.m2.ipii.carpooling.transverse.dto.VoitureDto;
+import edu.fst.m2.ipii.carpooling.transverse.exception.CarpoolingFonctionnelleException;
+import edu.fst.m2.ipii.carpooling.transverse.exception.code.CarpoolingFonctionnelleExceptionCode;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,8 +22,7 @@ import edu.fst.m2.ipii.carpooling.transverse.utils.mapper.MapperUtils;
  * Created by Dimitri on 02/04/15.
  */
 @Service
-public class MembreServiceImpl extends AbstractServiceImpl implements
-		MembreService {
+public class MembreServiceImpl extends AbstractServiceImpl implements MembreService {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(MembreServiceImpl.class);
@@ -54,11 +57,20 @@ public class MembreServiceImpl extends AbstractServiceImpl implements
 	}
 
 	@Override
-	public void save(MembreDto membre) {
-		Membre m = new Membre();
-		m = MapperUtils.map(mapperService, membre, Membre.class);
-		membreRepository.save(m);
+	public MembreDto rechercher(String login, String password) {
+		return MapperUtils.map(mapperService, membreRepository.findByLoginAndPassword(login, password), MembreDto.class);
+	}
 
+	@Override
+	public void save(MembreDto membre) {
+		Membre m = membreRepository.findOne(membre.getID());
+
+		m.setNomMembre(membre.getNomMembre());
+		m.setPrenomMembre(membre.getPrenomMembre());
+		m.setEmail(membre.getEmail());
+		m.setPassword(membre.getPassword());
+
+		membreRepository.save(m);
 	}
 
 	@Override
@@ -69,5 +81,31 @@ public class MembreServiceImpl extends AbstractServiceImpl implements
 	   // m.getVoitures().addAll((Collection<? extends Voiture>) MapperUtils.map(mapperService, membreDto.getVoitures(), ArrayList.class));
 		 membreRepository.save(m);
 
+	}
+
+	@Override
+	public void nouveau(MembreDto membreDto) {
+
+		List<Membre> membres = membreRepository.findByLoginAndEmail(membreDto.getLogin(), membreDto.getEmail());
+
+		if (CollectionUtils.isNotEmpty(membres)) {
+			throw new CarpoolingFonctionnelleException(CarpoolingFonctionnelleExceptionCode.ERR_USER_005);
+		}
+
+		Membre m = new Membre();
+		m.setNomMembre(membreDto.getNomMembre());
+		m.setPrenomMembre(membreDto.getPrenomMembre());
+		m.setLogin(membreDto.getLogin());
+		m.setEmail(membreDto.getEmail());
+		m.setPassword(membreDto.getPassword());
+
+		m.getProfils().add(profilRepository.findOne(1));
+
+		membreRepository.save(m);
+	}
+
+	@Override
+	public List<VoitureDto> rechercherVoitures(int membreId) {
+		return MapperUtils.map(mapperService, voitureRepository.findByConducteur(membreId), VoitureDto.class);
 	}
 }

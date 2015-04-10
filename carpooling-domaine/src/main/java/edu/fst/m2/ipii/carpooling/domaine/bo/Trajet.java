@@ -48,11 +48,14 @@ public class Trajet implements Serializable {
 	@Column(name="DateDepart", nullable=true)
 	// @Temporal(TemporalType.DATE)
 	private Date dateDepart;
+
+	@Column(name = "actif")
+	private boolean actif;
 	
 	@OneToMany(mappedBy="trajet", targetEntity=Reservation.class, fetch = FetchType.LAZY)
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
-	private Set<Reservation> reservations;
+	private List<Reservation> reservations;
 	
 	@OneToMany(targetEntity=Commentaire.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})
@@ -139,14 +142,21 @@ public class Trajet implements Serializable {
 		this.dateDepart = dateDepart;
 	}
 
-	public Set<Reservation> getReservations() {
+	public List<Reservation> getReservations() {
         if (null == reservations) {
-            reservations = new HashSet<>();
+            reservations = new ArrayList<>();
         }
 		return reservations;
 	}
-	
-	
+
+	public boolean isActif() {
+		return actif;
+	}
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
+	}
+
 	public void setVoiture(Voiture value) {
 		this.voiture = value;
 	}

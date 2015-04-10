@@ -32,4 +32,7 @@ public abstract class AbstractServiceTest {
     @Autowired
     protected FactureRepository factureRepository;
 
+    @Autowired
+    protected ReservationService reservationService;
+
 }

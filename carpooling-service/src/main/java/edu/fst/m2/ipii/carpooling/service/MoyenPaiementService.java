@@ -1,6 +1,7 @@
 package edu.fst.m2.ipii.carpooling.service;
 
 import edu.fst.m2.ipii.carpooling.domaine.bo.MoyenPaiement;
+import edu.fst.m2.ipii.carpooling.transverse.dto.MembreDto;
 import edu.fst.m2.ipii.carpooling.transverse.dto.MoyenPaiementDto;
 
 import java.util.List;

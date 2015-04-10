@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layout/layout">
+<head>
+    <title>Erreur</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <br/>
+    <br/>
+    <div class="col-sm-12" style="text-align:center;margin-top:30px;">
+        <h2>Oulala!</h2>
+        <h3>Vous devez avoir enregistré au moins une voiture avant de pouvoir créer un trajet</h3>
+        <a type="submit" class="btn form-btn btn-block">enregistrer ma voiture</a>
+    </div>
+
+</section>
+</body>
+</html>

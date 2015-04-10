@@ -20,6 +20,12 @@ public class UserInscriptionModel {
     @NotBlank
     private String login;
 
+    @NotBlank
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
+
     /** The email. */
     @NotBlank
     @Email
@@ -71,6 +77,22 @@ public class UserInscriptionModel {
      */
     public void setLogin(String login) {
 	this.login = login;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**

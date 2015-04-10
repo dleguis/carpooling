@@ -69,38 +69,21 @@ public class LoginController {
      * @return the string
      */
     @RequestMapping(value = "/register.html", method = RequestMethod.POST)
-    public String postInscription(Model model, @ModelAttribute("userModel") @Validated UserInscriptionModel userInscriptionModel,
-	    BindingResult bindingResult) {
+	public String postInscription(Model model, @ModelAttribute("userModel") @Validated UserInscriptionModel userInscriptionModel,
+								  BindingResult bindingResult) {
 
-		if (!bindingResult.hasErrors()) {
-			// Création du UserDto à envoyer hghg
-			MembreDto user = new MembreDto();
-			user.setLogin(userInscriptionModel.getLogin());
-			user.setPassword(userInscriptionModel.getPassword());
-			user.setEmail(userInscriptionModel.getEmail());
 
-			/*AdresseDto address = new AdresseDto();
-			address.setLine1(userInscriptionModel.getLine1());
-			address.setLine2(userInscriptionModel.getLine2());
-			address.setLine3(userInscriptionModel.getLine3());
-			address.setCity(userInscriptionModel.getCity());
-			address.setZip(userInscriptionModel.getZip());
+		// Création du UserDto à envoyer hghg
+		MembreDto user = new MembreDto();
+		user.setLogin(userInscriptionModel.getLogin());
+		user.setPassword(userInscriptionModel.getPassword());
+		user.setEmail(userInscriptionModel.getEmail());
+		user.setNomMembre(userInscriptionModel.getLastName());
+		user.setPrenomMembre(userInscriptionModel.getFirstName());
 
-			user.setMailingAddress(address);
+		membreService.nouveau(user);
+		return "redirect:/mon-compte.html?success";
 
-			// Enregistrement de l'utilisateur */
 
-			membreService.save(user);
-			return "redirect:login.html";
-		}
-
-		String errors = BindingResultUtils.getBindingMessages(bindingResult);
-
-		if (StringUtils.isNotEmpty(errors)) {
-			model.addAttribute("errors", errors);
-		}
-
-		return "register";
-
-    }
+	}
 }

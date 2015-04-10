@@ -14,7 +14,7 @@
 
 
                         <div class="call-us">
-                            <p>Envie de bouger ?</p>
+                            <a th:href="@{/creer-trajet.html}">Envie de bouger ?</a>
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -34,7 +34,7 @@
                                 <a href="#" th:href="@{'/#'}">s'enregistrer</a>
                             </div>
                             <div sec:authorize="hasRole('ROLE_ECRAN_001_RECHERCHE_TRAJET')" class="login-register">
-                                <a href="#" th:href="@{'/#'}">compte</a>
+                                <a href="#" th:href="@{'/mon-compte.html'}">compte</a>
                                 <a href="#" th:href="@{/j_spring_security_logout}" >déconnexion</a>
                             </div>
                             <div class="social-icon">
@@ -59,55 +59,12 @@
                                             <a href="#" th:href="@{'/#'}" class="dl-trigger" data-toggle="dropdown"><i class="fa fa-align-justify"></i></a>
                                             <ul class="dl-menu">
                                                 <li>
-                                                    <a href="#" th:href="@{'/#'}">Home Page Variants</a>
-                                                    <ul class="dl-submenu ">
-                                                        <li><a href="index-2.html" th:href="@{'/index-2.html'}">Home Variant 1</a></li>
-                                                        <li><a href="index2.html" th:href="@{'/index2.html'}">Home Variant 2</a></li>
-                                                        <li><a href="index3.html" th:href="@{'/index3.html'}">Home Variant 3</a></li>
-                                                        <li><a href="index4.html" th:href="@{'/index4.html'}">Home Variant 4</a></li>
-                                                        <li><a href="index5.html" th:href="@{'/index5.html'}">Home Variant 5</a></li>
-                                                        <li><a href="index6.html" th:href="@{'/index6.html'}">Home Variant 6</a></li>
-                                                        <li><a href="index7.html" th:href="@{'/index7.html'}">Home Variant 7</a></li>
-                                                        <li><a href="index8.html" th:href="@{'/index8.html'}">Home Variant 8</a></li>
-                                                        <li><a href="index9.html" th:href="@{'/index9.html'}">Home Variant 9</a></li>
-                                                        <li><a href="index10.html" th:href="@{'/index10.html'}">Home Variant 10</a></li>
-                                                        <li><a href="index11.html" th:href="@{'/index11.html'}">Home Variant 11</a></li>
-                                                        <li><a href="index12.html" th:href="@{'/index12.html'}">Home Variant 12</a></li>
-                                                    </ul>
+                                                    <a href="index-2.html" th:href="@{'/mes-trajets.html'}">Mes trajets</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" th:href="@{'/#'}">Home Page Variants2</a>
-                                                    <ul class="dl-submenu ">
-                                                        <li><a href="index13.html" th:href="@{'/index13.html'}">Home Variant 13</a></li>
-                                                        <li><a href="index14.html" th:href="@{'/index14.html'}">Home Variant 14</a></li>
-                                                        <li><a href="index15.html" th:href="@{'/index15.html'}">Home Variant 15</a></li>
-                                                        <li><a href="index16.html" th:href="@{'/index16.html'}">Home Variant 16</a></li>
-                                                        <li><a href="index17.html" th:href="@{'/index17.html'}">Home Variant 17</a></li>
-                                                        <li><a href="index18.html" th:href="@{'/index18.html'}">Home Variant 18</a></li>
-                                                        <li><a href="index19.html" th:href="@{'/index19.html'}">Home Variant 19</a></li>
-                                                        <li><a href="index20.html" th:href="@{'/index20.html'}">Home Variant 20</a></li>
-                                                        <li><a href="index21.html" th:href="@{'/index21.html'}">Home Variant 21</a></li>
-                                                        <li><a href="index22.html" th:href="@{'/index22.html'}">Home Variant 22</a></li>
-                                                        <li><a href="index23.html" th:href="@{'/index23.html'}">Home Variant 23</a></li>
-                                                        <li><a href="index24.html" th:href="@{'/index24.html'}">Home Variant 24</a></li>
-                                                    </ul>
+                                                    <a href="index2.html" th:href="@{'/mes-reservations.html'}">Mes réservations</a>
                                                 </li>
-                                                <li>
-                                                    <a href="#" th:href="@{'/#'}">Results Page Variants</a>
-                                                    <ul class="dl-submenu">
-                                                        <li><a href="Results_1.html" th:href="@{'/Results_1.html'}">Result Variant 1</a></li>
-                                                        <li><a href="Results_2.html" th:href="@{'/Results_2.html'}">Result Variant 2</a></li>
-                                                        <li><a href="Results_3.html" th:href="@{'/Results_3.html'}">Result Variant 3</a></li>
-                                                        <li><a href="Results_4.html" th:href="@{'/Results_4.html'}">Result Variant 4 </a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="#" th:href="@{'/#'}">Booking Variants</a>
-                                                    <ul class="dl-submenu">
-                                                        <li><a href="Results_5.html" th:href="@{'/Results_5.html'}">Booking Variants 1</a></li>
-                                                        <li><a href="Results_6.html" th:href="@{'/Results_6.html'}">Booking Variants 2</a></li>
-                                                    </ul>
-                                                </li>
+
                                             </ul>
                                         </div>
                                     </div>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layout/layout">
+<head>
+    <title>Erreur</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div th:if="${null != trajets}" class="container">
+        <div class="row page25-container">
+            <div class="col-sm-12">
+                <div class="row">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div th:each="trajet : ${trajets}" class="page25-content">
+                        <div class="page25-content-header"></div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <div class="p25-minicar-wrap">
+                                    <div class="p25-minicar"><a href="#" th:href="@{'/#'}"><img src="images/minicar.png" th:src="@{'/images/minicar.png'}" alt=""/></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="Proin-text-wrap">
+                                    <a href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}"><h6 th:text="${trajet.voiture.marque} + ' ' + ${trajet.voiture.modele}">Mini Car</h6></a>
+                                    <p th:text="${trajet.titre}">Proin gravida nibh vel velit actor <br/>aliquet. Aenean sollicitudin,</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="pa25-frofile-wrap">
+                                    <div class="p25-minicar-promo-text2">
+                                        <div class="containt-text-profile">
+                                            <a title="Places disponibles" href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" class="img-circle"><img src="images/profile2.png" th:src="@{'/images/profile2.png'}" alt="Places disponibles" /></a>
+                                        </div>
+                                        <div class="containt-text-profile p25-text-bag2">
+                                            <a title="Réservations en cours" href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" class="img-circle"><img src="images/bag.png" th:src="@{'/images/bag.png'}" alt="Réservations en cours" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="p25-minicar-clipartwrap">
+                                        <div class="page25-clipart">
+                                            <a href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" th:text="${trajet.nbPlacesDisponibles}">6</a>
+                                        </div>
+                                        <div class="page25-clipart page25-clipart2">
+                                            <a href="#" th:href="@{'/detail-trajet/' + ${trajet.ID}}" th:text="${#lists.size(trajet.reservations) - 1}">6</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="row">
+                                <div class="pa28-text-wrap">
+                                    <h2 th:text="${trajet.tarif} + ' €'">99 €</h2>
+                                    <p th:text="${trajet.conducteur}">Fare Details</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="pa25-btn-wrapper">
+                                    <div class="pa25-btn-wrap">
+                                        <a href="Results_6.html" th:href="@{'/detail-trajet/' + ${trajet.ID}}" class="btn pa25-btn btn-lg">VOIR</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

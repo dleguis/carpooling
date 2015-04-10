@@ -7,9 +7,7 @@ import edu.fst.m2.ipii.carpooling.domaine.bo.*;
 import edu.fst.m2.ipii.carpooling.service.TrajetService;
 import edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation;
 import edu.fst.m2.ipii.carpooling.transverse.criteria.TrajetCriteria;
-import edu.fst.m2.ipii.carpooling.transverse.dto.CoordonneesVilleDto;
-import edu.fst.m2.ipii.carpooling.transverse.dto.NouvelleReservationDto;
-import edu.fst.m2.ipii.carpooling.transverse.dto.TrajetDto;
+import edu.fst.m2.ipii.carpooling.transverse.dto.*;
 import edu.fst.m2.ipii.carpooling.transverse.exception.CarpoolingFonctionnelleException;
 import edu.fst.m2.ipii.carpooling.transverse.exception.code.CarpoolingFonctionnelleExceptionCode;
 import edu.fst.m2.ipii.carpooling.transverse.utils.mapper.MapperUtils;
@@ -34,7 +32,7 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
 
     @Override
     public List<TrajetDto> rechercher() {
-        return MapperUtils.map(mapperService, trajetRepository.findAll(), TrajetDto.class);
+        return MapperUtils.map(mapperService, trajetRepository.findAllActif(), TrajetDto.class);
     }
 
     @Override
@@ -53,14 +51,25 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
             return new HashSet<>();
         }
 
-        Set<Trajet> trajets = trajetRepository.findTrajetByCriteria(
-                coordonneesDepart.getLatitude(),
-                coordonneesDepart.getLongitude(),
-                coordonneesArrivee.getLatitude(),
-                coordonneesArrivee.getLongitude(),
-                new DateTime(trajetCriteria.getDateDepart()).withTimeAtStartOfDay().toDate(),
-                new DateTime(trajetCriteria.getDateDepart()).withTime(23, 59, 59, 0).toDate()
-        );
+        Set<Trajet> trajets;
+
+        if (trajetCriteria.getDateDepart() == null) {
+            trajets = trajetRepository.findTrajetByCriteriaAlt(
+                    coordonneesDepart.getLatitude(),
+                    coordonneesDepart.getLongitude(),
+                    coordonneesArrivee.getLatitude(),
+                    coordonneesArrivee.getLongitude());
+        }
+        else {
+            trajets = trajetRepository.findTrajetByCriteria(
+                    coordonneesDepart.getLatitude(),
+                    coordonneesDepart.getLongitude(),
+                    coordonneesArrivee.getLatitude(),
+                    coordonneesArrivee.getLongitude(),
+                    new DateTime(trajetCriteria.getDateDepart()).withTimeAtStartOfDay().toDate(),
+                    new DateTime(trajetCriteria.getDateDepart()).withTime(23, 59, 59, 0).toDate()
+            );
+        }
 
         return MapperUtils.map(mapperService, trajets, TrajetDto.class);
     }
@@ -82,24 +91,52 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
     }
 
     @Override
-    public int creer(TrajetDto trajetDto) {
+    public int creer(TrajetDto trajetDto) throws Exception {
 
         Trajet trajet = MapperUtils.map(mapperService, trajetDto, Trajet.class);
+        trajet.setActif(true);
 
+        CoordonneesVilleDto coordonnees = getCoordonneesByRequest(trajet.getArrivee().getLibelle());
+        trajet.getArrivee().setLatitude(coordonnees.getLatitude());
+        trajet.getArrivee().setLongitude(coordonnees.getLongitude());
         // Sauvegarde préalable du point d'embarquement d'arrivée du trajet
         trajet.setArrivee(pointEmbarquementRepository.save(trajet.getArrivee()));
 
-        // Création de la réservation initiale
-        List<Reservation> reservations = reservationRepository.save(trajet.getReservations());
 
-        trajet.getReservations().clear();
-        trajet.getReservations().addAll(reservations);
+        List<Reservation> reservations = MapperUtils.map(mapperService, trajetDto.getReservations(), Reservation.class);
+
+
+        reservations.get(0).getFacture().getPaiement().setMoyenPaiement(moyenPaiementRepository.findOne(1));
+
+        paiementRepository.save(reservations.get(0).getFacture().getPaiement());
+
+        factureRepository.save(reservations.get(0).getFacture());
+
+
 
         // récupération de la voiture associée
         trajet.setVoiture(voitureRepository.findOne(trajetDto.getVoiture().getID()));
 
         // Sauvegarde du trajet
         trajet = trajetRepository.save(trajet);
+
+        PointEmbarquement pt = reservations.get(0).getPointEmbarquement();
+
+        reservations.get(0).setMembre(membreRepository.findByLogin(reservations.get(0).getMembre().getLogin()));
+        reservations.get(0).setTrajet(trajet);
+        // Création de la réservation initiale
+        reservations = reservationRepository.save(reservations);
+
+        coordonnees = getCoordonneesByRequest(reservations.get(0).getPointEmbarquement().getLibelle());
+        pt.setLatitude(coordonnees.getLatitude());
+        pt.setLongitude(coordonnees.getLongitude());
+        pt.setLibelle(coordonnees.getRequest());
+        pt.setReservation(reservations.get(0));
+
+        pointEmbarquementRepository.save(pt);
+
+        trajet.getReservations().clear();
+        trajet.getReservations().addAll(reservations);
 
         // Récupération de l'id du trajet nouvellement créé
         return trajet.getID();
@@ -130,15 +167,8 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
 
         facture = factureRepository.save(facture);
 
-        PointEmbarquement pointDepart = new PointEmbarquement();
-        pointDepart.setLibelle(coordonnees.getRequest());
-        pointDepart.setLatitude(coordonnees.getLatitude());
-        pointDepart.setLongitude(coordonnees.getLongitude());
-
-        pointDepart = pointEmbarquementRepository.save(pointDepart);
 
         Reservation reservation = new Reservation();
-        reservation.setPointEmbarquement(pointDepart);
         reservation.setNombrePassagers(nouvelleReservation.getNbPlaces());
         reservation.setDateReservation(DateTime.now().toDate());
         reservation.setFacture(facture);
@@ -147,10 +177,52 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
         reservation.setEtat(EtatReservation.EN_ATTENTE);
         reservation.setTrajet(trajet);
         reservation.setTarif(new Float(trajet.getTarif()));
-        reservation.setPointEmbarquement(pointDepart);
 
-        reservationRepository.save(reservation);
+        reservation = reservationRepository.save(reservation);
+
+        PointEmbarquement pointDepart = new PointEmbarquement();
+        pointDepart.setLibelle(coordonnees.getRequest());
+        pointDepart.setLatitude(coordonnees.getLatitude());
+        pointDepart.setLongitude(coordonnees.getLongitude());
+        pointDepart.setReservation(reservation);
+
+        pointEmbarquementRepository.save(pointDepart);
     }
+
+    @Override
+    public void annuler(int trajetId, String username) {
+        Trajet trajet = trajetRepository.findOne(trajetId);
+
+        if (null == trajet || !username.equals(trajet.getConducteur())) {
+            throw new CarpoolingFonctionnelleException(CarpoolingFonctionnelleExceptionCode.ERR_TRAJET_002);
+        }
+
+        for (Reservation reservation : trajet.getReservations()) {
+            reservation.setEtat(EtatReservation.ANNULEE);
+        }
+
+        trajet.setActif(false);
+
+        trajetRepository.save(trajet);
+    }
+
+    @Override
+    public List<TrajetDto> rechercherParMembreId(int membreId) {
+
+        return MapperUtils.map(mapperService, reservationRepository.findByConducteur(membreId, EtatReservation.INITIALE), TrajetDto.class);
+    }
+
+    @Override
+    public List<TrajetDto> rechercherParPassagerId(int membreId) {
+        return MapperUtils.map(mapperService, reservationRepository.findByPassager(membreId), TrajetDto.class);
+    }
+
+    @Override
+    public List<ReservationDto> rechercherReservationsEnAttente(int trajetId) {
+        return MapperUtils.map(mapperService, trajetRepository.findAllReservationsEnAttente(trajetId), ReservationDto.class);
+    }
+
+
 
     // @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
     // @Cacheable(cacheName = "getCoordonneesCache")

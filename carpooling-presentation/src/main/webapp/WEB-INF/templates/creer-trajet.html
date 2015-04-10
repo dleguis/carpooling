@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layout/layout">
+<head>
+    <title>Erreur</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <br/>
+    <br/>
+    <!-- label white2 html start -->
+    <div class="label-white white-lable-m">
+        <div class="container">
+            <div class="row">
+                <a href="#" style="float: left; margin:20px;margin-top:70px;"><h5 class="btn form-btn">Retour</h5></a>
+            </div>
+            <div class="row">
+
+                <form th:action="@{/creer-trajet.html}" th:object="${trajetForm}" method="POST" class="form-horizontal">
+                    <div class="col-sm-6" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+                        <div class="row">
+                            <div class="label-item">
+
+                                <div class="containt-text">
+                                    <h3>Je démarre de...</h3>
+                                    <span>Indiquer le lieux d'où vous partez</span>
+                                    <p>
+
+                                    <div class="form-group">
+                                        <label for="inputname1" class="col-sm-4 control-label2 control-label">Adresse de départ<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input th:field="*{adresseDepart}" type="text" class="form-control" placeholder="Adresse de départ" required="required" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label for="inputlastname1" class="col-sm-4 control-label2 control-label "> Avec quelle voiture ?</label>
+                                        <div class="col-sm-4 btn  completing-form">
+                                            <select th:field="*{voitureId}" class="form-control">
+                                                <option th:each="voiture : ${voitures}" th:value="${voiture.ID}" th:text="${voiture.marque + voiture.modele}">la voiture de ta mére</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputage1" class="col-sm-4 control-label2 control-label ">Nombre de place initialement occupées</label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input th:field="*{nbUtilisateursInitiaux}" step="1" min="1" type="number" class="form-control" id="inputage1" placeholder="Nombre de places" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputcountry1" class="col-sm-4 control-label2 control-label" >Prix<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input th:field="*{prix}" type="text" class="form-control" id="inputcountry1" placeholder="Prix" required="required" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label2 control-label"> Description du trajet</label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <textarea th:field="*{titre}" class="form-control" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label2 control-label"> Description du trajet</label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input th:field="*{dateDepart}" class="form-control custom-select-box tec-domain-cat5" type="date" pattern="dd/MM/YYYY" name="date"  />
+                                        </div>
+                                    </div>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 " data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+                        <div class="row float-right">
+                            <div class="label-item ">
+                                <div class="containt-text">
+                                    <h3>Et je vais à ...</h3>
+                                    <span>Indiquer votre destination</span>
+                                    <p>
+
+                                    <div class="form-group">
+                                        <label for="inputname1" class="col-sm-4 control-label2 control-label">Adresse d'arrivée<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input th:field="*{adresseArrivee}" type="text" class="form-control" id="inputname1" placeholder="Adresse arrivée" required="required" />
+                                        </div>
+                                    </div>
+
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="col-sm-12" style="text-align:center;margin-top:70px;">
+        <button type="submit" class="btn form-btn btn-block">Valider mon trajet</button>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+
+</section>
+</body>
+</html>

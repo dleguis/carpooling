@@ -19,6 +19,14 @@ import static org.junit.Assert.assertTrue;
 public class TrajetServiceTest extends AbstractServiceTest {
 
     @Test
+    public void testRechercherAll() throws Exception {
+        List<TrajetDto> trajet = trajetService.rechercher();
+
+        assertNotNull(trajet);
+        assertTrue(trajet.size() > 0);
+    }
+
+    @Test
     public void testRechercher() throws Exception {
         Set<TrajetDto> trajets = trajetService.rechercher(TrajetCriteria.builder()
                 .villeDepart("Lille")

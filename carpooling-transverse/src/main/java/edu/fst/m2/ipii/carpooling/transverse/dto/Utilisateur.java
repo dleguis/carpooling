@@ -10,6 +10,16 @@ import java.util.Collection;
  */
 public class Utilisateur extends User {
 
+    private int membreId;
+
+    public int getMembreId() {
+        return membreId;
+    }
+
+    public void setMembreId(int membreId) {
+        this.membreId = membreId;
+    }
+
     /**
      * Instantiates a new utilisateur.
      *

@@ -234,6 +234,7 @@
             </column>
             <column name="Titre" type="VARCHAR(255)"/>
             <column name="DateDepart" type="timestamp"/>
+            <column name="actif" type="TINYINT" />
         </createTable>
     </changeSet>
     <changeSet runOnChange="true" author="Dimitri (generated)" id="1427402628182-20">

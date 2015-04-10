@@ -39,6 +39,7 @@ public class HomeController extends AbstractController {
     public String index(Model model) {
 
         model.addAttribute("trajetRechercheModel", new TrajetRechercheModel());
+        model.addAttribute("userModel", new UserInscriptionModel());
 
         return "index";
     }

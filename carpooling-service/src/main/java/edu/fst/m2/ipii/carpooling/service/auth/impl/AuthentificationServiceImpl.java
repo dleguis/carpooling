@@ -62,7 +62,10 @@ public class AuthentificationServiceImpl implements AuthentificationService {
             }
         }
 
-        return new Utilisateur(membre.getLogin(), membre.getPassword(), authorities);
+        Utilisateur user = new Utilisateur(membre.getLogin(), membre.getPassword(), authorities);
+        user.setMembreId(membre.getID());
+
+        return user;
 
     }
 }

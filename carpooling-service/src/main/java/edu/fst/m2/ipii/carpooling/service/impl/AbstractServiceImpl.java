@@ -43,6 +43,9 @@ public abstract class AbstractServiceImpl {
     @Autowired
     protected FactureRepository factureRepository;
 
+    @Autowired
+    protected ProfilRepository profilRepository;
+
     /** The mapper service. */
     @Autowired
     protected Mapper mapperService;

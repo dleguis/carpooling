@@ -11,6 +11,8 @@ public enum EtatReservation {
 
     VALIDEE,
 
+    ANNULEE,
+
     REJETEE;
 
 }

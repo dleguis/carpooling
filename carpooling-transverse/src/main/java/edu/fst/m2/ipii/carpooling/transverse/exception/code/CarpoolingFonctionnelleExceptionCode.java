@@ -21,6 +21,8 @@ public enum CarpoolingFonctionnelleExceptionCode {
      */
     ERR_USER_004("Mot de passe incorrect"),
 
+    ERR_USER_005("Le nom d'utilisateur ou l'adresse email existe déjà"),
+
     /** The ER r_ boo k_001. */
     ERR_TRAJET_001("Le trajet existe déjà"),
 
@@ -28,6 +30,8 @@ public enum CarpoolingFonctionnelleExceptionCode {
     ERR_TRAJET_002("Le trajet n'existe pas"),
 
     ERR_TRAJET_003("Le trajet est plein"),
+
+    ERR_RESA_001("La réservation n'existe pas"),
 
     /** The ER r_ orde r_001. */
     ERR_ORDER_001("La commande n'existe pas"),

@@ -19,10 +19,10 @@
         <div id="map-canvas"></div>
     </div>
 
-
     <!-- label white html start -->
     <div class="container">
         <div class="page30-wrap" style="margin-top: 70px;">
+            <div th:if="${(param.reservation != null) and (param.reservation[0] == 'success')}" class="alert alert-success" th:text="#{trajet.reservation.success}"></div>
             <div class="row">
                 <a href="#" th:href="@{'/#'}" style="float: left; margin:20px;"><h5 class="btn form-btn">Retour</h5></a>
             </div>
@@ -69,30 +69,24 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="service-wrap1"><span>From:</span></div>
-                                        <div class="service-wrap2"><span>Paris</span></div>
+                                        <div class="service-wrap2"><span th:text="${pointDepart.libelle}">Paris</span></div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="service-wrap1"><span>Destination:</span></div>
-                                        <div class="service-wrap2"><span>London</span></div>
+                                        <div class="service-wrap2"><span th:text="${pointArrivee.libelle}">London</span></div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="service-wrap1"><span>Pickup Date:</span></div>
-                                        <div class="service-wrap2"><span>Sunday, 09th Dec 2014</span></div>
+                                        <div class="service-wrap2"><span th:text="${#calendars.format(trajet.dateDepart,'dd MMMM yyyy')}">Sunday, 09th Dec 2014</span></div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="service-wrap1"><span>Drop Date:</span></div>
-                                        <div class="service-wrap2"><span>Thursday, 20th Dec 2014</span></div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="Roundtrip-Fare">
                                 <h4>Roundtrip Fare:</h4>
@@ -111,7 +105,7 @@
                         <form th:object="${reservationForm}" th:action="@{/reserver}" method="POST" class="form-horizontal">
                             <div class="form-group">
                                 <label for="inputname1" class="col-sm-4 control-label2 control-label">Adresse de départ</label>
-                                <label for="inputname1" class="col-sm-4 control-label2 control-label">45 rue tamere</label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">45 rue d'Alembert</label>
                             </div>
                             <div class="form-group">
                                 <label for="inputname1" class="col-sm-4 control-label2 control-label">Ville</label>
@@ -129,29 +123,133 @@
                             <h5>Information d'arrivée</h5>
                             <div class="form-group">
                                 <label for="inputname1" class="col-sm-4 control-label2 control-label">Ville d'arrivée </label>
-                                <label for="inputname1" class="col-sm-4 control-label2 control-label">tarace</label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label" th:text="${pointArrivee.libelle}">Paris</label>
                             </div>
                             <div class="form-group">
                                 <label for="inputname1" class="col-sm-4 control-label2 control-label">adresse d'arrivée </label>
-                                <label for="inputname1" class="col-sm-4 control-label2 control-label">45 rue des putes</label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label">132 rue des fusillés</label>
                             </div>
                             <div class="form-group">
                                 <label for="inputname1" class="col-sm-4 control-label2 control-label">prix</label>
-                                <label for="inputname1" class="col-sm-4 control-label2 control-label">10 balles</label>
+                                <label for="inputname1" class="col-sm-4 control-label2 control-label" th:text="${trajet.tarif} + ' €'">10 balles</label>
                             </div>
                             <hr />
-                            <div class="form-group" th:if="${(userProfil.username != trajet.conducteur) || !(#lists.contains(trajet.passagers, userProfil.username))}">
-                                private int trajetId;
-                                private String pointEmbarquement;
-                                private int membreId;
-                                int nbPlaces;
-                                int moyenPaiementId;
+                            <h3 th:if="${etatReservation == T(edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation).EN_ATTENTE}" th:text="#{trajet.reservation.attente}"></h3>
+                            <h3 th:if="${etatReservation == T(edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation).VALIDEE}" th:text="#{trajet.reservation.validee}"></h3>
+                            <h3 th:if="${etatReservation == T(edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation).REJETEE}" th:text="#{trajet.reservation.rejetee}"></h3>
+                            <div class="form-group" th:if="${etatReservation == null and ((userProfil.username != trajet.conducteur) || !(#lists.contains(trajet.passagers, userProfil.username)))}">
+
                                 <input type="hidden" th:field="*{trajetId}" th:value="${trajet.ID}" />
+                                <input type="hidden" th:field="*{membreId}" th:value="${userProfil.membreId}" />
+                                <div class="form-group">
+                                    <label for="pointEmbarquement" class="col-sm-4 control-label2 control-label">Point d'embarquement</label>
+                                    <input style="width: 50%;" placeholder="où souhaitez-vous être récupéré ?" th:field="*{pointEmbarquement}" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="nbPlaces" class="col-sm-4 control-label2 control-label">Nombre de passagers</label>
+                                    <input th:field="*{nbPlaces}" />
+                                </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Paiement</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>
+                                                    Somme nette à payer : <span th:text="${trajet.tarif}"></span> €
+                                                </h4>
+                                                <select th:field="*{moyenPaiementId}" class="form-control">
+                                                    <option th:if="${moyenPaiement.ID != 1}" th:each="moyenPaiement : ${moyensPaiement}" th:value="${moyenPaiement.ID}" th:text="${moyenPaiement.libelle}">1</option>
+                                                </select>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                <button type="submit" class="btn btn-primary">Payer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-offset-7 col-sm-5">
-                                    <div class="completing-form-btnwrap"><button type="submit" class="btn form-btn  btn-block">Réserver</button></div>
+                                    <div class="completing-form-btnwrap">
+                                        <button type="button" onclick="$('#myModal').modal('toggle')" class="btn form-btn  btn-block">Réserver</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalAnnulationReservation" tabindex="-1" role="dialog" aria-labelledby="modalAnnulationReservationLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="modalAnnulationReservationLabel">Annulation réservation</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Êtes-vous sûre(e) de vouloir annuler votre réservation ?</h3>
+                                            Cette action est irréversible.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                            <a th:href="@{'/annuler-reservation.html' + '?trajetId=' + ${trajet.ID}}" class="btn btn-primary">Valider</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:if="${etatReservation == T(edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation).EN_ATTENTE or etatReservation == T(edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation).VALIDEE}" class="col-sm-offset-7 col-sm-5">
+                                <div class="completing-form-btnwrap">
+                                    <a style="cursor: pointer" onclick="$('#modalAnnulationReservation').modal('toggle')" class="btn form-btn  btn-block">Annuler réservation</a>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalAnnulationTrajet" tabindex="-1" role="dialog" aria-labelledby="modalAnnulationTrajetLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="modalAnnulationTrajetLabel">Annulation trajet</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Êtes-vous sûre(e) de vouloir supprimer votre trajet ?</h3>
+                                            Cette action est irréversible.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                            <a th:href="@{'/annuler-trajet.html' + '?trajetId=' + ${trajet.ID}}" class="btn btn-primary">Valider</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:if="${(userProfil.username == trajet.conducteur)}" class="col-sm-offset-7 col-sm-5">
+                                <div class="completing-form-btnwrap">
+                                    <a style="cursor: pointer" onclick="$('#modalAnnulationTrajet').modal('toggle')" class="btn form-btn  btn-block">Annuler trajet</a>
                                 </div>
                             </div>
                         </form>
+                        <div th:if="${null != reservations and #lists.size(reservations) > 0}">
+                            <table class="table table-stripped">
+                                <caption>Réservations en attente</caption>
+                                <tr>
+                                    <th>Membre</th>
+                                    <th>Nombre passagers</th>
+                                    <th>Point d'embarquement</th>
+                                    <th>Valider</th>
+                                    <th>Rejeter</th>
+                                </tr>
+                                <tr th:each="reservation : ${reservations}">
+                                    <td th:text="${reservation.membre.login}">Membre</td>
+                                    <td th:text="${reservation.nombrePassagers}">Nombre passagers</td>
+                                    <td th:text="${reservation.pointEmbarquement.libelle}">Point d'embarquement</td>
+                                    <td><a class="btn btn-primary" href="#" th:href="@{'/valider-reservation.html?reservationId=' + ${reservation.ID} + '&amp;trajetId=' + ${trajet.ID}}">valider</a></td>
+                                    <td><a class="btn btn-danger" href="#" th:href="@{'/rejeter-reservation.html?reservationId=' + ${reservation.ID} + '&amp;trajetId=' + ${trajet.ID}}">rejeter</a></td>
+                                </tr>
+
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4 page30-form-wrapper">
@@ -171,7 +269,19 @@
         </div>
     </div>
     <!-- label white html exit -->
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+        jQuery(document).ready(function ($) {
 
+
+            pointDepart = /*[[${pointDepart}]]*/ null;
+            pointArrivee = /*[[${pointArrivee}]]*/ null;
+            etapes = /*[[${etapes}]]*/ null;
+
+
+        });
+    /*]]>*/
+    </script>
 </section>
 </body>
 </html>
