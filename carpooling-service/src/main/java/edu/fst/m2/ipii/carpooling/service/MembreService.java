@@ -1,5 +1,7 @@
 package edu.fst.m2.ipii.carpooling.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 import edu.fst.m2.ipii.carpooling.transverse.dto.MembreDto;

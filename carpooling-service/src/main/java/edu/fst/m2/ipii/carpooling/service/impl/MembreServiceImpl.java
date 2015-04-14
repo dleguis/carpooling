@@ -1,5 +1,7 @@
 package edu.fst.m2.ipii.carpooling.service.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 import edu.fst.m2.ipii.carpooling.transverse.dto.VoitureDto;
 import edu.fst.m2.ipii.carpooling.transverse.exception.CarpoolingFonctionnelleException;
 import edu.fst.m2.ipii.carpooling.transverse.exception.code.CarpoolingFonctionnelleExceptionCode;
+import edu.fst.m2.ipii.carpooling.transverse.utils.security.EncryptionUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

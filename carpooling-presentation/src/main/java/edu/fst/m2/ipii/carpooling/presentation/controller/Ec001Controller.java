@@ -36,8 +36,20 @@ public class Ec001Controller extends AbstractController {
         if (!bindingResult.hasErrors()) {
 
             // Parsing de la date
-            Date dateTrajet  = "".equals(trajetRechercheModel.getDateDepart()) ? null
-                                                                               : DateTime.parse(trajetRechercheModel.getDateDepart(), DateTimeFormat.forPattern("YYYY-MM-dd")).toDate();
+            Date dateTrajet;
+
+            if ("".equals(trajetRechercheModel.getDateDepart())) {
+                dateTrajet = null;
+            }
+            else {
+                try {
+                    dateTrajet = DateTime.parse(trajetRechercheModel.getDateDepart(), DateTimeFormat.forPattern("YYYY-MM-dd")).toDate();
+                }
+                catch (Exception exception) {
+                    dateTrajet = DateTime.parse(trajetRechercheModel.getDateDepart(), DateTimeFormat.forPattern("dd/MM/YYYY")).toDate();
+                }
+
+            }
 
             TrajetCriteria trajetCriteria = TrajetCriteria.builder().villeDepart(trajetRechercheModel.getVilleDepart())
                                                                     .villeArrivee(trajetRechercheModel.getVilleArrivee())

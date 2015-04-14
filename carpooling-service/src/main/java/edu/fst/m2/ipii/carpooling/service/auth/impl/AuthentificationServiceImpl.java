@@ -14,10 +14,14 @@ import edu.fst.m2.ipii.carpooling.transverse.dto.Utilisateur;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.config.authentication.PasswordEncoderParser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +34,9 @@ import java.util.Set;
  */
 @Service
 public class AuthentificationServiceImpl implements AuthentificationService {
+
+    //@Value("${carpooling.security.encription.key}")
+    //String cleEncription;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthentificationService.class);
 

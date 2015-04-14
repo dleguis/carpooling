@@ -75,6 +75,9 @@ public class Trajet implements Serializable {
 	@Transient
 	private List<String> passagers = new ArrayList<>();
 
+	@Transient
+	private List<Membre> membresPassagers = new ArrayList<>();
+
 	@PostLoad
 	public void buildTransientValues() {
 
@@ -88,6 +91,7 @@ public class Trajet implements Serializable {
 			}
 			if (reservation.getEtat() == EtatReservation.INITIALE || reservation.getEtat() == EtatReservation.VALIDEE) {
 				passagers.add(reservation.getMembre().getLogin());
+				membresPassagers.add(reservation.getMembre());
 				placesDisponibles -= reservation.getNombrePassagers();
 			}
 		}
@@ -117,7 +121,11 @@ public class Trajet implements Serializable {
 	public List<String> getPassagers() {
 		return passagers;
 	}
-	
+
+	public List<Membre> getMembresPassagers() {
+		return membresPassagers;
+	}
+
 	public int getID() {
 		return ID;
 	}

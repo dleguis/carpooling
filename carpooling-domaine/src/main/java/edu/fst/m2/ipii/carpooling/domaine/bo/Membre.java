@@ -13,8 +13,13 @@
  */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
+import edu.fst.m2.ipii.carpooling.transverse.utils.security.EncryptionUtils;
+
 import javax.persistence.*;
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -51,10 +56,8 @@ public class Membre implements Serializable {
 	@Column(name="Email", nullable=true, length=255)
 	private String email;
 	
-	@OneToMany(targetEntity=Voiture.class)
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="MembreID", nullable=false) })	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@OneToMany(targetEntity=Voiture.class, mappedBy = "proprietaire")
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)
 	private Set<Voiture> voitures;
 	
 	@ManyToMany(targetEntity=Abonnement.class)
@@ -112,11 +115,21 @@ public class Membre implements Serializable {
 	}
 	
 	public void setPassword(String value) {
-		this.password = value;
+		try {
+			this.password = EncryptionUtils.encrypt(value);
+		} catch (GeneralSecurityException | UnsupportedEncodingException e) {
+			this.password = value;
+		}
 	}
 	
 	public String getPassword() {
-		return password;
+		try {
+			return EncryptionUtils.decrypt(password);
+		} catch (IOException | GeneralSecurityException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 	
 	public void setNomMembre(String value) {

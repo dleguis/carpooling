@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layout/layout">
+<head>
+    <title>Erreur</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <br/>
+    <br/>
+
+    <div class="label-white white-lable-m">
+        <div class="container">
+            <div class="row">
+                <a href="#" style="float: left; margin:20px;margin-top:70px;"><h5 class="btn form-btn">Retour</h5></a>
+            </div>
+            <div class="row">
+                <p class="alert alert-error" th:if="${null != errors}" th:utext="${#strings.replace(errors, '|', '&lt;br /&gt;')}"></p>
+                <form th:action="@{/creer-voiture.html}" th:object="${voitureForm}" method="POST" class="form-horizontal">
+                    <div class="col-sm-12" data-uk-scrollspy="{cls:'uk-animation-fade', delay:300, repeat: true}">
+                        <div class="row">
+                            <div class="label-item">
+
+                                <div class="containt-text">
+                                    <h3>Ma voiture...</h3>
+                                    <span>Indiquez les détails de votre voiture</span>
+                                    <p>
+
+                                    <div class="form-group">
+                                        <label for="marque" class="col-sm-4 control-label2 control-label">Marque<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input th:field="*{marque}" type="text" class="form-control" placeholder="Marque" required="required" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="modele" class="col-sm-4 control-label2 control-label">Modèle<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input th:field="*{modele}" type="text" class="form-control" placeholder="Modèle" required="required" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="nbPlaces" class="col-sm-4 control-label2 control-label">Nombre de places<span>*</span></label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input th:field="*{nbPlaces}" step="1" min="1" type="number" class="form-control" placeholder="Nombre de places" required="required" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="puissance" class="col-sm-4 control-label2 control-label">Puissance</label>
+                                        <div class=" col-sm-8 completing-form">
+                                            <input th:field="*{puissance}" type="text" class="form-control" placeholder="Puissance" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label for="carburant" class="col-sm-4 control-label2 control-label "> Carburant <span>*</span></label>
+                                        <div class="col-sm-4 btn  completing-form">
+                                            <select th:field="*{carburant}" class="form-control">
+                                                <option th:each="carburant : ${T(edu.fst.m2.ipii.carpooling.transverse.constants.Carburant).values()}" th:value="${carburant}" th:text="${carburant}">la voiture de ta mére</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label for="categorie" class="col-sm-4 control-label2 control-label "> Catégorie <span>*</span></label>
+                                        <div class="col-sm-4 btn  completing-form">
+                                            <select th:field="*{categorie}" class="form-control">
+                                                <option th:each="categorie : ${T(edu.fst.m2.ipii.carpooling.transverse.constants.CategorieEnum).values()}" th:value="${categorie}" th:text="${categorie}">la voiture de ta mére</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12" style="text-align:center;margin-top:70px;">
+                        <button type="submit" class="btn form-btn btn-block">Ajouter une voiture</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

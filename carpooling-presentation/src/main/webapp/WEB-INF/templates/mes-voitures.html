@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layout/layout">
+<head>
+    <title>Mes voitures</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div th:if="${null != voitures}" class="container">
+        <div class="row" th:if="${#lists.isEmpty(voitures)}">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="col-sm-12" style="text-align:center;margin-top:30px;">
+                <h2>Oulala!</h2>
+                <h3>Vous devez avoir enregistré au moins une voiture avant de pouvoir créer un trajet</h3>
+                <a type="submit" th:href="@{/creer-voiture.html}" class="btn form-btn btn-block">enregistrer ma voiture</a>
+            </div>
+        </div>
+        <div class="row page25-container">
+            <div class="col-sm-12">
+                <div class="row">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div th:each="voiture : ${voitures}" class="page25-content">
+                        <div class="page25-content-header"></div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <div class="p25-minicar-wrap">
+                                    <div class="p25-minicar"><a href="#" th:href="@{'/#'}"><img src="images/minicar.png" th:src="@{'/images/minicar.png'}" alt=""/></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="Proin-text-wrap">
+                                    <a href="#"><h6 th:text="${voiture.marque} + ' ' + ${voiture.modele}">Mini Car</h6></a>
+                                    <p th:text="${voiture.categorie}">Proin gravida nibh vel velit actor <br/>aliquet. Aenean sollicitudin,</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="pa28-text-wrap">
+                                    <h4 th:text="${voiture.nbPlaces + ' places'}">99 €</h4>
+                                    <p th:text="${voiture.carburant}">Fare Details</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="row">
+                                <div class="pa28-text-wrap">
+                                    <h4 th:text="${voiture.categorie}">99 €</h4>
+                                    <p th:text="${voiture.puissance + 'ch'}">Fare Details</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="pa25-btn-wrapper">
+                                    <div class="pa25-btn-wrap">
+                                        <a href="#" th:attr="voitureid = ${voiture.ID}" class="btn pa25-btn btn-lg suppr-voiture">SUPPRIMER</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" th:id="${'modalSuppressionVoiture' + voiture.ID}" tabindex="-1" role="dialog" aria-labelledby="modalAnnulationTrajetLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="modalAnnulationTrajetLabel">Suppression voiture</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h3>Êtes-vous sûre(e) de vouloir supprimer cette voiture ?</h3>
+                                        Cette action est irréversible, et tous les trajets associés seront supprimés !
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                        <a th:href="@{'/supprimer-voiture.html?voitureId=' + ${voiture.ID}}" class="btn btn-primary">Valider</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).on("click", ".suppr-voiture", function () {
+            $("#modalSuppressionVoiture"+$(this).attr("voitureid")).modal('toggle');
+        })
+    </script>
+
+</section>
+</body>
+</html>

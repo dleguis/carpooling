@@ -187,6 +187,17 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
         pointDepart.setReservation(reservation);
 
         pointEmbarquementRepository.save(pointDepart);
+
+        // MAIL
+
+        Membre conducteur = membreRepository.findByLogin(trajet.getConducteur());
+
+        emailService.envoyer("Dogecar<noreply@dogecar.com>",
+                conducteur.getEmail(),
+                "Nouvelle réservation",
+                "Bonjour " + conducteur.getPrenomMembre() +
+                        ", \n\n L'utilisateur " + reservation.getMembre().getLogin() + " a effectué une nouvelle réservation pour le trajet "
+                        + reservation.getTrajet().getTitre() + ". \n\n Cordialement.");
     }
 
     @Override
@@ -204,6 +215,16 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
         trajet.setActif(false);
 
         trajetRepository.save(trajet);
+
+        for (Membre membre : trajet.getMembresPassagers()) {
+            emailService.envoyer("Dogecar<noreply@dogecar.com>",
+                    membre.getEmail(),
+                    "Annulation de votre trajet",
+                    "Bonjour " + membre.getPrenomMembre() +
+                            ", \n\n Votre trajet " + trajet.getTitre() +
+                            " du " + trajet.getDateDepart() +
+                            " vient d'être annulé. \n\n Cordialement.");
+        }
     }
 
     @Override

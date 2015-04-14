@@ -14,6 +14,8 @@ import javax.validation.constraints.Size;
     @FieldMatch(first = "email", second = "emailConfirmation", message = "L'adresse email doit correspondre à la confirmation") })
 public class UserInscriptionModel {
 
+
+
     /**
      * The login.
      */
@@ -60,6 +62,8 @@ public class UserInscriptionModel {
 
     /** The city. */
     private String city;
+
+
 
     /**
      * Gets the login.

@@ -79,4 +79,7 @@ public interface TrajetRepository extends JpaRepository<Trajet, Integer>, Trajet
             "LEFT JOIN FETCH t.commentaires " +
             "WHERE t.ID = :id AND t.actif = true")
     Trajet findOneFetch(@Param("id") int id);
+
+    @Query("SELECT t FROM Trajet t WHERE t.voiture.ID = :voitureId")
+    List<Trajet> findByVoiture(@Param("voitureId") Integer voitureId);
 }

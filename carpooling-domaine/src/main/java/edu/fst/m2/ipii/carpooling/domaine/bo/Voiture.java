@@ -13,6 +13,9 @@
  */
 package edu.fst.m2.ipii.carpooling.domaine.bo;
 
+import edu.fst.m2.ipii.carpooling.transverse.constants.Carburant;
+import edu.fst.m2.ipii.carpooling.transverse.constants.CategorieEnum;
+
 import java.io.Serializable;
 import javax.persistence.*;
 @Entity
@@ -40,11 +43,17 @@ public class Voiture implements Serializable {
 	@Column(name="Puissance", nullable=true)	
 	private Float puissance;
 	
-	@Column(name="Carburant", nullable=true, length=255)	
-	private String carburant;
+	@Column(name="Carburant", nullable=true, length=255)
+	@Enumerated(EnumType.STRING)
+	private Carburant carburant;
 	
-	@Column(name="Categorie", nullable=true, length=255)	
-	private String categorie;
+	@Column(name="Categorie", nullable=true, length=255)
+	@Enumerated(EnumType.STRING)
+	private CategorieEnum categorie;
+
+	@ManyToOne(targetEntity=Membre.class, fetch=FetchType.LAZY)
+	@JoinColumns({ @JoinColumn(name="MembreID", nullable=false) })
+	private Membre proprietaire;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -94,22 +103,31 @@ public class Voiture implements Serializable {
 		return puissance;
 	}
 	
-	public void setCarburant(String value) {
+	public void setCarburant(Carburant value) {
 		this.carburant = value;
 	}
 	
-	public String getCarburant() {
+	public Carburant getCarburant() {
 		return carburant;
 	}
 	
-	public void setCategorie(String value) {
+	public void setCategorie(CategorieEnum value) {
 		this.categorie = value;
 	}
 	
-	public String getCategorie() {
+	public CategorieEnum getCategorie() {
 		return categorie;
 	}
-	
+
+
+	public Membre getProprietaire() {
+		return proprietaire;
+	}
+
+	public void setProprietaire(Membre proprietaire) {
+		this.proprietaire = proprietaire;
+	}
+
 	public String toString() {
 		return String.valueOf(getID());
 	}

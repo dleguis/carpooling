@@ -2,6 +2,7 @@ package edu.fst.m2.ipii.carpooling.service.impl;
 
 import edu.fst.m2.ipii.carpooling.domaine.bo.Facture;
 import edu.fst.m2.ipii.carpooling.domaine.repository.*;
+import edu.fst.m2.ipii.carpooling.service.EmailService;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,9 @@ public abstract class AbstractServiceImpl {
 
     @Autowired
     protected ProfilRepository profilRepository;
+
+    @Autowired
+    protected EmailService emailService;
 
     /** The mapper service. */
     @Autowired

@@ -19,6 +19,12 @@ public class UserModificationModel {
     @NotBlank
     private String login;
 
+    @NotBlank
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
+
     /** The email. */
     @NotBlank
     @Email
@@ -26,7 +32,7 @@ public class UserModificationModel {
 
     /** The previous password. */
     @NotBlank
-    @Size(min = 7, max = 25)
+    @Size(min = 5, max = 25)
     private String password;
 
     /**
@@ -73,7 +79,7 @@ public class UserModificationModel {
         this.line3 = userDto.getMailingAddress().getLine3();
         this.zip = userDto.getMailingAddress().getZip();
         this.city = userDto.getMailingAddress().getCity();
-    }*
+    }*/
 
     /**
      * Gets the login.
@@ -82,6 +88,22 @@ public class UserModificationModel {
      */
     public String getLogin() {
 	return login;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**

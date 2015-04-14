@@ -1,7 +1,9 @@
 package edu.fst.m2.ipii.carpooling.service;
 
+import edu.fst.m2.ipii.carpooling.domaine.bo.Voiture;
 import edu.fst.m2.ipii.carpooling.domaine.repository.FactureRepository;
 import edu.fst.m2.ipii.carpooling.domaine.repository.PaiementRepository;
+import edu.fst.m2.ipii.carpooling.domaine.repository.VoitureRepository;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -34,5 +36,11 @@ public abstract class AbstractServiceTest {
 
     @Autowired
     protected ReservationService reservationService;
+
+    @Autowired
+    protected VoitureService voitureService;
+
+    @Autowired
+    protected VoitureRepository voitureRepository;
 
 }

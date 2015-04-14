@@ -1,10 +1,7 @@
 package edu.fst.m2.ipii.carpooling.presentation;
 
 
-import edu.fst.m2.ipii.carpooling.service.MembreService;
-import edu.fst.m2.ipii.carpooling.service.MoyenPaiementService;
-import edu.fst.m2.ipii.carpooling.service.ReservationService;
-import edu.fst.m2.ipii.carpooling.service.TrajetService;
+import edu.fst.m2.ipii.carpooling.service.*;
 import edu.fst.m2.ipii.carpooling.transverse.dto.Utilisateur;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +31,9 @@ public abstract class AbstractController {
 
     @Autowired
     protected ReservationService reservationService;
+
+    @Autowired
+    protected VoitureService voitureService;
 
     /**
      * Gets the user profil.

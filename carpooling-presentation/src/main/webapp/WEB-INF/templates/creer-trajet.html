@@ -39,7 +39,7 @@
                                         <label for="inputlastname1" class="col-sm-4 control-label2 control-label "> Avec quelle voiture ?</label>
                                         <div class="col-sm-4 btn  completing-form">
                                             <select th:field="*{voitureId}" class="form-control">
-                                                <option th:each="voiture : ${voitures}" th:value="${voiture.ID}" th:text="${voiture.marque + voiture.modele}">la voiture de ta mére</option>
+                                                <option th:each="voiture : ${voitures}" th:value="${voiture.ID}" th:text="${voiture.marque + ' ' + voiture.modele}">la voiture de ta mére</option>
                                             </select>
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label2 control-label"> Description du trajet</label>
                                         <div class=" col-sm-8 completing-form">
-                                            <input th:field="*{dateDepart}" class="form-control custom-select-box tec-domain-cat5" type="date" pattern="dd/MM/YYYY" name="date"  />
+                                            <input th:field="*{dateDepart}" class="form-control custom-select-box tec-domain-cat5" type="date" name="date"  />
                                         </div>
                                     </div>
 
@@ -89,18 +89,18 @@
                                     </div>
 
 
-                </p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-12" style="text-align:center;margin-top:70px;">
+                        <button type="submit" class="btn form-btn btn-block">Valider mon trajet</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-
-    </div>
-    <div class="col-sm-12" style="text-align:center;margin-top:70px;">
-        <button type="submit" class="btn form-btn btn-block">Valider mon trajet</button>
-    </div>
-    </form>
-    </div>
-    </div>
     </div>
 
 </section>

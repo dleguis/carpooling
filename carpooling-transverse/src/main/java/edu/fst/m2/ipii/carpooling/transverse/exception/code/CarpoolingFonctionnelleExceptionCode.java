@@ -33,6 +33,10 @@ public enum CarpoolingFonctionnelleExceptionCode {
 
     ERR_RESA_001("La réservation n'existe pas"),
 
+    ERR_VOITURE_001("La voiture n'existe pas"),
+
+    ERR_VOITURE_002("Action interdite sur cette voiture"),
+
     /** The ER r_ orde r_001. */
     ERR_ORDER_001("La commande n'existe pas"),
 

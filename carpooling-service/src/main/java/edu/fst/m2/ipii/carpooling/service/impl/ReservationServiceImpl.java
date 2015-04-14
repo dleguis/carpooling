@@ -1,5 +1,6 @@
 package edu.fst.m2.ipii.carpooling.service.impl;
 
+import edu.fst.m2.ipii.carpooling.domaine.bo.Membre;
 import edu.fst.m2.ipii.carpooling.domaine.bo.Reservation;
 import edu.fst.m2.ipii.carpooling.service.ReservationService;
 import edu.fst.m2.ipii.carpooling.transverse.constants.EtatReservation;
@@ -38,6 +39,15 @@ public class ReservationServiceImpl extends AbstractServiceImpl implements Reser
             for (Reservation reservation : reservations) {
                 if (EtatReservation.EN_ATTENTE.equals(reservation.getEtat()) || EtatReservation.VALIDEE.equals(reservation.getEtat())) {
                     reservation.setEtat(EtatReservation.ANNULEE);
+
+                    Membre conducteur = membreRepository.findByLogin(reservation.getTrajet().getConducteur());
+
+                    emailService.envoyer("Dogecar<noreply@dogecar.com>",
+                            conducteur.getEmail(),
+                            "Annulation d'une réservation",
+                            "Bonjour " + conducteur.getPrenomMembre() +
+                                    ", \n\n L'utilisateur " + reservation.getMembre().getLogin() + " a annulé sa réservation pour le trajet "
+                                    + reservation.getTrajet().getTitre() + ". \n\n Cordialement.");
                 }
             }
         }
@@ -56,5 +66,14 @@ public class ReservationServiceImpl extends AbstractServiceImpl implements Reser
         reservation.setEtat(etat);
 
         reservationRepository.save(reservation);
+
+        Membre conducteur = membreRepository.findByLogin(reservation.getTrajet().getConducteur());
+
+        emailService.envoyer("Dogecar<noreply@dogecar.com>",
+                reservation.getMembre().getEmail(),
+                "Annulation d'une réservation",
+                "Bonjour " + reservation.getMembre().getPrenomMembre() +
+                        ", \n\n L'utilisateur " + conducteur.getLogin() + " a changé votre réservation à l'état " + reservation.getEtat() + " pour le trajet "
+                        + reservation.getTrajet().getTitre() + ". \n\n Cordialement.");
     }
 }

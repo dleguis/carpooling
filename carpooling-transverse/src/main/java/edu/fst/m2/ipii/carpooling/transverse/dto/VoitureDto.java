@@ -1,5 +1,8 @@
 package edu.fst.m2.ipii.carpooling.transverse.dto;
 
+import edu.fst.m2.ipii.carpooling.transverse.constants.Carburant;
+import edu.fst.m2.ipii.carpooling.transverse.constants.CategorieEnum;
+
 /**
  * Created by Dimitri on 02/04/15.
  */
@@ -15,9 +18,9 @@ public class VoitureDto {
 
     private Float puissance;
 
-    private String carburant;
+    private Carburant carburant;
 
-    private String categorie;
+    private CategorieEnum categorie;
 
     public VoitureDto() {
     }
@@ -42,11 +45,11 @@ public class VoitureDto {
         return this.puissance;
     }
 
-    public String getCarburant() {
+    public Carburant getCarburant() {
         return this.carburant;
     }
 
-    public String getCategorie() {
+    public CategorieEnum getCategorie() {
         return this.categorie;
     }
 
@@ -70,11 +73,11 @@ public class VoitureDto {
         this.puissance = puissance;
     }
 
-    public void setCarburant(String carburant) {
+    public void setCarburant(Carburant carburant) {
         this.carburant = carburant;
     }
 
-    public void setCategorie(String categorie) {
+    public void setCategorie(CategorieEnum categorie) {
         this.categorie = categorie;
     }
 
