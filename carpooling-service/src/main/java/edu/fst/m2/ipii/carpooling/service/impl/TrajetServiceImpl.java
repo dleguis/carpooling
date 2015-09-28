@@ -262,19 +262,21 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
 
         CoordonneesVilleDto coordonnees = new CoordonneesVilleDto();
 
-        GeoApiContext context = new GeoApiContext().setApiKey("***REMOVED***");
+        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyDrBoKKbnpr1Pr_34_tJEDULV6FbFgl08Q");
         GeocodingResult[] results =  GeocodingApi.geocode(context, request).await();
 
-        coordonnees.setRequest(request);
-        coordonnees.setLatitude(results[0].geometry.location.lat);
-        coordonnees.setLongitude(results[0].geometry.location.lng);
-
-        coordonnees.setRue((results[0].addressComponents.length > 0 ? results[0].addressComponents[0].longName : null) + " " + (results[0].addressComponents[1] != null ? results[0].addressComponents[1].longName : null));
-        coordonnees.setVille(results[0].addressComponents.length > 2 ? results[0].addressComponents[2].longName : null);
-        coordonnees.setCodePostal(results[0].addressComponents.length > 6 ? results[0].addressComponents[6].longName : null);
-        coordonnees.setPays(results[0].addressComponents.length > 5 ? results[0].addressComponents[5].longName : null);
-
-        cacheCoordonnees.put(request, coordonnees);
+        if (null != results) {
+            coordonnees.setRequest(request);
+            coordonnees.setLatitude(results[0].geometry.location.lat);
+            coordonnees.setLongitude(results[0].geometry.location.lng);
+    
+            coordonnees.setRue((results[0].addressComponents.length > 0 ? results[0].addressComponents[0].longName : null) + " " + (results[0].addressComponents[1] != null ? results[0].addressComponents[1].longName : null));
+            coordonnees.setVille(results[0].addressComponents.length > 2 ? results[0].addressComponents[2].longName : null);
+            coordonnees.setCodePostal(results[0].addressComponents.length > 6 ? results[0].addressComponents[6].longName : null);
+            coordonnees.setPays(results[0].addressComponents.length > 5 ? results[0].addressComponents[5].longName : null);
+    
+            cacheCoordonnees.put(request, coordonnees);
+        }
 
         return coordonnees;
     }
