@@ -262,7 +262,7 @@ public class TrajetServiceImpl extends AbstractServiceImpl implements TrajetServ
 
         CoordonneesVilleDto coordonnees = new CoordonneesVilleDto();
 
-        GeoApiContext context = new GeoApiContext().setApiKey("PLACER ICI LA CLE API GOOGLE MAPS");
+        GeoApiContext context = new GeoApiContext().setApiKey("PLACER ICI LA CLE API GOOGLE MAPS.");
         GeocodingResult[] results =  GeocodingApi.geocode(context, request).await();
 
         if (null != results) {
