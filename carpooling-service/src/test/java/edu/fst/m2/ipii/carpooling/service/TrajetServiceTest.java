@@ -121,6 +121,7 @@ public class TrajetServiceTest extends AbstractServiceTest {
     @Test
     @Ignore
     public void testReserver() throws Exception {
+        
         NouvelleReservationDto nouvelleReservation = new NouvelleReservationDto();
         nouvelleReservation.setMembreId(1);
         nouvelleReservation.setMoyenPaiementId(2);

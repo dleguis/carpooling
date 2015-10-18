@@ -63,6 +63,7 @@ public abstract class AbstractServiceTest {
 
     // @Before
     public void setUp() throws Exception {
+
         /*
         GeocodingResult fakeResult = new GeocodingResult();
 
