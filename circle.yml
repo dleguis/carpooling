@@ -1,1 +1,4 @@
 
+machine:
+  java:
+    version: openjdk7
