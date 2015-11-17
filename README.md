@@ -1,5 +1,5 @@
 # carpooling [![Build Status](https://travis-ci.org/Kawada/carpooling.svg?branch=master)](https://travis-ci.org/Kawada/carpooling)
-Projet de Master 2 dans le cadre du cours "Projet technique"
+Projet de Master 2 dans le cadre du cours "Projet technique".
 
 ## Ressources
 ### Spécifications fonctionnelles détaillées
