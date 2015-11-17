@@ -36,10 +36,10 @@ public class TrajetRepositoryImpl implements TrajetRepositoryCustom {
         List<Predicate> predicates = new ArrayList<>();
 
         if (!StringUtils.isBlank(trajetCriteria.getVilleDepart())) {
-            predicates.add(cb.like(b.get("villeDepart"), "%" + trajetCriteria.getVilleDepart() + "%"));
+            predicates.add(cb.like(b.<String>get("villeDepart"), "%" + trajetCriteria.getVilleDepart() + "%"));
         }
         if (!StringUtils.isBlank(trajetCriteria.getVilleArrivee())) {
-            predicates.add(cb.like(b.get("villeArrivee"), "%" + trajetCriteria.getVilleArrivee() + "%"));
+            predicates.add(cb.like(b.<String>get("villeArrivee"), "%" + trajetCriteria.getVilleArrivee() + "%"));
         }
         if (trajetCriteria.getDateDepart() != null) {
             predicates.add(cb.lessThanOrEqualTo(b.<Date> get("dateDepart"), trajetCriteria.getDateDepart()));
