@@ -25,7 +25,7 @@
         <project.parent.basedir>../carpooling-config-externe/localhost</project.parent.basedir>
         <main.basedir>carpooling-config-externe/localhost</main.basedir>
         <ow2.version>1.0.13</ow2.version>
-        <hibernate.version>4.2.0.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
